@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7059933364795651" crossorigin="anonymous"></script>
+  <title>Contact — MillwrightIQ</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0a0e1a; color: #fff; font-family: 'Segoe UI', sans-serif; }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2rem; background: #0a0e1a; border-bottom: 1px solid #1e2a3a; }
+    .logo { font-size: 1.4rem; font-weight: 800; color: #fff; text-decoration: none; }
+    .logo span { color: #f5a623; }
+    nav a { color: #ccc; text-decoration: none; margin-left: 1.5rem; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
+    nav a:hover { color: #f5a623; }
+    .hero { padding: 4rem 2rem 2rem; max-width: 900px; margin: 0 auto; }
+    .label { color: #f5a623; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; }
+    h1 { font-size: 2.8rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1rem; }
+    .subtitle { color: #aaa; font-size: 1rem; margin-bottom: 3rem; }
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+    @media(max-width: 600px) { .cards { grid-template-columns: 1fr; } h1 { font-size: 2rem; } }
+    .card { background: #111827; border: 1px solid #1e2a3a; border-radius: 10px; padding: 1.5rem; }
+    .card-title { color: #f5a623; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.8rem; }
+    .card a { color: #f5a623; text-decoration: none; }
+    .card p { color: #aaa; font-size: 0.9rem; line-height: 1.6; }
+    .card strong { color: #fff; }
+    .form-section { background: #111827; border: 1px solid #1e2a3a; border-radius: 10px; padding: 2rem; margin-bottom: 3rem; }
+    .form-title { color: #f5a623; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    @media(max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+    label { display: block; font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: #aaa; margin-bottom: 0.4rem; }
+    input, select, textarea { width: 100%; background: #0a0e1a; border: 1px solid #1e2a3a; color: #fff; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.95rem; margin-bottom: 1rem; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: #f5a623; }
+    textarea { height: 130px; resize: vertical; }
+    select option { background: #0a0e1a; }
+    button { background: #f5a623; color: #000; font-weight: 800; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; padding: 0.85rem 2rem; border: none; border-radius: 6px; cursor: pointer; }
+    button:hover { background: #e09510; }
+    footer { text-align: center; padding: 2rem; color: #555; font-size: 0.8rem; border-top: 1px solid #1e2a3a; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="logo">Millwright<span>IQ</span></a>
+    <div>
+      <a href="index.html">Calculators</a>
+      <a href="index.html">All Tools</a>
+      <a href="index.html">Apprentice Hub</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <p class="label">Get In Touch</p>
+    <h1>Contact Us</h1>
+    <p class="subtitle">Have a question, suggestion, or want to report a bug? We'd love to hear from you.</p>
+
+    <div class="cards">
+      <div class="card">
+        <p class="card-title">📧 Email Us</p>
+        <p>For general questions, feedback, or business inquiries:</p>
+        <br>
+        <p><a href="mailto:millwrightiq@gmail.com">millwrightiq@gmail.com</a></p>
+        <br>
+        <p>We typically respond within 24–48 hours.</p>
+      </div>
+      <div class="card">
+        <p class="card-title">📍 Location</p>
+        <p>MillwrightIQ is based in:</p>
+        <br>
+        <p><strong>Arlington, Texas</strong><br>United States</p>
+        <br>
+        <p>Proudly serving millwrights and tradespeople across America.</p>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <p class="form-title">Send Us a Message</p>
+      <form action="mailto:millwrightiq@gmail.com" method="post" enctype="text/plain">
+        <div class="form-row">
+          <div>
+            <label>Your Name</label>
+            <input type="text" name="name" placeholder="John Smith" />
+          </div>
+          <div>
+            <label>Your Email</label>
+            <input type="email" name="email" placeholder="john@example.com" />
+          </div>
+        </div>
+        <label>Subject</label>
+        <select name="subject">
+          <option value="">Select a topic...</option>
+          <option>Calculator issue</option>
+          <option>Feature request</option>
+          <option>General question</option>
+          <option>Business inquiry</option>
+          <option>Other</option>
+        </select>
+        <label>Message</label>
+        <textarea name="message" placeholder="Tell us what's on your mind..."></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 MillwrightIQ. Built by a millwright, for the trade.
+  </footer>
+</body>
+</html>

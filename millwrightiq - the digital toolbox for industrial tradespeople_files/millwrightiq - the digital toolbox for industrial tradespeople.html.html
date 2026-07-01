@@ -1,0 +1,2777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MillwrightIQ — The Digital Toolbox for Industrial Tradespeople</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2FQEDVZVDE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2FQEDVZVDE');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7059933364795651" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Share+Tech+Mono&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --steel: #1a1d23;
+    --steel-mid: #22262f;
+    --steel-light: #2e3340;
+    --plate: #31363f;
+    --amber: #f59e0b;
+    --amber-bright: #fbbf24;
+    --amber-dim: #92600a;
+    --red-alert: #ef4444;
+    --green-go: #22c55e;
+    --cyan: #06b6d4;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-dim: #475569;
+    --border: #3f4654;
+    --glow: rgba(245,158,11,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--steel);
+    color: var(--text-primary);
+    font-family: 'Barlow', sans-serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* DIAGONAL STRIPE PATTERN */
+  .stripe-bg {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 8px,
+      rgba(245,158,11,0.03) 8px,
+      rgba(245,158,11,0.03) 16px
+    );
+  }
+
+  /* ==================== HEADER ==================== */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(26,29,35,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+  }
+
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    position: relative;
+  }
+
+  .logo-icon svg { width: 100%; height: 100%; }
+
+  .logo-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.6rem;
+    letter-spacing: 0.05em;
+    color: var(--text-primary);
+  }
+
+  .logo-text span { color: var(--amber); }
+
+  .logo-sub {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: block;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  nav { display: flex; gap: 0.25rem; }
+
+  nav a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  nav a:hover { color: var(--amber); background: var(--glow); }
+
+  .nav-cta {
+    background: var(--amber) !important;
+    color: var(--steel) !important;
+    font-weight: 700 !important;
+  }
+
+  .nav-cta:hover { background: var(--amber-bright) !important; }
+
+  /* ==================== HERO ==================== */
+  .hero {
+    position: relative;
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 70% 50%, rgba(245,158,11,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(6,182,212,0.04) 0%, transparent 60%),
+      linear-gradient(180deg, var(--steel) 0%, var(--steel-mid) 100%);
+  }
+
+  /* Gear decorations */
+  .gear-deco {
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 500px;
+    height: 500px;
+    opacity: 0.04;
+    animation: spin 60s linear infinite;
+  }
+
+  .gear-deco2 {
+    position: absolute;
+    right: 180px;
+    top: 20%;
+    width: 200px;
+    height: 200px;
+    opacity: 0.06;
+    animation: spin 40s linear infinite reverse;
+  }
+
+  @keyframes spin { from { transform: translateY(-50%) rotate(0deg); } to { transform: translateY(-50%) rotate(360deg); } }
+  @keyframes spin2 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  .gear-deco2 { animation: spin2 40s linear infinite reverse; }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    width: 100%;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(245,158,11,0.1);
+    border: 1px solid rgba(245,158,11,0.3);
+    border-radius: 2px;
+    padding: 4px 12px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--amber);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    animation: fadeInDown 0.6s ease both;
+  }
+
+  .badge-dot {
+    width: 6px; height: 6px;
+    background: var(--amber);
+    border-radius: 50%;
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    animation: fadeInDown 0.6s ease 0.1s both;
+  }
+
+  h1 .line2 { color: var(--amber); display: block; }
+  h1 .line3 { color: var(--text-secondary); font-size: 0.55em; font-weight: 600; display: block; letter-spacing: 0.08em; }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 520px;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    animation: fadeInDown 0.6s ease 0.2s both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeInDown 0.6s ease 0.3s both;
+  }
+
+  .btn-primary {
+    background: var(--amber);
+    color: var(--steel);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: var(--amber-bright);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(245,158,11,0.3);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-primary);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--amber);
+    color: var(--amber);
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--steel-mid);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 1.25rem 2rem;
+  }
+
+  .stats-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.5rem;
+    color: var(--amber);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  /* ==================== SECTION STYLES ==================== */
+  section { padding: 5rem 2rem; }
+
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+
+  .section-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--amber);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--amber);
+  }
+
+  h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .section-desc {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    max-width: 560px;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+
+  /* ==================== CALCULATORS ==================== */
+  .calculators-section { background: var(--steel-mid); }
+
+  .calc-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0;
+    flex-wrap: wrap;
+  }
+
+  .calc-tab {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 10px 18px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.2s;
+  }
+
+  .calc-tab:hover { color: var(--text-secondary); }
+  .calc-tab.active { color: var(--amber); border-bottom-color: var(--amber); }
+
+  .calc-panel { display: none; }
+  .calc-panel.active { display: block; }
+
+  .calc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  @media (max-width: 768px) { .calc-grid { grid-template-columns: 1fr; } }
+
+  .calc-card {
+    background: var(--steel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .calc-card-header {
+    background: var(--plate);
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .calc-icon {
+    width: 32px; height: 32px;
+    background: rgba(245,158,11,0.1);
+    border: 1px solid rgba(245,158,11,0.2);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+  }
+
+  .calc-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .calc-body { padding: 1.5rem; }
+
+  .input-group {
+    margin-bottom: 1.25rem;
+  }
+
+  .input-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .input-row {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .calc-input {
+    flex: 1;
+    background: var(--steel-light);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 14px;
+    color: var(--text-primary);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  .calc-input:focus {
+    outline: none;
+    border-color: var(--amber);
+    box-shadow: 0 0 0 2px rgba(245,158,11,0.1);
+  }
+
+  .calc-select {
+    background: var(--steel-light);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 14px;
+    color: var(--text-primary);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+
+  .calc-select:focus { outline: none; border-color: var(--amber); }
+
+  .calc-btn {
+    width: 100%;
+    background: var(--amber);
+    color: var(--steel);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+  }
+
+  .calc-btn:hover {
+    background: var(--amber-bright);
+    box-shadow: 0 4px 15px rgba(245,158,11,0.3);
+  }
+
+  .calc-result {
+    margin-top: 1.25rem;
+    background: var(--steel-light);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.25rem;
+    display: none;
+  }
+
+  .calc-result.show { display: block; }
+
+  .result-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 4px;
+  }
+
+  .result-value {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 2rem;
+    color: var(--amber);
+    font-weight: bold;
+  }
+
+  .result-unit {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-left: 4px;
+  }
+
+  .result-notes {
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    border-top: 1px solid var(--border);
+    padding-top: 0.75rem;
+  }
+
+  /* INFO PANEL */
+  .info-panel {
+    background: rgba(245,158,11,0.04);
+    border: 1px solid rgba(245,158,11,0.15);
+    border-radius: 6px;
+    padding: 1.5rem;
+  }
+
+  .info-panel h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1rem;
+  }
+
+  .formula-box {
+    background: var(--steel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--cyan);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .info-list { list-style: none; }
+  .info-list li {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(63,70,84,0.5);
+    display: flex;
+    justify-content: space-between;
+  }
+  .info-list li:last-child { border-bottom: none; }
+  .info-list li span { color: var(--text-primary); font-family: 'Share Tech Mono', monospace; }
+
+  /* ==================== TOOLS GRID ==================== */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .tool-card {
+    background: var(--steel-mid);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tool-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--amber);
+    transform: scaleY(0);
+    transition: transform 0.2s;
+    transform-origin: bottom;
+  }
+
+  .tool-card:hover {
+    border-color: rgba(245,158,11,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+
+  .tool-card:hover::before { transform: scaleY(1); }
+
+  .tool-card-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+
+  .tool-card-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+
+  .tool-card-desc {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+
+  .tool-badge {
+    position: absolute;
+    top: 10px; right: 10px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .badge-free { background: rgba(34,197,94,0.1); color: var(--green-go); border: 1px solid rgba(34,197,94,0.2); }
+  .badge-pro { background: rgba(245,158,11,0.1); color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
+  .badge-new { background: rgba(6,182,212,0.1); color: var(--cyan); border: 1px solid rgba(6,182,212,0.2); }
+
+  /* ==================== APPRENTICE HUB ==================== */
+  .hub-section { background: var(--steel); }
+
+  .hub-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 768px) { .hub-grid { grid-template-columns: 1fr; } }
+
+  .hub-card {
+    background: var(--steel-mid);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hub-card.featured {
+    border-color: rgba(245,158,11,0.3);
+    background: linear-gradient(135deg, var(--steel-mid) 0%, rgba(245,158,11,0.04) 100%);
+    grid-column: 1 / -1;
+  }
+
+  .hub-card-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .hub-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+
+  .hub-card p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  .progress-bar {
+    background: var(--steel-light);
+    border-radius: 2px;
+    height: 4px;
+    margin-bottom: 0.4rem;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--amber), var(--amber-bright));
+    border-radius: 2px;
+    transition: width 1s ease;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .year-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .year-tab {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: transparent;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .year-tab.active, .year-tab:hover {
+    border-color: var(--amber);
+    color: var(--amber);
+    background: var(--glow);
+  }
+
+  /* ==================== PRICING ==================== */
+  .pricing-section {
+    background: var(--steel-mid);
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; } }
+
+  .pricing-card {
+    background: var(--steel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .pricing-card.featured {
+    border-color: var(--amber);
+    box-shadow: 0 0 40px rgba(245,158,11,0.1);
+    transform: scale(1.03);
+  }
+
+  .pricing-header {
+    padding: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pricing-card.featured .pricing-header {
+    background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(245,158,11,0.02));
+  }
+
+  .pricing-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .pricing-card.featured .pricing-name { color: var(--amber); }
+
+  .pricing-price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 3rem;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .pricing-period {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    font-weight: 300;
+  }
+
+  .pricing-body { padding: 1.5rem 2rem 2rem; }
+
+  .feature-list { list-style: none; margin-bottom: 2rem; }
+
+  .feature-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 0;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    border-bottom: 1px solid rgba(63,70,84,0.4);
+  }
+
+  .feature-list li:last-child { border-bottom: none; }
+
+  .feature-check { color: var(--green-go); font-size: 0.8rem; flex-shrink: 0; }
+  .feature-x { color: var(--text-dim); font-size: 0.8rem; flex-shrink: 0; }
+
+  .featured-badge {
+    position: absolute;
+    top: 0; right: 2rem;
+    background: var(--amber);
+    color: var(--steel);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 0 0 6px 6px;
+  }
+
+  /* ==================== FOOTER ==================== */
+  footer {
+    background: var(--steel);
+    border-top: 1px solid var(--border);
+    padding: 3rem 2rem 2rem;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: 768px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+
+  .footer-brand p {
+    font-size: 0.875rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin-top: 1rem;
+    font-weight: 300;
+  }
+
+  .footer-col h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+  }
+
+  .footer-col a {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 4px 0;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: var(--amber); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-copy {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+  }
+
+  .footer-tagline {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--amber);
+    letter-spacing: 0.1em;
+  }
+
+  /* ==================== ANIMATIONS ==================== */
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--steel); }
+  ::-webkit-scrollbar-thumb { background: var(--plate); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--amber-dim); }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0;
+  }
+
+  /* ALERT BOX */
+  .alert-box {
+    background: rgba(245,158,11,0.07);
+    border: 1px solid rgba(245,158,11,0.2);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin-top: 0.75rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 36 36" fill="none">
+          <circle cx="18" cy="18" r="8" stroke="#f59e0b" stroke-width="2"/>
+          <circle cx="18" cy="18" r="3" fill="#f59e0b"/>
+          <rect x="16.5" y="2" width="3" height="7" rx="1.5" fill="#f59e0b" opacity="0.6"/>
+          <rect x="16.5" y="27" width="3" height="7" rx="1.5" fill="#f59e0b" opacity="0.6"/>
+          <rect x="2" y="16.5" width="7" height="3" rx="1.5" fill="#f59e0b" opacity="0.6"/>
+          <rect x="27" y="16.5" width="7" height="3" rx="1.5" fill="#f59e0b" opacity="0.6"/>
+          <rect x="6.5" y="6.5" width="3" height="6" rx="1.5" fill="#f59e0b" opacity="0.3" transform="rotate(45 8 8)"/>
+          <rect x="24.5" y="6.5" width="3" height="6" rx="1.5" fill="#f59e0b" opacity="0.3" transform="rotate(-45 28 8)"/>
+        </svg>
+      </div>
+      <div>
+        <div class="logo-text">Millwright<span>IQ</span></div>
+        <span class="logo-sub">Industrial Toolkit</span>
+      </div>
+    </a>
+    <nav>
+      <a href="#calculators">Calculators</a>
+      <a href="#tools">All Tools</a>
+      <a href="#apprentice">Apprentice Hub</a>
+      <a href="#pricing" class="nav-cta">Go Pro</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero stripe-bg">
+  <div class="hero-bg"></div>
+  <svg class="gear-deco" viewBox="0 0 200 200" fill="white">
+    <path d="M100 30 L110 10 L90 10 Z M100 170 L110 190 L90 190 Z M30 100 L10 110 L10 90 Z M170 100 L190 110 L190 90 Z M146 54 L158 38 L142 42 Z M54 146 L42 162 L58 158 Z M146 146 L162 158 L158 142 Z M54 54 L38 42 L42 58 Z"/>
+    <circle cx="100" cy="100" r="60" fill="none" stroke="white" stroke-width="8"/>
+    <circle cx="100" cy="100" r="40" fill="none" stroke="white" stroke-width="4"/>
+    <circle cx="100" cy="100" r="15" fill="white"/>
+  </svg>
+  <svg class="gear-deco2" viewBox="0 0 200 200" fill="white">
+    <circle cx="100" cy="100" r="70" fill="none" stroke="white" stroke-width="12"/>
+    <circle cx="100" cy="100" r="20" fill="white"/>
+    <rect x="94" y="10" width="12" height="30" rx="6" fill="white"/>
+    <rect x="94" y="160" width="12" height="30" rx="6" fill="white"/>
+    <rect x="10" y="94" width="30" height="12" rx="6" fill="white"/>
+    <rect x="160" y="94" width="30" height="12" rx="6" fill="white"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      Built by a Millwright · For the Trade
+    </div>
+    <h1>
+      Every Tool
+      <span class="line2">You Need</span>
+      <span class="line3">On The Floor & Off The Clock</span>
+    </h1>
+    <p class="hero-desc">
+      The only tool site built by a millwright who's still on the floor. Precision calculators, apprentice study tools, and trade references — no fluff, no guessing, just results.
+    </p>
+    <div class="hero-actions">
+      <a href="#calculators" class="btn-primary">Open Calculators</a>
+      <a href="#apprentice" class="btn-secondary">Apprentice Hub →</a>
+    </div>
+    <!-- SHARE BUTTONS -->
+    <div style="margin-top:1.5rem;display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;">
+      <span style="color:var(--text-dim);font-size:0.75rem;font-family:'Share Tech Mono',monospace;letter-spacing:0.1em;">SHARE WITH YOUR CREW:</span>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https://millwrightiq.com" target="_blank" style="background:#1877f2;color:#fff;padding:6px 14px;border-radius:4px;text-decoration:none;font-size:0.75rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:0.05em;">📘 Facebook</a>
+      <a href="https://reddit.com/submit?url=https://millwrightiq.com&title=Free tool site for millwrights - built by a 3rd year apprentice" target="_blank" style="background:#ff4500;color:#fff;padding:6px 14px;border-radius:4px;text-decoration:none;font-size:0.75rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:0.05em;">🔴 Reddit</a>
+      <a href="sms:?body=Check out this free tool site for millwrights: https://millwrightiq.com" style="background:#22c55e;color:#fff;padding:6px 14px;border-radius:4px;text-decoration:none;font-size:0.75rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:0.05em;">💬 Text</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat">
+      <span class="stat-num" id="visitor-count">—</span>
+      <span class="stat-label">Millwrights Served</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">12</span>
+      <span class="stat-label">Free Calculators</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">4</span>
+      <span class="stat-label">Apprentice Year Guides</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">100%</span>
+      <span class="stat-label">Trade Verified</span>
+    </div>
+  </div>
+</div>
+
+<!-- TOOL OF THE DAY -->
+<div style="background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(245,158,11,0.03));border-top:1px solid rgba(245,158,11,0.2);border-bottom:1px solid rgba(245,158,11,0.2);padding:1.25rem 2rem;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;">
+    <div style="background:var(--amber);color:var(--steel);font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:0.7rem;letter-spacing:0.15em;padding:4px 10px;border-radius:3px;white-space:nowrap;">⚡ TOOL OF THE DAY</div>
+    <div id="totd-content" style="flex:1;min-width:200px;">
+      <span style="color:var(--text-primary);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;" id="totd-name"></span>
+      <span style="color:var(--text-secondary);font-size:0.875rem;margin-left:0.75rem;" id="totd-desc"></span>
+    </div>
+    <a href="#calculators" id="totd-link" onclick="" style="background:var(--amber);color:var(--steel);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.05em;padding:8px 16px;border-radius:3px;text-decoration:none;white-space:nowrap;">Try It Now →</a>
+  </div>
+</div>
+
+<!-- CALCULATORS -->
+<section class="calculators-section" id="calculators">
+  <div class="section-inner">
+    <div class="section-label">Core Tools</div>
+    <h2>Live Calculators</h2>
+    <p class="section-desc">Real calculations millwrights use every day on the shop floor. Enter your values and get instant results.</p>
+
+    <div class="calc-tabs">
+      <button class="calc-tab active" onclick="switchTab('rpm')">⚙️ RPM & Pulley</button>
+      <button class="calc-tab" onclick="switchTab('gear')">🔩 Gear Ratio</button>
+      <button class="calc-tab" onclick="switchTab('torque')">🔧 Bolt Torque</button>
+      <button class="calc-tab" onclick="switchTab('thermal')">🌡️ Thermal Expansion</button>
+      <button class="calc-tab" onclick="switchTab('shaft')">📐 Shaft Alignment</button>
+      <button class="calc-tab" onclick="switchTab('vbelt')">🔄 V-Belt Length</button>
+      <button class="calc-tab" onclick="switchTab('unit')">📏 Unit Converter</button>
+      <button class="calc-tab" onclick="switchTab('drill')">🪛 Drill & Tap</button>
+      <button class="calc-tab" onclick="switchTab('conveyor')">🏗️ Conveyor Speed</button>
+      <button class="calc-tab" onclick="switchTab('bearing')">⚡ Bearing Fit</button>
+      <button class="calc-tab" onclick="switchTab('keyway')">🔑 Keyway & Keyseat</button>
+      <button class="calc-tab" onclick="switchTab('hydraulic')">💧 Hydraulic Power</button>
+    </div>
+
+    <!-- RPM CALCULATOR -->
+    <div class="calc-panel active" id="panel-rpm">
+      <div class="calc-grid">
+        <div class="calc-card">
+          <div class="calc-card-header">
+            <div class="calc-icon">⚙️</div>
+            <div>
+              <div class="calc-title">RPM & Pulley Speed</div>
+            </div>
+          </div>
+          <div class="calc-body">
+            <div class="input-group">
+              <label class="input-label">Driver Pulley Diameter (inches)</label>
+              <input class="calc-input" type="number" id="rpm-driver-dia" placeholder="e.g. 6" step="0.1">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Driver Speed (RPM)</label>
+              <input class="calc-input" type="number" id="rpm-driver-speed" placeholder="e.g. 1750">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Driven Pulley Diameter (inches)</label>
+              <input class="calc-input" type="number" id="rpm-driven-dia" placeholder="e.g. 12" step="0.1">
+            </div>
+            <button class="calc-btn" onclick="calcRPM()">Calculate Driven RPM</button>
+            <div class="calc-result" id="result-rpm">
+              <div class="result-label">Driven Pulley Speed</div>
+              <div><span class="result-value" id="rpm-result">—</span><span class="result-unit">RPM</span></div>
+              <div class="result-notes" id="rpm-notes"></div>
+            </div>
+          </div>
+        </div>
+        <div class="info-panel">
+          <h3>How It Works</h3>
+          <div class="formula-box">Driven RPM = (Driver Dia × Driver RPM) ÷ Driven Dia</div>
+          <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:1rem; line-height:1.6;">Use this to find the output speed of a belt-driven shaft when you know the driver pulley size, driver speed, and driven pulley size.</p>
+          <h3 style="margin-bottom:0.75rem;">Common Motor Speeds</h3>
+          <ul class="info-list">
+            <li>2-pole motor <span>3600 RPM</span></li>
+            <li>4-pole motor <span>1800 RPM</span></li>
+            <li>6-pole motor <span>1200 RPM</span></li>
+            <li>8-pole motor <span>900 RPM</span></li>
+          </ul>
+          <div class="alert-box">⚡ Always verify belt type and tension before running. Underspeed or overspeed can damage bearings and equipment.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GEAR RATIO CALCULATOR -->
+    <div class="calc-panel" id="panel-gear">
+      <div class="calc-grid">
+        <div class="calc-card">
+          <div class="calc-card-header">
+            <div class="calc-icon">🔩</div>
+            <div><div class="calc-title">Gear Ratio Calculator</div></div>
+          </div>
+          <div class="calc-body">
+            <div class="input-group">
+              <label class="input-label">Number of Teeth — Drive Gear</label>
+              <input class="calc-input" type="number" id="gear-drive" placeholder="e.g. 20">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Number of Teeth — Driven Gear</label>
+              <input class="calc-input" type="number" id="gear-driven" placeholder="e.g. 60">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Input Speed (RPM) — Optional</label>
+              <input class="calc-input" type="number" id="gear-input-rpm" placeholder="e.g. 1800">
+            </div>
+            <button class="calc-btn" onclick="calcGear()">Calculate Gear Ratio</button>
+            <div class="calc-result" id="result-gear">
+              <div class="result-label">Gear Ratio</div>
+              <div><span class="result-value" id="gear-ratio-result">—</span><span class="result-unit">: 1</span></div>
+              <div class="result-notes" id="gear-notes"></div>
+            </div>
+          </div>
+        </div>
+        <div class="info-panel">
+          <h3>Gear Ratio Basics</h3>
+          <div class="formula-box">Ratio = Driven Teeth ÷ Drive Teeth</div>
+          <div class="formula-box">Output RPM = Input RPM ÷ Ratio</div>
+          <ul class="info-list">
+            <li>Ratio &gt; 1 <span>Speed reduction</span></li>
+            <li>Ratio &lt; 1 <span>Speed increase</span></li>
+            <li>Ratio = 1 <span>1:1 (same speed)</span></li>
+            <li>Higher ratio <span>More torque</span></li>
+          </ul>
+          <div class="alert-box">📐 Count gear teeth carefully — one tooth off changes the entire ratio. Use a reference mark and count twice.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TORQUE CALCULATOR -->
+    <div class="calc-panel" id="panel-torque">
+      <div class="calc-grid">
+        <div class="calc-card">
+          <div class="calc-card-header">
+            <div class="calc-icon">🔧</div>
+            <div><div class="calc-title">Bolt Torque Calculator</div></div>
+          </div>
+          <div class="calc-body">
+            <div class="input-group">
+              <label class="input-label">Bolt Diameter</label>
+              <div class="input-row">
+                <select class="calc-select" id="torque-size">
+                  <option value="0.25,6">1/4" (6mm)</option>
+                  <option value="0.3125,8">5/16" (8mm)</option>
+                  <option value="0.375,10">3/8" (10mm)</option>
+                  <option value="0.5,13">1/2" (13mm)</option>
+                  <option value="0.625,16">5/8" (16mm)</option>
+                  <option value="0.75,19">3/4" (19mm)</option>
+                  <option value="0.875,22">7/8" (22mm)</option>
+                  <option value="1.0,25">1" (25mm)</option>
+                </select>
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Bolt Grade / Class</label>
+              <select class="calc-select" id="torque-grade" style="width:100%">
+                <option value="2">Grade 2 (Low Carbon)</option>
+                <option value="5" selected>Grade 5 (Medium Carbon)</option>
+                <option value="8">Grade 8 (Alloy Steel)</option>
+                <option value="10.9">Class 10.9 (Metric)</option>
+                <option value="12.9">Class 12.9 (Metric High Strength)</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Lubrication</label>
+              <select class="calc-select" id="torque-lube" style="width:100%">
+                <option value="1.0">Dry (no lube)</option>
+                <option value="0.75">Machine oil / light lube</option>
+                <option value="0.65">Anti-seize compound</option>
+              </select>
+            </div>
+            <button class="calc-btn" onclick="calcTorque()">Get Torque Spec</button>
+            <div class="calc-result" id="result-torque">
+              <div class="result-label">Recommended Torque</div>
+              <div><span class="result-value" id="torque-result">—</span><span class="result-unit">ft-lbs</span></div>
+              <div class="result-notes" id="torque-notes"></div>
+            </div>
+          </div>
+        </div>
+        <div class="info-panel">
+          <h3>Torque Reference</h3>
+          <div class="formula-box">T = K × D × F<br><span style="color:var(--text-dim); font-size:0.7rem">K=nut factor, D=diameter, F=clamp load</span></div>
+          <h3 style="margin-bottom:0.75rem; margin-top:1rem;">Grade ID Markings</h3>
+          <ul class="info-list">
+            <li>Grade 2 <span>No marks</span></li>
+            <li>Grade 5 <span>3 radial lines</span></li>
+            <li>Grade 8 <span>6 radial lines</span></li>
+            <li>Class 10.9 <span>10.9 stamped</span></li>
+          </ul>
+          <div class="alert-box">⚠️ These are general reference values. Always follow OEM torque specs for critical machinery fasteners.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THERMAL EXPANSION -->
+    <div class="calc-panel" id="panel-thermal">
+      <div class="calc-grid">
+        <div class="calc-card">
+          <div class="calc-card-header">
+            <div class="calc-icon">🌡️</div>
+            <div><div class="calc-title">Thermal Expansion</div></div>
+          </div>
+          <div class="calc-body">
+            <div class="input-group">
+              <label class="input-label">Material</label>
+              <select class="calc-select" id="therm-material" style="width:100%">
+                <option value="6.5">Carbon Steel (6.5 μin/in/°F)</option>
+                <option value="9.6">304 Stainless Steel (9.6 μin/in/°F)</option>
+                <option value="13.1">Aluminum (13.1 μin/in/°F)</option>
+                <option value="9.8">Cast Iron (9.8 μin/in/°F)</option>
+                <option value="11.4">Copper (11.4 μin/in/°F)</option>
+                <option value="10.2">Brass (10.2 μin/in/°F)</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Original Length (inches)</label>
+              <input class="calc-input" type="number" id="therm-length" placeholder="e.g. 48" step="0.001">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Temperature Change (°F)</label>
+              <input class="calc-input" type="number" id="therm-delta" placeholder="e.g. 150">
+            </div>
+            <button class="calc-btn" onclick="calcThermal()">Calculate Expansion</button>
+            <div class="calc-result" id="result-thermal">
+              <div class="result-label">Change in Length</div>
+              <div><span class="result-value" id="thermal-result">—</span><span class="result-unit" id="thermal-unit">inches</span></div>
+              <div class="result-notes" id="thermal-notes"></div>
+            </div>
+          </div>
+        </div>
+        <div class="info-panel">
+          <h3>Why This Matters</h3>
+          <div class="formula-box">ΔL = α × L × ΔT<br><span style="color:var(--text-dim);font-size:0.7rem">α=coefficient, L=length, ΔT=temp change</span></div>
+          <p style="font-size:0.8rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem;">Critical for shaft alignment on hot equipment. A shaft that's cold-aligned may misalign significantly at operating temperature.</p>
+          <ul class="info-list">
+            <li>Pump shafts <span>Check at temp</span></li>
+            <li>Couplings <span>Add thermal gap</span></li>
+            <li>Pipe anchors <span>Allow expansion</span></li>
+            <li>Gearbox mounts <span>Check cold offset</span></li>
+          </ul>
+          <div class="alert-box">🎯 For precision alignment work, always get operating temperature readings from the equipment operator before aligning.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHAFT ALIGNMENT PANEL -->
+    <div class="calc-panel" id="panel-shaft">
+      <div class="calc-grid">
+        <div class="calc-card">
+          <div class="calc-card-header">
+            <div class="calc-icon">📐</div>
+            <div><div class="calc-title">Shaft Alignment Tolerance Checker</div></div>
+          </div>
+          <div class="calc-body">
+            <div class="input-group">
+              <label class="input-label">Shaft RPM</label>
+              <input class="calc-input" type="number" id="shaft-rpm" placeholder="e.g. 1800">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Measured Offset (mils)</label>
+              <input class="calc-input" type="number" id="shaft-offset" placeholder="e.g. 3.5" step="0.1">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Measured Angularity (mils/inch)</label>
+              <input class="calc-input" type="number" id="shaft-angle" placeholder="e.g. 1.2" step="0.1">
+            </div>
+            <button class="calc-btn" onclick="calcShaft()">Check Alignment</button>
+            <div class="calc-result" id="result-shaft">
+              <div class="result-label">Alignment Status</div>
+              <div><span class="result-value" id="shaft-result" style="font-size:1.5rem">—</span></div>
+              <div class="result-notes" id="shaft-notes"></div>
+            </div>
+          </div>
+        </div>
+        <div class="info-panel">
+          <h3>Tolerance Guidelines</h3>
+          <div class="formula-box">Higher RPM = Tighter Tolerance Required</div>
+          <ul class="info-list">
+            <li>Under 1800 RPM <span>Offset ≤ 5 mils</span></li>
+            <li>1800–3600 RPM <span>Offset ≤ 3 mils</span></li>
+            <li>Over 3600 RPM <span>Offset ≤ 1.5 mils</span></li>
+            <li>Angularity <span>≤ 1 mil/inch</span></li>
+          </ul>
+          <div class="alert-box">🎯 1 mil = 0.001 inch. Always check both horizontal and vertical planes before declaring alignment acceptable.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- V-BELT LENGTH PANEL -->
+    <div class="calc-panel" id="panel-vbelt">
+      <div class="calc-grid">
+        <div class="calc-card">
+          <div class="calc-card-header">
+            <div class="calc-icon">🔄</div>
+            <div><div class="calc-title">V-Belt Length Calculator</div></div>
+          </div>
+          <div class="calc-body">
+            <div class="input-group">
+              <label class="input-label">Large Pulley Diameter (inches)</label>
+              <input class="calc-input" type="number" id="vbelt-large" placeholder="e.g. 12" step="0.1">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Small Pulley Diameter (inches)</label>
+              <input class="calc-input" type="number" id="vbelt-small" placeholder="e.g. 4" step="0.1">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Center Distance (inches)</label>
+              <input class="calc-input" type="number" id="vbelt-center" placeholder="e.g. 24" step="0.1">
+            </div>
+            <button class="calc-btn" onclick="calcVBelt()">Calculate Belt Length</button>
+            <div class="calc-result" id="result-vbelt">
+              <div class="result-label">Required Belt Length</div>
+              <div><span class="result-value" id="vbelt-result">—</span><span class="result-unit">inches</span></div>
+              <div class="result-notes" id="vbelt-notes"></div>
+            </div>
+          </div>
+        </div>
+        <div class="info-panel">
+          <h3>Belt Length Formula</h3>
+          <div class="formula-box">L = 2C + 1.57(D+d) + (D-d)²÷4C</div>
+          <ul class="info-list">
+            <li>C = Center distance <span>inches</span></li>
+            <li>D = Large pulley dia <span>inches</span></li>
+            <li>d = Small pulley dia <span>inches</span></li>
+          </ul>
+          <div class="alert-box">📏 Add 1–2% to calculated length for belt stretch and installation. Always check manufacturer's cross-reference for exact belt number.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UNIT CONVERTER PANEL -->
+    <div class="calc-panel" id="panel-unit">
+      <div class="calc-grid">
+        <div class="calc-card">
+          <div class="calc-card-header">
+            <div class="calc-icon">📏</div>
+            <div><div class="calc-title">Unit Converter — Imperial ↔ Metric</div></div>
+          </div>
+          <div class="calc-body">
+            <div class="input-group">
+              <label class="input-label">Category</label>
+              <select class="calc-select" id="unit-category" onchange="updateUnitOptions()">
+                <option value="length">Length</option>
+                <option value="weight">Weight / Force</option>
+                <option value="pressure">Pressure</option>
+                <option value="temp">Temperature</option>
+                <option value="torque">Torque</option>
+                <option value="speed">Speed (RPM ↔ rad/s)</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label class="input-label">From</label>
+              <select class="calc-select" id="unit-from"></select>
+            </div>
+            <div class="input-group">
+              <label class="input-label">To</label>
+              <select class="calc-select" id="unit-to"></select>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Value</label>
+              <input class="calc-input" type="number" id="unit-value" placeholder="Enter value">
+            </div>
+            <button class="calc-btn" onclick="calcUnit()">Convert</button>
+            <div class="calc-result" id="result-unit">
+              <div class="result-label">Converted Value</div>
+              <div><span class="result-value" id="unit-result">—</span></div>
+              <div class="result-notes" id="unit-notes"></div>
+            </div>
+          </div>
+        </div>
+        <div class="info-panel">
+          <h3>Common Shop Conversions</h3>
+          <ul class="info-list">
+            <li>1 inch <span>25.4 mm</span></li>
+            <li>1 lb-ft torque <span>1.356 N·m</span></li>
+            <li>1 PSI <span>6.895 kPa</span></li>
+            <li>1 HP <span>745.7 watts</span></li>
+            <li>1 RPM <span>0.1047 rad/s</span></li>
+          </ul>
+          <div class="alert-box">🔁 Always double-check unit conversions on critical measurements. A metric/imperial mix-up can cause serious equipment damage.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DRILL & TAP PANEL -->
+    <div class="calc-panel" id="panel-drill">
+      <div class="calc-grid">
+        <div class="calc-card">
+          <div class="calc-card-header">
+            <div class="calc-icon">🪛</div>
+            <div><div class="calc-title">Drill & Tap Chart</div></div>
+          </div>
+          <div class="calc-body">
+            <div class="input-group">
+              <label class="input-label">Thread Size</label>
+              <select class="calc-select" id="drill-size" onchange="lookupDrill()">
+                <option value="">Select thread size...</option>
+                <option value="0-80">#0-80</option>
+                <option value="1-64">#1-64</option>
+                <option value="2-56">#2-56</option>
+                <option value="4-40">#4-40</option>
+                <option value="6-32">#6-32</option>
+                <option value="8-32">#8-32</option>
+                <option value="10-24">#10-24</option>
+                <option value="10-32">#10-32</option>
+                <option value="1/4-20">1/4"-20 UNC</option>
+                <option value="1/4-28">1/4"-28 UNF</option>
+                <option value="5/16-18">5/16"-18 UNC</option>
+                <option value="5/16-24">5/16"-24 UNF</option>
+                <option value="3/8-16">3/8"-16 UNC</option>
+                <option value="3/8-24">3/8"-24 UNF</option>
+                <option value="7/16-14">7/16"-14 UNC</option>
+                <option value="1/2-13">1/2"-13 UNC</option>
+                <option value="1/2-20">1/2"-20 UNF</option>
+                <option value="5/8-11">5/8"-11 UNC</option>
+                <option value="3/4-10">3/4"-10 UNC</option>
+                <option value="7/8-9">7/8"-9 UNC</option>
+                <option value="1-8">1"-8 UNC</option>
+              </select>
+            </div>
+            <div class="calc-result show" id="result-drill">
+              <div class="result-label">Drill & Tap Specs</div>
+              <div class="result-notes" id="drill-notes" style="margin-top:0.5rem;">Select a thread size above to see specs.</div>
+            </div>
+          </div>
+        </div>
+        <div class="info-panel">
+          <h3>How to Use</h3>
+          <div class="formula-box">Select thread → See tap drill size</div>
+          <ul class="info-list">
+            <li>75% thread <span>Standard strength</span></li>
+            <li>50% thread <span>Softer materials</span></li>
+            <li>UNC <span>Coarse thread</span></li>
+            <li>UNF <span>Fine thread</span></li>
+          </ul>
+          <div class="alert-box">🪛 Always use the correct tap drill for 75% thread engagement. Under-drilling causes tap breakage; over-drilling weakens threads.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONVEYOR SPEED PANEL -->
+    <div class="calc-panel" id="panel-conveyor">
+      <div class="calc-grid">
+        <div class="calc-card">
+          <div class="calc-card-header">
+            <div class="calc-icon">🏗️</div>
+            <div><div class="calc-title">Conveyor Speed Calculator</div></div>
+          </div>
+          <div class="calc-body">
+            <div class="input-group">
+              <label class="input-label">Belt Speed (FPM)</label>
+              <input class="calc-input" type="number" id="conv-fpm" placeholder="e.g. 300" step="1">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Belt Width (inches)</label>
+              <input class="calc-input" type="number" id="conv-width" placeholder="e.g. 24" step="1">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Material Density (lbs/ft³)</label>
+              <select class="calc-select" id="conv-density">
+                <option value="50">Coal (50 lbs/ft³)</option>
+                <option value="80">Gravel (80 lbs/ft³)</option>
+                <option value="100" selected>Sand/Dirt (100 lbs/ft³)</option>
+                <option value="120">Limestone (120 lbs/ft³)</option>
+                <option value="150">Iron Ore (150 lbs/ft³)</option>
+                <option value="490">Steel (490 lbs/ft³)</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Material Depth on Belt (inches)</label>
+              <input class="calc-input" type="number" id="conv-depth" placeholder="e.g. 4" step="0.5">
+            </div>
+            <button class="calc-btn" onclick="calcConveyor()">Calculate Conveyor Capacity</button>
+            <div class="calc-result" id="result-conveyor">
+              <div class="result-label">Throughput</div>
+              <div><span class="result-value" id="conv-tph">—</span><span class="result-unit">TPH</span></div>
+              <div class="result-notes" id="conv-notes"></div>
+            </div>
+          </div>
+        </div>
+        <div class="info-panel">
+          <h3>Conveyor Capacity Formula</h3>
+          <div class="formula-box">TPH = (Width × Depth × FPM × Density) ÷ 2000</div>
+          <ul class="info-list">
+            <li>FPM <span>Belt surface speed</span></li>
+            <li>TPH <span>Tons per hour</span></li>
+            <li>Width × Depth <span>Cross section (ft²)</span></li>
+            <li>÷ 2000 <span>Converts lbs to tons</span></li>
+          </ul>
+          <div class="alert-box">⚠️ Always account for conveyor incline/decline angle. Steep angles reduce effective capacity significantly.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BEARING FIT PANEL -->
+    <div class="calc-panel" id="panel-bearing">
+      <div class="calc-grid">
+        <div class="calc-card">
+          <div class="calc-card-header">
+            <div class="calc-icon">⚡</div>
+            <div><div class="calc-title">Bearing Fit Calculator</div></div>
+          </div>
+          <div class="calc-body">
+            <div class="input-group">
+              <label class="input-label">Shaft Diameter (inches)</label>
+              <input class="calc-input" type="number" id="bear-shaft" placeholder="e.g. 2.0000" step="0.0001">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Bearing Bore Diameter (inches)</label>
+              <input class="calc-input" type="number" id="bear-bore" placeholder="e.g. 1.9998" step="0.0001">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Application Type</label>
+              <select class="calc-select" id="bear-type">
+                <option value="rotating">Rotating Inner Ring (standard)</option>
+                <option value="stationary">Stationary Inner Ring</option>
+                <option value="heavy">Heavy Shock Load</option>
+              </select>
+            </div>
+            <button class="calc-btn" onclick="calcBearing()">Calculate Fit</button>
+            <div class="calc-result" id="result-bearing">
+              <div class="result-label">Fit Type</div>
+              <div><span class="result-value" id="bear-result" style="font-size:1.4rem">—</span></div>
+              <div class="result-notes" id="bear-notes"></div>
+            </div>
+          </div>
+        </div>
+        <div class="info-panel">
+          <h3>Fit Types</h3>
+          <div class="formula-box">Interference = Shaft Dia − Bore Dia</div>
+          <ul class="info-list">
+            <li>Clearance fit <span>Bore &gt; Shaft (loose)</span></li>
+            <li>Transition fit <span>Very close tolerance</span></li>
+            <li>Interference fit <span>Shaft &gt; Bore (press)</span></li>
+            <li>Typical press <span>0.0001–0.0005"</span></li>
+          </ul>
+          <div class="alert-box">🔩 Press fits require bearing heater or hydraulic press. Never hammer a bearing directly onto a shaft — always use a bearing driver.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KEYWAY & KEYSEAT PANEL -->
+    <div class="calc-panel" id="panel-keyway">
+      <div class="calc-grid">
+        <div class="calc-card">
+          <div class="calc-card-header">
+            <div class="calc-icon">🔑</div>
+            <div><div class="calc-title">Keyway & Keyseat Reference</div></div>
+          </div>
+          <div class="calc-body">
+            <div class="input-group">
+              <label class="input-label">Shaft Diameter</label>
+              <select class="calc-select" id="key-shaft" onchange="lookupKeyway()">
+                <option value="">Select shaft diameter...</option>
+                <option value="0.5">1/2" (0.500")</option>
+                <option value="0.625">5/8" (0.625")</option>
+                <option value="0.75">3/4" (0.750")</option>
+                <option value="0.875">7/8" (0.875")</option>
+                <option value="1.0">1" (1.000")</option>
+                <option value="1.125">1-1/8" (1.125")</option>
+                <option value="1.25">1-1/4" (1.250")</option>
+                <option value="1.375">1-3/8" (1.375")</option>
+                <option value="1.5">1-1/2" (1.500")</option>
+                <option value="1.75">1-3/4" (1.750")</option>
+                <option value="2.0">2" (2.000")</option>
+                <option value="2.25">2-1/4" (2.250")</option>
+                <option value="2.5">2-1/2" (2.500")</option>
+                <option value="2.75">2-3/4" (2.750")</option>
+                <option value="3.0">3" (3.000")</option>
+                <option value="3.5">3-1/2" (3.500")</option>
+                <option value="4.0">4" (4.000")</option>
+              </select>
+            </div>
+            <div class="calc-result show" id="result-keyway">
+              <div class="result-label">Keyway Dimensions</div>
+              <div class="result-notes" id="keyway-notes" style="margin-top:0.5rem;">Select a shaft diameter above to see specs.</div>
+            </div>
+          </div>
+        </div>
+        <div class="info-panel">
+          <h3>ANSI Standard Keyways</h3>
+          <div class="formula-box">Key Width = ~1/4 of shaft diameter</div>
+          <ul class="info-list">
+            <li>Keyway <span>Cut in shaft</span></li>
+            <li>Keyseat <span>Cut in hub/bore</span></li>
+            <li>Square key <span>Up to 6.5" shaft</span></li>
+            <li>Fit <span>Side fit is critical</span></li>
+          </ul>
+          <div class="alert-box">📐 Always measure the actual key and keyway with micrometers. ANSI standards are nominal — actual fit determines torque capacity.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HYDRAULIC POWER PANEL -->
+    <div class="calc-panel" id="panel-hydraulic">
+      <div class="calc-grid">
+        <div class="calc-card">
+          <div class="calc-card-header">
+            <div class="calc-icon">💧</div>
+            <div><div class="calc-title">Hydraulic Power Calculator</div></div>
+          </div>
+          <div class="calc-body">
+            <div class="input-group">
+              <label class="input-label">Calculate:</label>
+              <select class="calc-select" id="hyd-mode" onchange="updateHydMode()">
+                <option value="hp">Horsepower (from PSI + GPM)</option>
+                <option value="gpm">Flow Rate GPM (from HP + PSI)</option>
+                <option value="psi">Pressure PSI (from HP + GPM)</option>
+              </select>
+            </div>
+            <div id="hyd-inputs">
+              <div class="input-group" id="hyd-psi-group">
+                <label class="input-label">Pressure (PSI)</label>
+                <input class="calc-input" type="number" id="hyd-psi" placeholder="e.g. 2000">
+              </div>
+              <div class="input-group" id="hyd-gpm-group">
+                <label class="input-label">Flow Rate (GPM)</label>
+                <input class="calc-input" type="number" id="hyd-gpm" placeholder="e.g. 10">
+              </div>
+              <div class="input-group" id="hyd-hp-group" style="display:none">
+                <label class="input-label">Horsepower (HP)</label>
+                <input class="calc-input" type="number" id="hyd-hp-input" placeholder="e.g. 5">
+              </div>
+            </div>
+            <button class="calc-btn" onclick="calcHydraulic()">Calculate</button>
+            <div class="calc-result" id="result-hydraulic">
+              <div class="result-label" id="hyd-result-label">Hydraulic Horsepower</div>
+              <div><span class="result-value" id="hyd-result">—</span><span class="result-unit" id="hyd-result-unit">HP</span></div>
+              <div class="result-notes" id="hyd-notes"></div>
+            </div>
+          </div>
+        </div>
+        <div class="info-panel">
+          <h3>Hydraulic Power Formula</h3>
+          <div class="formula-box">HP = (PSI × GPM) ÷ 1714</div>
+          <ul class="info-list">
+            <li>PSI <span>System pressure</span></li>
+            <li>GPM <span>Flow rate</span></li>
+            <li>1714 <span>Hydraulic constant</span></li>
+            <li>Efficiency <span>Typically 85–90%</span></li>
+          </ul>
+          <div class="alert-box">⚠️ Always add 15–20% to calculated HP for system inefficiency. Undersized pumps overheat and fail prematurely.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ALL TOOLS -->
+<section id="tools">
+  <div class="section-inner">
+    <div class="section-label">Full Library</div>
+    <h2>All Available Tools</h2>
+    <p class="section-desc">Everything in one place. More tools added regularly based on real shop floor needs.</p>
+
+    <div class="tools-grid">
+      <div class="tool-card" onclick="scrollToCalc('rpm')" style="cursor:pointer">
+        <div class="tool-badge badge-free">Free</div>
+        <div style="position:absolute;top:0.5rem;right:0.5rem;background:#ef4444;color:#fff;font-size:0.6rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:0.1em;padding:2px 6px;border-radius:2px;">🔥 POPULAR</div>
+        <div class="tool-card-icon">⚙️</div>
+        <div class="tool-card-name">RPM Calculator</div>
+        <div class="tool-card-desc">Belt & pulley driven speed</div>
+      </div>
+      <div class="tool-card" onclick="scrollToCalc('gear')" style="cursor:pointer">
+        <div class="tool-badge badge-free">Free</div>
+        <div class="tool-card-icon">🔩</div>
+        <div class="tool-card-name">Gear Ratio</div>
+        <div class="tool-card-desc">Teeth count to ratio</div>
+      </div>
+      <div class="tool-card" onclick="scrollToCalc('torque')" style="cursor:pointer">
+        <div class="tool-badge badge-free">Free</div>
+        <div class="tool-card-icon">🔧</div>
+        <div class="tool-card-name">Bolt Torque</div>
+        <div class="tool-card-desc">Grade-based torque specs</div>
+      </div>
+      <div class="tool-card" onclick="scrollToCalc('thermal')" style="cursor:pointer">
+        <div class="tool-badge badge-free">Free</div>
+        <div class="tool-card-icon">🌡️</div>
+        <div class="tool-card-name">Thermal Expansion</div>
+        <div class="tool-card-desc">Material length change</div>
+      </div>
+      <div class="tool-card" onclick="scrollToCalc('shaft')" style="cursor:pointer">
+        <div class="tool-badge badge-new">New</div>
+        <div style="position:absolute;top:0.5rem;right:0.5rem;background:#f59e0b;color:#000;font-size:0.6rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:0.1em;padding:2px 6px;border-radius:2px;">⭐ TOP RATED</div>
+        <div class="tool-card-icon">📐</div>
+        <div class="tool-card-name">Shaft Alignment</div>
+        <div class="tool-card-desc">Tolerance checker</div>
+      </div>
+      <div class="tool-card" onclick="scrollToCalc('vbelt')" style="cursor:pointer">
+        <div class="tool-badge badge-free">Free</div>
+        <div class="tool-card-icon">🔄</div>
+        <div class="tool-card-name">V-Belt Length</div>
+        <div class="tool-card-desc">Center distance calculator</div>
+      </div>
+      <div class="tool-card" onclick="scrollToCalc('conveyor')" style="cursor:pointer">
+        <div class="tool-badge badge-pro">Pro</div>
+        <div class="tool-card-icon">🏗️</div>
+        <div class="tool-card-name">Conveyor Speed</div>
+        <div class="tool-card-desc">FPM & TPH calculator</div>
+      </div>
+      <div class="tool-card" onclick="scrollToCalc('bearing')" style="cursor:pointer">
+        <div class="tool-badge badge-pro">Pro</div>
+        <div class="tool-card-icon">⚡</div>
+        <div class="tool-card-name">Bearing Fit</div>
+        <div class="tool-card-desc">Interference fit calc</div>
+      </div>
+      <div class="tool-card" onclick="scrollToCalc('unit')" style="cursor:pointer">
+        <div class="tool-badge badge-free">Free</div>
+        <div class="tool-card-icon">📏</div>
+        <div class="tool-card-name">Unit Converter</div>
+        <div class="tool-card-desc">Imperial ↔ Metric</div>
+      </div>
+      <div class="tool-card" onclick="scrollToCalc('keyway')" style="cursor:pointer">
+        <div class="tool-badge badge-pro">Pro</div>
+        <div class="tool-card-icon">🔑</div>
+        <div class="tool-card-name">Keyway & Keyseat</div>
+        <div class="tool-card-desc">Width & depth lookup</div>
+      </div>
+      <div class="tool-card" onclick="scrollToCalc('drill')" style="cursor:pointer">
+        <div class="tool-badge badge-free">Free</div>
+        <div class="tool-card-icon">🪛</div>
+        <div class="tool-card-name">Drill & Tap Chart</div>
+        <div class="tool-card-desc">Size reference lookup</div>
+      </div>
+      <div class="tool-card" onclick="scrollToCalc('hydraulic')" style="cursor:pointer">
+        <div class="tool-badge badge-pro">Pro</div>
+        <div class="tool-card-icon">💧</div>
+        <div class="tool-card-name">Hydraulic Power</div>
+        <div class="tool-card-desc">PSI / GPM / HP calc</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- APPRENTICE HUB -->
+<section class="hub-section" id="apprentice">
+  <div class="section-inner">
+    <div class="section-label">Study Center</div>
+    <h2>Apprentice Hub</h2>
+    <p class="section-desc">Everything you need to get from 1st year to Journeyman. Study guides, quizzes, and exam prep — written by someone on the same path.</p>
+
+    <!-- YEAR SELECTOR -->
+    <div class="hub-card featured" style="margin-bottom:2rem;">
+      <div class="hub-card-icon">🎓</div>
+      <h3>Select Your Apprentice Year</h3>
+      <p>Choose your current year to see your topics, study guide, and what to focus on next.</p>
+      <div class="year-tabs" style="margin-top:1rem;">
+        <button class="year-tab" onclick="selectYear(1, this)">Year 1</button>
+        <button class="year-tab" onclick="selectYear(2, this)">Year 2</button>
+        <button class="year-tab" onclick="selectYear(3, this)">Year 3</button>
+        <button class="year-tab" onclick="selectYear(4, this)">Year 4</button>
+      </div>
+      <div id="year-content" style="margin-top:1.25rem;">
+        <p style="color:var(--text-dim); font-style:italic;">Select your year above to see your study plan.</p>
+      </div>
+    </div>
+
+    <!-- HUB NAV TABS -->
+    <div class="calc-tabs" style="margin-bottom:1.5rem;">
+      <button class="calc-tab active" onclick="switchHub('guides')">📚 Study Guides</button>
+      <button class="calc-tab" onclick="switchHub('math')">🧮 Trade Math Quiz</button>
+      <button class="calc-tab" onclick="switchHub('exam')">📋 Exam Prep</button>
+      <button class="calc-tab" onclick="switchHub('glossary')">📖 Glossary</button>
+    </div>
+
+    <!-- STUDY GUIDES PANEL -->
+    <div class="hub-panel active" id="hub-guides">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
+
+        <div style="background:var(--steel-mid);border:1px solid var(--border);border-radius:8px;padding:1.5rem;">
+          <div style="color:var(--amber);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;text-transform:uppercase;margin-bottom:1rem;">📘 Year 1 — Foundation</div>
+          <ul style="list-style:none;color:var(--text-secondary);font-size:0.875rem;line-height:2;">
+            <li>✅ Trade Safety & OSHA Requirements</li>
+            <li>✅ Hand Tools & Proper Use</li>
+            <li>✅ Basic Blueprint Reading</li>
+            <li>✅ Measuring Tools (micrometers, calipers)</li>
+            <li>✅ Fasteners — Bolts, Nuts, Threads</li>
+            <li>✅ Basic Rigging & Lifting</li>
+            <li>✅ Introduction to Bearings</li>
+            <li>✅ Shop Math — Fractions & Decimals</li>
+            <li>✅ Material Identification (steel grades)</li>
+            <li>✅ Lubrication Basics</li>
+          </ul>
+          <div style="margin-top:1rem;background:var(--steel-light);border-left:3px solid var(--amber);padding:0.75rem;font-size:0.8rem;color:var(--text-secondary);">
+            <strong style="color:var(--amber);">Year 1 Focus:</strong> Safety, tools, and measurement. Master your micrometer — you'll use it every day for the rest of your career.
+          </div>
+        </div>
+
+        <div style="background:var(--steel-mid);border:1px solid var(--border);border-radius:8px;padding:1.5rem;">
+          <div style="color:var(--amber);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;text-transform:uppercase;margin-bottom:1rem;">📗 Year 2 — Mechanical Systems</div>
+          <ul style="list-style:none;color:var(--text-secondary);font-size:0.875rem;line-height:2;">
+            <li>✅ Bearing Installation & Removal</li>
+            <li>✅ Shaft & Coupling Alignment Basics</li>
+            <li>✅ V-Belt & Chain Drive Systems</li>
+            <li>✅ Gearbox Identification & Oil Types</li>
+            <li>✅ Hydraulics — Basic Principles</li>
+            <li>✅ Pneumatics — Air Systems</li>
+            <li>✅ Welding Fundamentals (MIG/stick)</li>
+            <li>✅ Advanced Blueprint Reading</li>
+            <li>✅ Precision Measurement — Dial Indicators</li>
+            <li>✅ Preventive Maintenance Concepts</li>
+          </ul>
+          <div style="margin-top:1rem;background:var(--steel-light);border-left:3px solid var(--amber);padding:0.75rem;font-size:0.8rem;color:var(--text-secondary);">
+            <strong style="color:var(--amber);">Year 2 Focus:</strong> Mechanical systems. Learn how power flows from motor to shaft — belts, chains, gears, and couplings.
+          </div>
+        </div>
+
+        <div style="background:var(--steel-mid);border:1px solid var(--border);border-radius:8px;padding:1.5rem;">
+          <div style="color:var(--amber);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;text-transform:uppercase;margin-bottom:1rem;">📙 Year 3 — Advanced Skills</div>
+          <ul style="list-style:none;color:var(--text-secondary);font-size:0.875rem;line-height:2;">
+            <li>✅ Advanced Shaft Alignment (laser/dial)</li>
+            <li>✅ Gearbox Overhaul & Rebuild</li>
+            <li>✅ Vibration Analysis Basics</li>
+            <li>✅ Conveyor Systems — Installation</li>
+            <li>✅ Hydraulic System Troubleshooting</li>
+            <li>✅ Pump Types & Applications</li>
+            <li>✅ Motor & Drive Systems</li>
+            <li>✅ Advanced Rigging & Crane Signals</li>
+            <li>✅ Thermal Imaging Basics</li>
+            <li>✅ Root Cause Analysis (RCA)</li>
+          </ul>
+          <div style="margin-top:1rem;background:var(--steel-light);border-left:3px solid var(--amber);padding:0.75rem;font-size:0.8rem;color:var(--text-secondary);">
+            <strong style="color:var(--amber);">Year 3 Focus:</strong> You're doing the real work now. Alignment, troubleshooting, and rebuilds. Document everything you do — it builds your credibility.
+          </div>
+        </div>
+
+        <div style="background:var(--steel-mid);border:1px solid var(--border);border-radius:8px;padding:1.5rem;">
+          <div style="color:var(--amber);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;text-transform:uppercase;margin-bottom:1rem;">📕 Year 4 — Journeyman Prep</div>
+          <ul style="list-style:none;color:var(--text-secondary);font-size:0.875rem;line-height:2;">
+            <li>✅ Complete Machinery Installation</li>
+            <li>✅ Laser Alignment — Advanced Methods</li>
+            <li>✅ Predictive Maintenance Programs</li>
+            <li>✅ Millwright Trade Calculations Review</li>
+            <li>✅ Journeyman Exam Topics Review</li>
+            <li>✅ Leadership & Mentoring Apprentices</li>
+            <li>✅ Work Orders & Documentation</li>
+            <li>✅ OSHA 30 — Advanced Safety</li>
+            <li>✅ Contractor & Union Regulations</li>
+            <li>✅ Job Site Management Basics</li>
+          </ul>
+          <div style="margin-top:1rem;background:var(--steel-light);border-left:3px solid var(--amber);padding:0.75rem;font-size:0.8rem;color:var(--text-secondary);">
+            <strong style="color:var(--amber);">Year 4 Focus:</strong> Journeyman exam prep and leadership. Start thinking like a journeyman — plan the job, supervise safely, and mentor the next class.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TRADE MATH QUIZ PANEL -->
+    <div class="hub-panel" id="hub-math" style="display:none;">
+      <div style="background:var(--steel-mid);border:1px solid var(--border);border-radius:8px;padding:2rem;max-width:700px;margin:0 auto;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.4rem;text-transform:uppercase;margin-bottom:0.5rem;">🧮 Trade Math Quiz</div>
+        <p style="color:var(--text-secondary);font-size:0.875rem;margin-bottom:1.5rem;">Real math problems millwrights face on the job and on the Journeyman exam. Select an answer then click Next.</p>
+        <div id="quiz-area">
+          <div id="quiz-question" style="background:var(--steel-light);border:1px solid var(--border);border-radius:6px;padding:1.25rem;margin-bottom:1rem;font-size:1rem;line-height:1.6;"></div>
+          <div id="quiz-options" style="display:grid;gap:0.5rem;margin-bottom:1rem;"></div>
+          <div id="quiz-feedback" style="display:none;padding:1rem;border-radius:6px;margin-bottom:1rem;font-size:0.875rem;"></div>
+          <div style="display:flex;gap:1rem;align-items:center;">
+            <button class="calc-btn" onclick="nextQuestion()" id="quiz-next-btn">Start Quiz</button>
+            <span id="quiz-score" style="color:var(--text-secondary);font-family:'Share Tech Mono',monospace;font-size:0.85rem;"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXAM PREP PANEL -->
+    <div class="hub-panel" id="hub-exam" style="display:none;">
+      <div style="background:var(--steel-mid);border:1px solid var(--border);border-radius:8px;padding:2rem;max-width:700px;margin:0 auto;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.4rem;text-transform:uppercase;margin-bottom:0.5rem;">📋 Journeyman Exam Prep</div>
+        <p style="color:var(--text-secondary);font-size:0.875rem;margin-bottom:1.5rem;">Practice questions modeled after real Journeyman millwright certification exams.</p>
+        <div id="exam-area">
+          <div id="exam-question" style="background:var(--steel-light);border:1px solid var(--border);border-radius:6px;padding:1.25rem;margin-bottom:1rem;font-size:1rem;line-height:1.6;"></div>
+          <div id="exam-options" style="display:grid;gap:0.5rem;margin-bottom:1rem;"></div>
+          <div id="exam-feedback" style="display:none;padding:1rem;border-radius:6px;margin-bottom:1rem;font-size:0.875rem;"></div>
+          <div style="display:flex;gap:1rem;align-items:center;">
+            <button class="calc-btn" onclick="nextExam()" id="exam-next-btn">Start Exam Prep</button>
+            <span id="exam-score" style="color:var(--text-secondary);font-family:'Share Tech Mono',monospace;font-size:0.85rem;"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GLOSSARY PANEL -->
+    <div class="hub-panel" id="hub-glossary" style="display:none;">
+      <div style="background:var(--steel-mid);border:1px solid var(--border);border-radius:8px;padding:1.5rem;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.4rem;text-transform:uppercase;margin-bottom:0.5rem;">📖 Millwright Glossary</div>
+        <p style="color:var(--text-secondary);font-size:0.875rem;margin-bottom:1rem;">Search trade terms, definitions, and abbreviations used in industrial millwright work.</p>
+        <input type="text" id="gloss-search" class="calc-input" placeholder="Search terms... (e.g. bearing, torque, alignment)" oninput="searchGlossary()" style="margin-bottom:1rem;">
+        <div id="gloss-results" style="max-height:500px;overflow-y:auto;"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TESTIMONIALS -->
+<section style="background:var(--steel-mid);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:3rem 2rem;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--amber);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.5rem;">From The Trade</div>
+    <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2rem;text-transform:uppercase;margin-bottom:2rem;">What Millwrights Are Saying</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;">
+
+      <div style="background:var(--steel);border:1px solid var(--border);border-radius:8px;padding:1.5rem;position:relative;">
+        <div style="color:var(--amber);font-size:2rem;line-height:1;margin-bottom:0.75rem;">"</div>
+        <p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7;margin-bottom:1rem;">Used the RPM calculator on my phone right on the floor. Got the driven pulley speed in 10 seconds. This would've taken me 5 minutes with a calculator and formula sheet.</p>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <div style="width:36px;height:36px;background:var(--amber);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:var(--steel);font-family:'Barlow Condensed',sans-serif;">JT</div>
+          <div>
+            <div style="color:var(--text-primary);font-size:0.875rem;font-weight:600;">James T.</div>
+            <div style="color:var(--text-dim);font-size:0.75rem;">2nd Year Apprentice · Ohio</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--steel);border:1px solid var(--border);border-radius:8px;padding:1.5rem;position:relative;">
+        <div style="color:var(--amber);font-size:2rem;line-height:1;margin-bottom:0.75rem;">"</div>
+        <p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7;margin-bottom:1rem;">The shaft alignment tolerance checker is exactly what apprentices need. Clear, simple, and built the way we actually think on the job. Bookmarked it for my whole crew.</p>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <div style="width:36px;height:36px;background:var(--amber);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:var(--steel);font-family:'Barlow Condensed',sans-serif;">MR</div>
+          <div>
+            <div style="color:var(--text-primary);font-size:0.875rem;font-weight:600;">Marcus R.</div>
+            <div style="color:var(--text-dim);font-size:0.75rem;">Journeyman Millwright · Texas</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--steel);border:1px solid var(--border);border-radius:8px;padding:1.5rem;position:relative;">
+        <div style="color:var(--amber);font-size:2rem;line-height:1;margin-bottom:0.75rem;">"</div>
+        <p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7;margin-bottom:1rem;">Finally a site that actually speaks millwright. The glossary alone is worth it — I've been in the trade 8 years and still found terms I needed to review before my foreman exam.</p>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <div style="width:36px;height:36px;background:var(--amber);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:var(--steel);font-family:'Barlow Condensed',sans-serif;">DW</div>
+          <div>
+            <div style="color:var(--text-primary);font-size:0.875rem;font-weight:600;">Derek W.</div>
+            <div style="color:var(--text-dim);font-size:0.75rem;">4th Year Apprentice · Michigan</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SHARE PROMPT -->
+    <div style="margin-top:2.5rem;background:linear-gradient(135deg,rgba(245,158,11,0.1),rgba(245,158,11,0.03));border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:1.5rem;text-align:center;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;text-transform:uppercase;margin-bottom:0.5rem;">Know a Millwright Who'd Find This Useful?</div>
+      <p style="color:var(--text-secondary);font-size:0.875rem;margin-bottom:1.25rem;">Share MillwrightIQ with your crew, apprentice class, or union hall. It's 100% free.</p>
+      <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://millwrightiq.com" target="_blank" style="background:#1877f2;color:#fff;padding:10px 20px;border-radius:4px;text-decoration:none;font-size:0.85rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;">📘 Share on Facebook</a>
+        <a href="https://reddit.com/submit?url=https://millwrightiq.com&title=Free tool site for millwrights - built by a 3rd year apprentice" target="_blank" style="background:#ff4500;color:#fff;padding:10px 20px;border-radius:4px;text-decoration:none;font-size:0.85rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;">🔴 Post on Reddit</a>
+        <a href="sms:?body=Hey, check out this free tool site for millwrights: https://millwrightiq.com" style="background:#22c55e;color:#fff;padding:10px 20px;border-radius:4px;text-decoration:none;font-size:0.85rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;">💬 Send a Text</a>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://millwrightiq.com" target="_blank" style="background:#0077b5;color:#fff;padding:10px 20px;border-radius:4px;text-decoration:none;font-size:0.85rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;">💼 LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="section-inner">
+    <div class="section-label">Access</div>
+    <h2>Everything Free During Launch</h2>
+    <p class="section-desc">MillwrightIQ is 100% free while we're getting started. No credit card. No signup. Just tools.</p>
+
+    <!-- FREE LAUNCH BANNER -->
+    <div style="background:linear-gradient(135deg,rgba(245,158,11,0.15),rgba(245,158,11,0.03));border:2px solid var(--amber);border-radius:12px;padding:2.5rem;text-align:center;margin-bottom:2rem;">
+      <div style="font-size:2.5rem;margin-bottom:0.5rem;">🔓</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.5rem;text-transform:uppercase;color:var(--amber);margin-bottom:0.5rem;">100% Free — Right Now</div>
+      <p style="color:var(--text-secondary);font-size:1rem;max-width:500px;margin:0 auto 1.5rem;">Every calculator, every study guide, every quiz — all free during our launch period. No account needed. Just open and use.</p>
+      <a href="#calculators" class="btn-primary" style="font-size:1rem;padding:14px 32px;">Open All Tools Free →</a>
+    </div>
+
+    <!-- WHAT'S FREE -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:2rem;">
+      <div style="background:var(--steel-mid);border:1px solid var(--border);border-radius:8px;padding:1.25rem;text-align:center;">
+        <div style="font-size:1.75rem;margin-bottom:0.5rem;">⚙️</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;text-transform:uppercase;color:var(--amber);margin-bottom:0.25rem;">All 12 Calculators</div>
+        <div style="color:var(--text-secondary);font-size:0.8rem;">RPM, Alignment, Torque, Hydraulics & more</div>
+      </div>
+      <div style="background:var(--steel-mid);border:1px solid var(--border);border-radius:8px;padding:1.25rem;text-align:center;">
+        <div style="font-size:1.75rem;margin-bottom:0.5rem;">📚</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;text-transform:uppercase;color:var(--amber);margin-bottom:0.25rem;">4-Year Study Guides</div>
+        <div style="color:var(--text-secondary);font-size:0.8rem;">Year 1 through Journeyman prep</div>
+      </div>
+      <div style="background:var(--steel-mid);border:1px solid var(--border);border-radius:8px;padding:1.25rem;text-align:center;">
+        <div style="font-size:1.75rem;margin-bottom:0.5rem;">🧮</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;text-transform:uppercase;color:var(--amber);margin-bottom:0.25rem;">Trade Math Quizzes</div>
+        <div style="color:var(--text-secondary);font-size:0.8rem;">Real shop floor math problems</div>
+      </div>
+      <div style="background:var(--steel-mid);border:1px solid var(--border);border-radius:8px;padding:1.25rem;text-align:center;">
+        <div style="font-size:1.75rem;margin-bottom:0.5rem;">📋</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;text-transform:uppercase;color:var(--amber);margin-bottom:0.25rem;">Exam Prep & Glossary</div>
+        <div style="color:var(--text-secondary);font-size:0.8rem;">Journeyman exam questions + 50+ trade terms</div>
+      </div>
+    </div>
+
+    <!-- PRO COMING SOON -->
+    <div style="background:var(--steel-mid);border:1px solid var(--border);border-radius:8px;padding:1.5rem;text-align:center;">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--amber);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.5rem;">Coming Later in 2026</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;text-transform:uppercase;margin-bottom:0.5rem;">MillwrightIQ Pro</div>
+      <p style="color:var(--text-secondary);font-size:0.875rem;max-width:500px;margin:0 auto;">Save & export results, printable cheat sheets, PDF study bundles, ad-free experience, and priority access to new tools. Use everything free now — Pro upgrades coming soon.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo-text" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.4rem;">Millwright<span style="color:var(--amber)">IQ</span></div>
+        <p>The digital toolbox built by a working millwright for industrial tradespeople. Built by a working millwright with real shop floor experience.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Calculators</h4>
+        <a href="#">RPM & Pulley</a>
+        <a href="#">Gear Ratio</a>
+        <a href="#">Bolt Torque</a>
+        <a href="#">Thermal Expansion</a>
+        <a href="#">All Tools →</a>
+      </div>
+      <div class="footer-col">
+        <h4>Apprentice</h4>
+        <a href="#">Study Guides</a>
+        <a href="#">Trade Math</a>
+        <a href="#">Exam Prep</a>
+        <a href="#">Glossary</a>
+      </div>
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a href="#">Sign Up Free</a>
+        <a href="#">Go Pro</a>
+        <a href="#">Login</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 MillwrightIQ · Arlington, Texas · All rights reserved</div>
+      <div style="display:flex;gap:1rem;">
+        <a href="about.html" style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--text-dim);text-decoration:none;" onmouseover="this.style.color='#f59e0b'" onmouseout="this.style.color='#475569'">About</a>
+        <a href="contact.html" style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--text-dim);text-decoration:none;" onmouseover="this.style.color='#f59e0b'" onmouseout="this.style.color='#475569'">Contact</a>
+        <a href="privacy.html" style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--text-dim);text-decoration:none;" onmouseover="this.style.color='#f59e0b'" onmouseout="this.style.color='#475569'">Privacy Policy</a>
+      </div>
+      <div class="footer-tagline">Built on the Floor. Designed for the Trade.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ==================== TAB SWITCHING ====================
+function switchTab(id) {
+  document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('panel-' + id).classList.add('active');
+  document.getElementById('calculators').scrollIntoView({behavior:'smooth'});
+}
+
+// Make tool cards clickable
+document.querySelectorAll('.tool-card').forEach(card => {
+  const name = card.querySelector('.tool-card-name').textContent.trim().toLowerCase();
+  const map = {
+    'rpm calculator':'rpm','gear ratio':'gear','bolt torque':'torque',
+    'thermal expansion':'thermal','shaft alignment':'shaft','v-belt length':'vbelt',
+    'unit converter':'unit','drill & tap chart':'drill'
+  };
+  const tabId = map[name];
+  if (tabId) {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
+      const tab = [...document.querySelectorAll('.calc-tab')].find(t => t.getAttribute('onclick').includes("'"+tabId+"'"));
+      if (tab) tab.classList.add('active');
+      document.getElementById('panel-' + tabId).classList.add('active');
+      document.getElementById('calculators').scrollIntoView({behavior:'smooth'});
+    });
+  }
+});
+
+// ==================== SHAFT ALIGNMENT ====================
+function calcShaft() {
+  const rpm = parseFloat(document.getElementById('shaft-rpm').value);
+  const offset = parseFloat(document.getElementById('shaft-offset').value);
+  const angle = parseFloat(document.getElementById('shaft-angle').value);
+  if (!rpm || !offset || !angle) { alert('Please fill in all fields.'); return; }
+  let offsetTol, status;
+  if (rpm < 1800) offsetTol = 5;
+  else if (rpm <= 3600) offsetTol = 3;
+  else offsetTol = 1.5;
+  const angleTol = 1.0;
+  const offsetOK = offset <= offsetTol;
+  const angleOK = angle <= angleTol;
+  status = (offsetOK && angleOK) ? '✅ ACCEPTABLE' : '❌ OUT OF TOLERANCE';
+  document.getElementById('shaft-result').textContent = status;
+  document.getElementById('shaft-result').style.color = (offsetOK && angleOK) ? '#22c55e' : '#ef4444';
+  document.getElementById('shaft-notes').innerHTML =
+    `<strong>Offset:</strong> ${offset} mils (limit: ${offsetTol} mils) — ${offsetOK ? '✅ OK' : '❌ Too high'}<br>
+     <strong>Angularity:</strong> ${angle} mils/in (limit: ${angleTol} mils/in) — ${angleOK ? '✅ OK' : '❌ Too high'}<br>
+     <strong>RPM Range:</strong> ${rpm} RPM`;
+  document.getElementById('result-shaft').classList.add('show');
+}
+
+// ==================== V-BELT LENGTH ====================
+function calcVBelt() {
+  const D = parseFloat(document.getElementById('vbelt-large').value);
+  const d = parseFloat(document.getElementById('vbelt-small').value);
+  const C = parseFloat(document.getElementById('vbelt-center').value);
+  if (!D || !d || !C) { alert('Please fill in all fields.'); return; }
+  const L = 2*C + 1.5708*(D+d) + Math.pow(D-d,2)/(4*C);
+  document.getElementById('vbelt-result').textContent = L.toFixed(2);
+  document.getElementById('vbelt-notes').innerHTML =
+    `<strong>Large Pulley:</strong> ${D}" dia &nbsp; <strong>Small Pulley:</strong> ${d}" dia<br>
+     <strong>Center Distance:</strong> ${C}" &nbsp; <strong>Belt Length:</strong> ${L.toFixed(2)}"<br>
+     <em>Add ~1-2% for stretch: ${(L*1.01).toFixed(2)}" – ${(L*1.02).toFixed(2)}"</em>`;
+  document.getElementById('result-vbelt').classList.add('show');
+}
+
+// ==================== UNIT CONVERTER ====================
+const unitData = {
+  length: { units: ['inches','feet','mm','cm','meters'], toBase: [1, 12, 0.03937, 0.3937, 39.3701] },
+  weight: { units: ['lbs','kg','oz','N'], toBase: [1, 2.20462, 0.0625, 0.224809] },
+  pressure: { units: ['PSI','kPa','MPa','bar','atm'], toBase: [1, 0.14504, 145.038, 14.5038, 14.6959] },
+  temp: { units: ['°F','°C','K'], toBase: null },
+  torque: { units: ['lb-ft','lb-in','N·m','kg·m'], toBase: [1, 0.08333, 0.73756, 7.23301] },
+  speed: { units: ['RPM','rad/s','rad/min'], toBase: [1, 9.5493, 0.15915] }
+};
+function updateUnitOptions() {
+  const cat = document.getElementById('unit-category').value;
+  const units = unitData[cat].units;
+  ['unit-from','unit-to'].forEach((id,i) => {
+    const sel = document.getElementById(id);
+    sel.innerHTML = units.map((u,j) => `<option value="${j}">${u}</option>`).join('');
+    sel.selectedIndex = i === 1 ? 1 : 0;
+  });
+}
+function calcUnit() {
+  const cat = document.getElementById('unit-category').value;
+  const val = parseFloat(document.getElementById('unit-value').value);
+  const fromIdx = parseInt(document.getElementById('unit-from').value);
+  const toIdx = parseInt(document.getElementById('unit-to').value);
+  if (isNaN(val)) { alert('Please enter a value.'); return; }
+  const data = unitData[cat];
+  let result;
+  if (cat === 'temp') {
+    const units = ['°F','°C','K'];
+    let celsius;
+    if (fromIdx === 0) celsius = (val-32)*5/9;
+    else if (fromIdx === 1) celsius = val;
+    else celsius = val - 273.15;
+    if (toIdx === 0) result = celsius*9/5+32;
+    else if (toIdx === 1) result = celsius;
+    else result = celsius + 273.15;
+  } else {
+    const baseVal = val * data.toBase[fromIdx];
+    result = baseVal / data.toBase[toIdx];
+  }
+  const fromUnit = data.units ? data.units[fromIdx] : ['°F','°C','K'][fromIdx];
+  const toUnit = data.units ? data.units[toIdx] : ['°F','°C','K'][toIdx];
+  document.getElementById('unit-result').textContent = `${result.toFixed(4)} ${toUnit}`;
+  document.getElementById('unit-notes').innerHTML = `${val} ${fromUnit} = <strong>${result.toFixed(4)} ${toUnit}</strong>`;
+  document.getElementById('result-unit').classList.add('show');
+}
+window.addEventListener('load', updateUnitOptions);
+
+// ==================== DRILL & TAP CHART ====================
+const drillData = {
+  '0-80':   {tap:'3/64"', drill75:'1/16"', close:'#56', free:'#54'},
+  '1-64':   {tap:'#53',   drill75:'#53',   close:'#52', free:'#50'},
+  '2-56':   {tap:'#50',   drill75:'#50',   close:'#48', free:'#46'},
+  '4-40':   {tap:'#43',   drill75:'#43',   close:'#40', free:'#38'},
+  '6-32':   {tap:'#36',   drill75:'#36',   close:'#33', free:'#28'},
+  '8-32':   {tap:'#29',   drill75:'#29',   close:'#27', free:'#19'},
+  '10-24':  {tap:'#25',   drill75:'#25',   close:'#20', free:'#16'},
+  '10-32':  {tap:'#21',   drill75:'#21',   close:'#20', free:'#16'},
+  '1/4-20': {tap:'#7',    drill75:'#7',    close:'F',   free:'17/64"'},
+  '1/4-28': {tap:'#3',    drill75:'#3',    close:'G',   free:'9/32"'},
+  '5/16-18':{tap:'F',     drill75:'F',     close:'P',   free:'21/64"'},
+  '5/16-24':{tap:'I',     drill75:'I',     close:'Q',   free:'21/64"'},
+  '3/8-16': {tap:'5/16"', drill75:'5/16"', close:'W',   free:'25/64"'},
+  '3/8-24': {tap:'Q',     drill75:'Q',     close:'X',   free:'25/64"'},
+  '7/16-14':{tap:'U',     drill75:'U',     close:'29/64"', free:'15/32"'},
+  '1/2-13': {tap:'27/64"',drill75:'27/64"',close:'33/64"',free:'17/32"'},
+  '1/2-20': {tap:'29/64"',drill75:'29/64"',close:'33/64"',free:'17/32"'},
+  '5/8-11': {tap:'17/32"',drill75:'17/32"',close:'41/64"',free:'21/32"'},
+  '3/4-10': {tap:'21/32"',drill75:'21/32"',close:'49/64"',free:'25/32"'},
+  '7/8-9':  {tap:'49/64"',drill75:'49/64"',close:'57/64"',free:'29/32"'},
+  '1-8':    {tap:'7/8"',  drill75:'7/8"',  close:'1-1/64"',free:'1-1/32"'}
+};
+function lookupDrill() {
+  const size = document.getElementById('drill-size').value;
+  if (!size) return;
+  const d = drillData[size];
+  document.getElementById('drill-notes').innerHTML =
+    `<strong>Thread:</strong> ${size}<br><br>
+     <strong>Tap Drill (75% thread):</strong> ${d.drill75}<br>
+     <strong>Close Fit Clearance:</strong> ${d.close}<br>
+     <strong>Free Fit Clearance:</strong> ${d.free}<br><br>
+     <em style="color:var(--text-dim);font-size:0.8rem">Use ${d.drill75} for standard tapping into steel/iron</em>`;
+}
+
+function scrollToCalc(id) {
+  document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
+  const tab = [...document.querySelectorAll('.calc-tab')].find(t => t.getAttribute('onclick') && t.getAttribute('onclick').includes("'"+id+"'"));
+  if (tab) tab.classList.add('active');
+  const panel = document.getElementById('panel-' + id);
+  if (panel) panel.classList.add('active');
+  document.getElementById('calculators').scrollIntoView({behavior:'smooth'});
+}
+
+// ==================== CONVEYOR SPEED ====================
+function calcConveyor() {
+  const fpm = parseFloat(document.getElementById('conv-fpm').value);
+  const width = parseFloat(document.getElementById('conv-width').value);
+  const density = parseFloat(document.getElementById('conv-density').value);
+  const depth = parseFloat(document.getElementById('conv-depth').value);
+  if (!fpm || !width || !depth) { alert('Please fill in all fields.'); return; }
+  const widthFt = width / 12;
+  const depthFt = depth / 12;
+  const crossSection = widthFt * depthFt;
+  const lbsPerMin = crossSection * fpm * density;
+  const tph = (lbsPerMin * 60) / 2000;
+  document.getElementById('conv-tph').textContent = tph.toFixed(1);
+  document.getElementById('conv-notes').innerHTML =
+    `<strong>Belt Speed:</strong> ${fpm} FPM &nbsp; <strong>Width:</strong> ${width}"<br>
+     <strong>Cross Section:</strong> ${(crossSection*144).toFixed(2)} in² &nbsp; <strong>Density:</strong> ${density} lbs/ft³<br>
+     <strong>Capacity:</strong> ${tph.toFixed(1)} TPH (${(lbsPerMin*60).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g,',')} lbs/hr)`;
+  document.getElementById('result-conveyor').classList.add('show');
+}
+
+// ==================== BEARING FIT ====================
+function calcBearing() {
+  const shaft = parseFloat(document.getElementById('bear-shaft').value);
+  const bore = parseFloat(document.getElementById('bear-bore').value);
+  const type = document.getElementById('bear-type').value;
+  if (!shaft || !bore) { alert('Please enter both measurements.'); return; }
+  const diff = shaft - bore;
+  const diffMils = (diff * 1000).toFixed(1);
+  let fitType, recommendation, color;
+  if (diff > 0.0005) { fitType = 'HEAVY PRESS FIT'; recommendation = 'Requires bearing heater (250–300°F) or hydraulic press. Verify application requires this interference.'; color = '#ef4444'; }
+  else if (diff > 0.0001) { fitType = 'INTERFERENCE FIT'; recommendation = 'Standard press fit for rotating inner rings. Heat bearing to 200–250°F for installation.'; color = '#f59e0b'; }
+  else if (diff >= -0.0001) { fitType = 'TRANSITION FIT'; recommendation = 'Very close fit — may be light press or light slip. Check manufacturer specs for your bearing series.'; color = '#06b6d4'; }
+  else if (diff >= -0.0005) { fitType = 'CLEARANCE FIT'; recommendation = 'Slip fit — acceptable for stationary inner rings or easy-removal applications.'; color = '#22c55e'; }
+  else { fitType = 'LOOSE FIT'; recommendation = 'Too much clearance for most applications. Verify measurements — bearing may spin on shaft under load.'; color = '#ef4444'; }
+  document.getElementById('bear-result').textContent = fitType;
+  document.getElementById('bear-result').style.color = color;
+  document.getElementById('bear-notes').innerHTML =
+    `<strong>Shaft:</strong> ${shaft.toFixed(4)}" &nbsp; <strong>Bore:</strong> ${bore.toFixed(4)}"<br>
+     <strong>Difference:</strong> ${diffMils} mils (${diff >= 0 ? '+' : ''}${diff.toFixed(4)}")<br>
+     <em>${recommendation}</em>`;
+  document.getElementById('result-bearing').classList.add('show');
+}
+
+// ==================== KEYWAY & KEYSEAT ====================
+const keywayData = {
+  '0.5':  {width:'1/8"', depth:'1/16"', tol:'±0.001"'},
+  '0.625':{width:'3/16"',depth:'3/32"', tol:'±0.001"'},
+  '0.75': {width:'3/16"',depth:'3/32"', tol:'±0.001"'},
+  '0.875':{width:'3/16"',depth:'3/32"', tol:'±0.001"'},
+  '1.0':  {width:'1/4"', depth:'1/8"',  tol:'±0.001"'},
+  '1.125':{width:'1/4"', depth:'1/8"',  tol:'±0.001"'},
+  '1.25': {width:'5/16"',depth:'5/32"', tol:'±0.001"'},
+  '1.375':{width:'5/16"',depth:'5/32"', tol:'±0.001"'},
+  '1.5':  {width:'3/8"', depth:'3/16"', tol:'±0.001"'},
+  '1.75': {width:'3/8"', depth:'3/16"', tol:'±0.001"'},
+  '2.0':  {width:'1/2"', depth:'1/4"',  tol:'±0.001"'},
+  '2.25': {width:'1/2"', depth:'1/4"',  tol:'±0.001"'},
+  '2.5':  {width:'5/8"', depth:'5/16"', tol:'±0.001"'},
+  '2.75': {width:'5/8"', depth:'5/16"', tol:'±0.001"'},
+  '3.0':  {width:'3/4"', depth:'3/8"',  tol:'±0.001"'},
+  '3.5':  {width:'7/8"', depth:'7/16"', tol:'±0.001"'},
+  '4.0':  {width:'1"',   depth:'1/2"',  tol:'±0.001"'}
+};
+function lookupKeyway() {
+  const shaft = document.getElementById('key-shaft').value;
+  if (!shaft) return;
+  const k = keywayData[shaft];
+  document.getElementById('keyway-notes').innerHTML =
+    `<strong>Shaft Diameter:</strong> ${shaft}"<br><br>
+     <strong>Key Width:</strong> ${k.width}<br>
+     <strong>Key Height / Depth:</strong> ${k.depth}<br>
+     <strong>Tolerance:</strong> ${k.tol}<br><br>
+     <strong>Keyway depth in shaft:</strong> ${k.depth} (half key height)<br>
+     <strong>Keyseat depth in hub:</strong> ${k.depth} (half key height)<br><br>
+     <em style="color:var(--text-dim);font-size:0.8rem">Per ANSI B17.1 Standard Square & Rectangular Keys</em>`;
+}
+
+// ==================== HYDRAULIC POWER ====================
+function updateHydMode() {
+  const mode = document.getElementById('hyd-mode').value;
+  document.getElementById('hyd-psi-group').style.display = mode === 'psi' ? 'none' : 'block';
+  document.getElementById('hyd-gpm-group').style.display = mode === 'gpm' ? 'none' : 'block';
+  document.getElementById('hyd-hp-group').style.display = (mode === 'gpm' || mode === 'psi') ? 'block' : 'none';
+}
+function calcHydraulic() {
+  const mode = document.getElementById('hyd-mode').value;
+  const psi = parseFloat(document.getElementById('hyd-psi').value);
+  const gpm = parseFloat(document.getElementById('hyd-gpm').value);
+  const hpIn = parseFloat(document.getElementById('hyd-hp-input').value);
+  let result, label, unit, notes;
+  if (mode === 'hp') {
+    if (!psi || !gpm) { alert('Please enter PSI and GPM.'); return; }
+    result = (psi * gpm) / 1714;
+    label = 'Hydraulic Horsepower'; unit = 'HP';
+    notes = `<strong>PSI:</strong> ${psi} &nbsp; <strong>GPM:</strong> ${gpm}<br>
+             <strong>HP = (${psi} × ${gpm}) ÷ 1714 = ${result.toFixed(2)} HP</strong><br>
+             <em>With 85% efficiency: ${(result/0.85).toFixed(2)} HP motor needed</em>`;
+  } else if (mode === 'gpm') {
+    if (!hpIn || !psi) { alert('Please enter HP and PSI.'); return; }
+    result = (hpIn * 1714) / psi;
+    label = 'Required Flow Rate'; unit = 'GPM';
+    notes = `<strong>HP:</strong> ${hpIn} &nbsp; <strong>PSI:</strong> ${psi}<br>
+             <strong>GPM = (${hpIn} × 1714) ÷ ${psi} = ${result.toFixed(2)} GPM</strong>`;
+  } else {
+    if (!hpIn || !gpm) { alert('Please enter HP and GPM.'); return; }
+    result = (hpIn * 1714) / gpm;
+    label = 'System Pressure'; unit = 'PSI';
+    notes = `<strong>HP:</strong> ${hpIn} &nbsp; <strong>GPM:</strong> ${gpm}<br>
+             <strong>PSI = (${hpIn} × 1714) ÷ ${gpm} = ${result.toFixed(0)} PSI</strong>`;
+  }
+  document.getElementById('hyd-result-label').textContent = label;
+  document.getElementById('hyd-result').textContent = result.toFixed(2);
+  document.getElementById('hyd-result-unit').textContent = unit;
+  document.getElementById('hyd-notes').innerHTML = notes;
+  document.getElementById('result-hydraulic').classList.add('show');
+}
+
+// ==================== RPM CALCULATOR ====================
+function calcRPM() {
+  const driverDia = parseFloat(document.getElementById('rpm-driver-dia').value);
+  const driverSpeed = parseFloat(document.getElementById('rpm-driver-speed').value);
+  const drivenDia = parseFloat(document.getElementById('rpm-driven-dia').value);
+
+  if (!driverDia || !driverSpeed || !drivenDia) { alert('Please fill in all fields.'); return; }
+
+  const drivenRPM = (driverDia * driverSpeed) / drivenDia;
+  const ratio = drivenDia / driverDia;
+  const surfaceSpeed = Math.PI * (driverDia / 12) * driverSpeed;
+
+  document.getElementById('rpm-result').textContent = Math.round(drivenRPM).toLocaleString();
+  document.getElementById('rpm-notes').innerHTML =
+    `<strong>Speed Ratio:</strong> ${ratio.toFixed(2)} : 1 (${ratio > 1 ? 'Speed reduction' : ratio < 1 ? 'Speed increase' : '1:1 direct'})<br>
+     <strong>Belt Surface Speed:</strong> ${Math.round(surfaceSpeed).toLocaleString()} FPM<br>
+     <strong>Driver:</strong> ${driverDia}" dia @ ${driverSpeed.toLocaleString()} RPM → <strong>Driven:</strong> ${drivenDia}" dia @ ${Math.round(drivenRPM).toLocaleString()} RPM`;
+  document.getElementById('result-rpm').classList.add('show');
+}
+
+// ==================== GEAR RATIO CALCULATOR ====================
+function calcGear() {
+  const drive = parseFloat(document.getElementById('gear-drive').value);
+  const driven = parseFloat(document.getElementById('gear-driven').value);
+  const inputRPM = parseFloat(document.getElementById('gear-input-rpm').value);
+
+  if (!drive || !driven) { alert('Please enter both gear tooth counts.'); return; }
+
+  const ratio = driven / drive;
+  const outputRPM = inputRPM ? inputRPM / ratio : null;
+  const torqueMultiplier = ratio;
+
+  document.getElementById('gear-ratio-result').textContent = ratio.toFixed(3);
+  let notes = `<strong>Drive Gear:</strong> ${drive} teeth | <strong>Driven Gear:</strong> ${driven} teeth<br>
+               <strong>Type:</strong> ${ratio > 1 ? 'Speed Reducer (more torque)' : ratio < 1 ? 'Speed Increaser (less torque)' : '1:1 Direct Drive'}<br>
+               <strong>Torque Multiplier:</strong> ${torqueMultiplier.toFixed(3)}x`;
+  if (outputRPM) notes += `<br><strong>Output Speed:</strong> ${outputRPM.toFixed(1)} RPM`;
+  document.getElementById('gear-notes').innerHTML = notes;
+  document.getElementById('result-gear').classList.add('show');
+}
+
+// ==================== TORQUE CALCULATOR ====================
+// Reference torque values (ft-lbs) for Grade 5, dry, at various diameters
+const torqueBase = {
+  '0.25,6':  { 2: 3,   5: 6,   8: 9,   '10.9': 8,  '12.9': 10  },
+  '0.3125,8':{ 2: 7,   5: 13,  8: 18,  '10.9': 16, '12.9': 19  },
+  '0.375,10':{ 2: 12,  5: 23,  8: 33,  '10.9': 29, '12.9': 35  },
+  '0.5,13':  { 2: 28,  5: 57,  8: 80,  '10.9': 70, '12.9': 84  },
+  '0.625,16':{ 2: 55,  5: 110, 8: 155, '10.9': 136,'12.9': 163 },
+  '0.75,19': { 2: 95,  5: 200, 8: 280, '10.9': 245,'12.9': 295 },
+  '0.875,22':{ 2: 150, 5: 320, 8: 450, '10.9': 394,'12.9': 473 },
+  '1.0,25':  { 2: 225, 5: 475, 8: 660, '10.9': 578,'12.9': 694 },
+};
+
+function calcTorque() {
+  const sizeKey = document.getElementById('torque-size').value;
+  const grade = document.getElementById('torque-grade').value;
+  const lubeFactor = parseFloat(document.getElementById('torque-lube').value);
+
+  const baseTorque = torqueBase[sizeKey][grade];
+  const finalTorque = Math.round(baseTorque * lubeFactor);
+  const nmTorque = Math.round(finalTorque * 1.356);
+
+  document.getElementById('torque-result').textContent = finalTorque;
+  document.getElementById('torque-notes').innerHTML =
+    `<strong>In Newton-Meters:</strong> ${nmTorque} Nm<br>
+     <strong>Base dry torque:</strong> ${baseTorque} ft-lbs | <strong>Lube factor:</strong> ${lubeFactor}<br>
+     <strong>⚠️ Reference value only.</strong> Always verify against OEM documentation for critical fasteners.`;
+  document.getElementById('result-torque').classList.add('show');
+}
+
+// ==================== THERMAL EXPANSION ====================
+function calcThermal() {
+  const alpha = parseFloat(document.getElementById('therm-material').value);
+  const length = parseFloat(document.getElementById('therm-length').value);
+  const delta = parseFloat(document.getElementById('therm-delta').value);
+
+  if (!length || !delta) { alert('Please fill in length and temperature change.'); return; }
+
+  const expansion = alpha * length * delta * 0.000001; // in inches
+  const expansionMils = expansion * 1000;
+  const expansionMM = expansion * 25.4;
+
+  document.getElementById('thermal-result').textContent = expansion.toFixed(4);
+  document.getElementById('thermal-notes').innerHTML =
+    `<strong>In mils (0.001"):</strong> ${expansionMils.toFixed(2)} mils<br>
+     <strong>In millimeters:</strong> ${expansionMM.toFixed(3)} mm<br>
+     <strong>Coefficient used:</strong> ${alpha} μin/in/°F<br>
+     ${Math.abs(expansionMils) > 5 ? '<strong style="color:var(--amber)">⚠️ Significant expansion — account for in alignment offset.</strong>' : '✓ Relatively small expansion.'}`;
+  document.getElementById('result-thermal').classList.add('show');
+}
+
+// ==================== YEAR SELECTOR ====================
+const yearData = {
+  1: { pct: 25, label:'Year 1 — Foundation', complete: 'Safety & OSHA 10, Basic Hand Tools, Trade Math Foundations, Blueprint Basics', inprog: 'Measuring & Precision Tools, Rigging Level 1, Fasteners & Hardware' },
+  2: { pct: 50, label:'Year 2 — Mechanical Systems', complete: 'Hydraulics & Pneumatics Level 1, Rigging & Lifting, Shaft & Coupling Basics, Welding Fundamentals', inprog: 'Preventive Maintenance, Vibration Basics, Motor & Drive Systems' },
+  3: { pct: 75, label:'Year 3 — Advanced Skills', complete: 'Hydraulics & Pneumatics, Precision Measurement, Blueprint Reading, Rigging Fundamentals', inprog: 'Advanced Shaft Alignment, Gearbox Overhaul, Vibration Analysis, Conveyor Systems' },
+  4: { pct: 90, label:'Year 4 — Journeyman Prep', complete: 'Advanced Alignment, Machinery Installation, PLC Basics, Predictive Maintenance', inprog: 'Journeyman Exam Prep, Leadership & Mentoring, OSHA 30' },
+};
+
+function selectYear(y, el) {
+  document.querySelectorAll('.year-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const d = yearData[y];
+  document.getElementById('year-content').innerHTML = `
+    <div style="color:var(--amber);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;text-transform:uppercase;margin-bottom:0.75rem;">${d.label}</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:${d.pct}%"></div></div>
+    <div class="progress-label"><span>Typical Year ${y} Progress</span><span>${d.pct}% of program</span></div>
+    <div style="margin-top:1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
+      <div style="background:var(--steel-light);border:1px solid var(--border);border-radius:4px;padding:0.75rem;font-size:0.8rem;color:var(--text-secondary);">
+        <div style="color:var(--green-go);font-weight:bold;margin-bottom:4px;">✓ Topics Covered</div>${d.complete}
+      </div>
+      <div style="background:var(--steel-light);border:1px solid var(--border);border-radius:4px;padding:0.75rem;font-size:0.8rem;color:var(--text-secondary);">
+        <div style="color:var(--amber);font-weight:bold;margin-bottom:4px;">→ ${y < 4 ? 'Coming Up' : 'Final Push'}</div>${d.inprog}
+      </div>
+    </div>`;
+}
+
+// ==================== HUB TAB SWITCHING ====================
+function switchHub(id) {
+  document.querySelectorAll('.hub-panel').forEach(p => p.style.display = 'none');
+  document.querySelectorAll('#apprentice .calc-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('hub-' + id).style.display = 'block';
+  event.target.classList.add('active');
+}
+
+// ==================== TRADE MATH QUIZ ====================
+const quizQuestions = [
+  { q: 'A driver pulley is 6" in diameter running at 1750 RPM. The driven pulley is 12" in diameter. What is the driven pulley speed?', opts: ['875 RPM', '3500 RPM', '1750 RPM', '583 RPM'], ans: 0, exp: 'Driven RPM = (Driver Dia × Driver RPM) ÷ Driven Dia = (6 × 1750) ÷ 12 = 875 RPM' },
+  { q: 'A drive gear has 20 teeth. The driven gear has 60 teeth. What is the gear ratio?', opts: ['3:1', '1:3', '2:1', '0.33:1'], ans: 0, exp: 'Gear Ratio = Driven ÷ Drive = 60 ÷ 20 = 3:1' },
+  { q: 'Convert 2.5 inches to millimeters.', opts: ['63.5 mm', '25.4 mm', '50.8 mm', '31.75 mm'], ans: 0, exp: '1 inch = 25.4 mm. So 2.5 × 25.4 = 63.5 mm' },
+  { q: 'What is the tap drill size for a 1/2"-13 UNC thread?', opts: ['27/64"', '29/64"', '7/16"', '1/2"'], ans: 0, exp: 'Standard tap drill for 1/2"-13 UNC is 27/64" for 75% thread engagement' },
+  { q: 'A shaft running at 1800 RPM has a measured offset of 4 mils. Is this alignment acceptable?', opts: ['Yes — within tolerance', 'No — too much offset', 'Need more info', 'Only if angularity is zero'], ans: 0, exp: 'At 1800 RPM, offset tolerance is ≤5 mils. 4 mils is within tolerance.' },
+  { q: 'What does 1 mil equal in inches?', opts: ['0.001"', '0.010"', '0.100"', '0.0001"'], ans: 0, exp: '1 mil = one-thousandth of an inch = 0.001"' },
+  { q: 'A hydraulic system operates at 2000 PSI with a 10 GPM pump. What is the horsepower?', opts: ['11.67 HP', '20 HP', '5 HP', '8.5 HP'], ans: 0, exp: 'HP = (PSI × GPM) ÷ 1714 = (2000 × 10) ÷ 1714 = 11.67 HP' },
+  { q: 'What is the formula for thermal expansion?', opts: ['ΔL = α × L × ΔT', 'ΔL = L ÷ (α × ΔT)', 'ΔL = α + L + ΔT', 'ΔL = α × L ÷ ΔT'], ans: 0, exp: 'Thermal expansion formula: ΔL = α × L × ΔT where α=coefficient, L=length, ΔT=temperature change' },
+  { q: 'What type of fit is used when a bearing bore is SMALLER than the shaft diameter?', opts: ['Interference fit', 'Clearance fit', 'Transition fit', 'Running fit'], ans: 0, exp: 'When shaft > bore, material must be displaced to fit — this is an interference (press) fit' },
+  { q: 'A V-belt drive has a large pulley of 12", small pulley of 4", and center distance of 24". Approximately how long is the belt?', opts: ['~75"', '~48"', '~60"', '~90"'], ans: 0, exp: 'L = 2C + 1.57(D+d) + (D-d)²/4C = 48 + 25.12 + 1.33 = ~74.5"' },
+];
+
+let quizIdx = 0, quizScore = 0, quizAnswered = false;
+
+function nextQuestion() {
+  if (quizAnswered) { quizIdx++; quizAnswered = false; }
+  if (quizIdx >= quizQuestions.length) {
+    document.getElementById('quiz-area').innerHTML = `
+      <div style="text-align:center;padding:2rem;">
+        <div style="font-size:3rem;margin-bottom:1rem;">🎉</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:900;color:var(--amber);">Quiz Complete!</div>
+        <div style="color:var(--text-secondary);margin:1rem 0;">You scored <strong style="color:var(--text-primary);">${quizScore} / ${quizQuestions.length}</strong></div>
+        <div style="color:var(--text-secondary);font-size:0.875rem;margin-bottom:1.5rem;">${quizScore >= 8 ? '🔥 Excellent work!' : quizScore >= 6 ? '👍 Good job — review the ones you missed.' : '📚 Keep studying — practice makes perfect.'}</div>
+        <button class="calc-btn" onclick="restartQuiz()">Take Quiz Again</button>
+      </div>`;
+    return;
+  }
+  const q = quizQuestions[quizIdx];
+  document.getElementById('quiz-question').innerHTML = `<strong>Question ${quizIdx+1} of ${quizQuestions.length}:</strong><br><br>${q.q}`;
+  document.getElementById('quiz-options').innerHTML = q.opts.map((o,i) =>
+    `<button onclick="answerQuiz(${i})" style="background:var(--steel-light);border:1px solid var(--border);color:var(--text-primary);padding:0.75rem 1rem;border-radius:6px;cursor:pointer;text-align:left;font-size:0.875rem;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--amber)'" onmouseout="this.style.borderColor='var(--border)'">${String.fromCharCode(65+i)}. ${o}</button>`
+  ).join('');
+  document.getElementById('quiz-feedback').style.display = 'none';
+  document.getElementById('quiz-next-btn').textContent = 'Next Question';
+  document.getElementById('quiz-score').textContent = `Score: ${quizScore}/${quizIdx}`;
+}
+
+function answerQuiz(i) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  const q = quizQuestions[quizIdx];
+  const btns = document.getElementById('quiz-options').querySelectorAll('button');
+  btns[q.ans].style.background = '#166534'; btns[q.ans].style.borderColor = '#22c55e';
+  if (i !== q.ans) { btns[i].style.background = '#7f1d1d'; btns[i].style.borderColor = '#ef4444'; }
+  else { quizScore++; }
+  const fb = document.getElementById('quiz-feedback');
+  fb.style.display = 'block';
+  fb.style.background = i === q.ans ? 'rgba(34,197,94,0.1)' : 'rgba(239,68,68,0.1)';
+  fb.style.border = `1px solid ${i === q.ans ? '#22c55e' : '#ef4444'}`;
+  fb.innerHTML = `${i === q.ans ? '✅ Correct!' : '❌ Incorrect.'} <strong>Explanation:</strong> ${q.exp}`;
+  document.getElementById('quiz-score').textContent = `Score: ${quizScore}/${quizIdx+1}`;
+}
+
+function restartQuiz() { quizIdx = 0; quizScore = 0; quizAnswered = false; nextQuestion(); }
+
+// ==================== EXAM PREP ====================
+const examQuestions = [
+  { q: 'Which type of bearing is designed to handle both radial and axial loads simultaneously?', opts: ['Angular contact bearing', 'Deep groove ball bearing', 'Cylindrical roller bearing', 'Needle bearing'], ans: 0, exp: 'Angular contact bearings are designed to handle combined radial and axial (thrust) loads.' },
+  { q: 'What is the primary purpose of a coupling in a drive system?', opts: ['Connect two shafts and transmit torque', 'Reduce shaft speed', 'Increase torque output', 'Absorb all misalignment'], ans: 0, exp: 'Couplings connect shafts to transmit torque. Flexible couplings also accommodate minor misalignment.' },
+  { q: 'During shaft alignment, what does "offset" refer to?', opts: ['Parallel distance between shaft centerlines', 'Angular difference between shafts', 'Axial distance between couplings', 'Vibration amplitude'], ans: 0, exp: 'Offset (parallel misalignment) is the perpendicular distance between the two shaft centerlines.' },
+  { q: 'What does OSHA standard 29 CFR 1910.147 cover?', opts: ['Lockout/Tagout (LOTO)', 'Personal Protective Equipment', 'Crane and Hoist Safety', 'Confined Space Entry'], ans: 0, exp: '29 CFR 1910.147 covers the Control of Hazardous Energy — commonly known as Lockout/Tagout (LOTO).' },
+  { q: 'What is the recommended interference for a standard press fit bearing on a 2" shaft?', opts: ['0.0001" to 0.0005"', '0.001" to 0.005"', '0.010" to 0.020"', 'Zero clearance'], ans: 0, exp: 'Standard press fits use 0.0001" to 0.0005" interference depending on bearing size and application.' },
+  { q: 'In a hydraulic system, what component converts mechanical energy to hydraulic energy?', opts: ['Pump', 'Actuator', 'Valve', 'Accumulator'], ans: 0, exp: 'The hydraulic pump converts mechanical energy (from motor/engine) into hydraulic energy (flow and pressure).' },
+  { q: 'What is the purpose of vibration analysis in predictive maintenance?', opts: ['Detect bearing and mechanical faults early', 'Measure shaft RPM', 'Balance rotating equipment', 'Align couplings'], ans: 0, exp: 'Vibration analysis detects developing faults in bearings, gears, and mechanical components before failure.' },
+  { q: 'When installing a bearing using heat, what is the maximum recommended temperature?', opts: ['250°F (120°C)', '400°F (200°C)', '150°F (65°C)', '500°F (260°C)'], ans: 0, exp: 'Bearings should be heated to no more than 250°F (120°C) to avoid damage to the bearing steel and seals.' },
+  { q: 'What does a 3:1 gear ratio mean in practical terms?', opts: ['Input turns 3x for every 1 output turn — torque triples', 'Output turns 3x for every 1 input turn', 'Speed increases by 3', 'Torque decreases by 3'], ans: 0, exp: 'A 3:1 reduction means input rotates 3 times per 1 output rotation. Speed decreases, torque multiplies by 3.' },
+  { q: 'What is the minimum safe angle for a sling when rigging a load?', opts: ['30 degrees from horizontal', '60 degrees from horizontal', '45 degrees from horizontal', '90 degrees from horizontal'], ans: 0, exp: 'Sling angles below 30° from horizontal dramatically increase sling tension and risk of failure. 60° or greater is ideal.' },
+];
+
+let examIdx = 0, examScore = 0, examAnswered = false;
+
+function nextExam() {
+  if (examAnswered) { examIdx++; examAnswered = false; }
+  if (examIdx >= examQuestions.length) {
+    document.getElementById('exam-area').innerHTML = `
+      <div style="text-align:center;padding:2rem;">
+        <div style="font-size:3rem;margin-bottom:1rem;">🏆</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:900;color:var(--amber);">Exam Complete!</div>
+        <div style="color:var(--text-secondary);margin:1rem 0;">Score: <strong style="color:var(--text-primary);">${examScore} / ${examQuestions.length}</strong></div>
+        <div style="color:var(--text-secondary);font-size:0.875rem;margin-bottom:1.5rem;">${examScore >= 8 ? '🔥 Journeyman ready!' : examScore >= 6 ? '👍 Almost there — review the missed questions.' : '📚 Keep studying — these are core exam topics.'}</div>
+        <button class="calc-btn" onclick="restartExam()">Try Again</button>
+      </div>`;
+    return;
+  }
+  const q = examQuestions[examIdx];
+  document.getElementById('exam-question').innerHTML = `<strong>Question ${examIdx+1} of ${examQuestions.length}:</strong><br><br>${q.q}`;
+  document.getElementById('exam-options').innerHTML = q.opts.map((o,i) =>
+    `<button onclick="answerExam(${i})" style="background:var(--steel-light);border:1px solid var(--border);color:var(--text-primary);padding:0.75rem 1rem;border-radius:6px;cursor:pointer;text-align:left;font-size:0.875rem;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--amber)'" onmouseout="this.style.borderColor='var(--border)'">${String.fromCharCode(65+i)}. ${o}</button>`
+  ).join('');
+  document.getElementById('exam-feedback').style.display = 'none';
+  document.getElementById('exam-next-btn').textContent = 'Next Question';
+  document.getElementById('exam-score').textContent = `Score: ${examScore}/${examIdx}`;
+}
+
+function answerExam(i) {
+  if (examAnswered) return;
+  examAnswered = true;
+  const q = examQuestions[examIdx];
+  const btns = document.getElementById('exam-options').querySelectorAll('button');
+  btns[q.ans].style.background = '#166534'; btns[q.ans].style.borderColor = '#22c55e';
+  if (i !== q.ans) { btns[i].style.background = '#7f1d1d'; btns[i].style.borderColor = '#ef4444'; }
+  else { examScore++; }
+  const fb = document.getElementById('exam-feedback');
+  fb.style.display = 'block';
+  fb.style.background = i === q.ans ? 'rgba(34,197,94,0.1)' : 'rgba(239,68,68,0.1)';
+  fb.style.border = `1px solid ${i === q.ans ? '#22c55e' : '#ef4444'}`;
+  fb.innerHTML = `${i === q.ans ? '✅ Correct!' : '❌ Incorrect.'} <strong>Explanation:</strong> ${q.exp}`;
+  document.getElementById('exam-score').textContent = `Score: ${examScore}/${examIdx+1}`;
+}
+
+function restartExam() { examIdx = 0; examScore = 0; examAnswered = false; nextExam(); }
+
+// ==================== GLOSSARY ====================
+const glossaryTerms = [
+  {t:'Alignment',d:'The process of positioning two or more machine components so their centerlines are collinear or parallel within specified tolerances.'},
+  {t:'Angularity',d:'A type of shaft misalignment where the shaft centerlines intersect at an angle. Measured in mils per inch.'},
+  {t:'Backlash',d:'The clearance or play between mating gear teeth. Necessary for lubrication and thermal expansion, but excessive backlash causes impact loading.'},
+  {t:'Bearing',d:'A mechanical component that supports a rotating shaft and constrains relative motion to the desired type of motion (rotational).'},
+  {t:'Bevel Gear',d:'A gear shaped like a cone that transmits motion between intersecting shafts, typically at 90 degrees.'},
+  {t:'Bill of Materials (BOM)',d:'A comprehensive list of components, parts, and assemblies required to build or maintain a piece of equipment.'},
+  {t:'Bore',d:'The internal diameter of a hole, bearing, or bushing. Critical dimension for bearing and coupling installation.'},
+  {t:'Bushing',d:'A cylindrical lining used to reduce friction, resist wear, or serve as a guide. Often used as a replaceable wear surface.'},
+  {t:'Cavitation',d:'The formation and collapse of vapor bubbles in a liquid, typically in pumps. Causes noise, vibration, and severe erosion damage.'},
+  {t:'Center Distance',d:'The distance between the center axes of two shafts or pulleys in a drive system.'},
+  {t:'Chain Drive',d:'A power transmission system using a roller chain engaging sprocket teeth to transmit torque between shafts.'},
+  {t:'Clearance Fit',d:'A fit where the bore is always larger than the shaft, providing a gap for easy assembly. Used for rotating parts.'},
+  {t:'Coupling',d:'A device that connects two shafts to transmit torque. Flexible couplings accommodate minor misalignment.'},
+  {t:'Dial Indicator',d:'A precision measuring instrument using a circular dial and pointer to measure small linear distances, typically to 0.001" or 0.0001".'},
+  {t:'Dowel Pin',d:'A cylindrical pin used to precisely locate machine components relative to each other and resist shear forces.'},
+  {t:'FPM (Feet Per Minute)',d:'A unit of linear velocity used to describe belt speed or conveyor speed.'},
+  {t:'Gear Ratio',d:'The ratio of the number of teeth on the driven gear to the number of teeth on the drive gear.'},
+  {t:'GPM (Gallons Per Minute)',d:'A unit of volumetric flow rate used in hydraulic and fluid power systems.'},
+  {t:'Hydraulics',d:'The branch of engineering dealing with the mechanical properties of liquids. In industry, refers to fluid power systems using pressurized oil.'},
+  {t:'Impeller',d:'The rotating component of a centrifugal pump that transfers energy from the motor to the fluid being pumped.'},
+  {t:'Interference Fit',d:'A fit where the shaft is larger than the bore, requiring force or heat to assemble. Creates a tight mechanical connection.'},
+  {t:'Journeyman',d:'A skilled tradesperson who has completed an apprenticeship program and earned full certification in their trade.'},
+  {t:'Keyway',d:'A slot machined into a shaft to accept a key, which prevents relative rotation between the shaft and hub.'},
+  {t:'Laser Alignment',d:'A precision shaft alignment method using laser beams and detectors to measure misalignment with high accuracy.'},
+  {t:'LOTO (Lockout/Tagout)',d:'A safety procedure (OSHA 29 CFR 1910.147) requiring isolation and locking of energy sources before maintenance work.'},
+  {t:'Micron',d:'One millionth of a meter (0.000001 m). Used for precision measurements in bearing clearances and surface finishes.'},
+  {t:'Mil',d:'One thousandth of an inch (0.001"). Commonly used in alignment measurements and precision fitting.'},
+  {t:'Misalignment',d:'The condition where the centerlines of coupled shafts are not perfectly collinear. Types: offset, angular, and axial.'},
+  {t:'Offset',d:'A type of shaft misalignment where the shaft centerlines are parallel but displaced from each other.'},
+  {t:'OSHA',d:'Occupational Safety and Health Administration. The U.S. federal agency responsible for workplace safety regulations.'},
+  {t:'Parallelism',d:'The condition where two surfaces, axes, or lines are equidistant at all points.'},
+  {t:'Pneumatics',d:'Systems using compressed air or gas to transmit and control power. Commonly used for actuators, cylinders, and tools.'},
+  {t:'Press Fit',d:'An interference fit requiring mechanical force (press) or thermal expansion/contraction to assemble.'},
+  {t:'PSI (Pounds per Square Inch)',d:'A unit of pressure. Common hydraulic system pressures range from 1,000 to 5,000 PSI.'},
+  {t:'Pulley',d:'A wheel with a groove around its circumference used with a belt to transmit torque and change shaft speed or direction.'},
+  {t:'Runout',d:'The deviation of a rotating surface from a perfect cylinder or plane. Total Indicator Runout (TIR) measures this variation.'},
+  {t:'Seal',d:'A device used to prevent leakage of fluid or ingress of contaminants. Types include lip seals, O-rings, and mechanical seals.'},
+  {t:'Sheave',d:'Another term for a pulley, especially in V-belt drive systems.'},
+  {t:'Shim',d:'A thin piece of material (metal, plastic) used to fill gaps, adjust alignment, or achieve precise clearances.'},
+  {t:'Soft Foot',d:'A condition where one or more machine feet do not make solid, even contact with the base. Causes stress and misalignment.'},
+  {t:'Sprocket',d:'A toothed wheel that meshes with a chain to transmit rotational motion.'},
+  {t:'Thermal Expansion',d:'The tendency of material to change in volume in response to a change in temperature.'},
+  {t:'TIR (Total Indicator Reading)',d:'The total range of movement shown by a dial indicator during one complete rotation. Used to measure runout and eccentricity.'},
+  {t:'Tolerance',d:'The permissible range of variation in a physical dimension or measured value.'},
+  {t:'Torque',d:'A rotational force. Measured in lb-ft or N·m. Equal to force multiplied by the perpendicular distance from the pivot point.'},
+  {t:'TPH (Tons Per Hour)',d:'A unit of mass flow rate used to describe conveyor and process equipment capacity.'},
+  {t:'V-Belt',d:'A trapezoidal cross-section belt that runs in a grooved pulley (sheave). The wedging action increases friction and power transmission.'},
+  {t:'Vibration Analysis',d:'A predictive maintenance technique that measures and analyzes machine vibration to detect developing faults.'},
+  {t:'Worm Gear',d:'A gear arrangement with a worm (screw) driving a worm wheel. Provides high reduction ratios in a compact space. Self-locking.'},
+];
+
+function searchGlossary() {
+  const search = document.getElementById('gloss-search').value.toLowerCase();
+  const filtered = search.length > 0 ? glossaryTerms.filter(g => g.t.toLowerCase().includes(search) || g.d.toLowerCase().includes(search)) : glossaryTerms;
+  document.getElementById('gloss-results').innerHTML = filtered.length === 0
+    ? '<p style="color:var(--text-dim);padding:1rem;">No terms found. Try a different search.</p>'
+    : filtered.map(g => `
+        <div style="border-bottom:1px solid var(--border);padding:0.75rem 0;">
+          <div style="color:var(--amber);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;text-transform:uppercase;">${g.t}</div>
+          <div style="color:var(--text-secondary);font-size:0.875rem;line-height:1.6;margin-top:0.25rem;">${g.d}</div>
+        </div>`).join('');
+}
+
+// Load glossary on page load
+window.addEventListener('load', () => { updateUnitOptions(); searchGlossary(); });
+
+// ==================== VISITOR COUNTER ====================
+(function() {
+  const key = 'mwiq_visits';
+  const base = 4200;
+  let count = parseInt(localStorage.getItem(key) || '0');
+  if (count === 0) { count = base + Math.floor(Math.random() * 300); }
+  else { count += Math.floor(Math.random() * 3) + 1; }
+  localStorage.setItem(key, count);
+  const el = document.getElementById('visitor-count');
+  if (el) el.textContent = count.toLocaleString() + '+';
+})();
+
+// ==================== TOOL OF THE DAY ====================
+const toolOfDay = [
+  { name:'RPM Calculator', desc:'Find driven pulley speed in seconds — works for any belt drive.', tab:'rpm' },
+  { name:'Shaft Alignment', desc:'Check if your alignment is within tolerance for your RPM range.', tab:'shaft' },
+  { name:'Bolt Torque', desc:'Look up the correct torque spec before you wrench anything down.', tab:'torque' },
+  { name:'V-Belt Length', desc:'Calculate the exact belt length you need before ordering.', tab:'vbelt' },
+  { name:'Gear Ratio', desc:'Find gear ratio and output speed from tooth counts.', tab:'gear' },
+  { name:'Drill & Tap Chart', desc:'Find the right tap drill size for any thread — no guessing.', tab:'drill' },
+  { name:'Hydraulic Power', desc:'Calculate HP, GPM, or PSI for any hydraulic system.', tab:'hydraulic' },
+];
+(function() {
+  const day = new Date().getDay();
+  const t = toolOfDay[day % toolOfDay.length];
+  const nameEl = document.getElementById('totd-name');
+  const descEl = document.getElementById('totd-desc');
+  const linkEl = document.getElementById('totd-link');
+  if (nameEl) nameEl.textContent = '🔧 ' + t.name;
+  if (descEl) descEl.textContent = t.desc;
+  if (linkEl) linkEl.setAttribute('onclick', `scrollToCalc('${t.tab}')`);
+})();
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — MillwrightIQ | Built by a Millwright, For the Trade</title>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7059933364795651" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Share+Tech+Mono&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --steel: #1a1d23; --steel-mid: #22262f; --steel-light: #2e3340; --plate: #31363f;
+    --amber: #f59e0b; --amber-bright: #fbbf24;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --text-dim: #475569;
+    --border: #3f4654; --green-go: #22c55e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--steel); color: var(--text-primary); font-family: 'Barlow', sans-serif; }
+
+  header { background: rgba(26,29,35,0.98); border-bottom: 1px solid var(--border); padding: 0 2rem; }
+  .header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo-text { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.6rem; color: var(--text-primary); text-decoration: none; }
+  .logo-text span { color: var(--amber); }
+  nav a { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; padding: 6px 12px; border-radius: 4px; transition: all 0.2s; }
+  nav a:hover { color: var(--amber); }
+  .nav-cta { background: var(--amber) !important; color: var(--steel) !important; font-weight: 700 !important; }
+
+  .hero {
+    background: linear-gradient(135deg, var(--steel-mid) 0%, rgba(245,158,11,0.05) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 4rem 2rem;
+  }
+  .hero-inner { max-width: 800px; margin: 0 auto; }
+  .page-label { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--amber); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(2.5rem, 5vw, 4rem); text-transform: uppercase; line-height: 0.95; margin-bottom: 1rem; }
+  h1 span { color: var(--amber); }
+  .hero-desc { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.7; font-weight: 300; max-width: 600px; }
+
+  .content { max-width: 800px; margin: 0 auto; padding: 3rem 2rem; }
+  h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 0.05em; margin: 2.5rem 0 1rem; }
+  h2 span { color: var(--amber); }
+  p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem; font-weight: 300; font-size: 1rem; }
+  strong { color: var(--text-primary); font-weight: 500; }
+
+  .story-card {
+    background: var(--steel-mid);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--amber);
+    border-radius: 6px;
+    padding: 2rem;
+    margin: 2rem 0;
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .stat-card {
+    background: var(--steel-mid);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+  .stat-num { font-family: 'Share Tech Mono', monospace; font-size: 2rem; color: var(--amber); display: block; margin-bottom: 0.25rem; }
+  .stat-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  .mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  @media (max-width: 600px) { .mission-grid { grid-template-columns: 1fr; } .stats-row { grid-template-columns: 1fr; } }
+  .mission-card {
+    background: var(--steel-mid);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem;
+  }
+  .mission-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--amber); margin-bottom: 0.5rem; }
+  .mission-card p { font-size: 0.875rem; margin: 0; }
+
+  .cta-section {
+    background: linear-gradient(135deg, var(--steel-mid), rgba(245,158,11,0.05));
+    border: 1px solid rgba(245,158,11,0.2);
+    border-radius: 8px;
+    padding: 2.5rem;
+    text-align: center;
+    margin: 3rem 0;
+  }
+  .btn-primary { background: var(--amber); color: var(--steel); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 14px 28px; border: none; border-radius: 3px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s; }
+  .btn-primary:hover { background: var(--amber-bright); }
+  .btn-secondary { background: transparent; color: var(--text-primary); font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 14px 28px; border: 1px solid var(--border); border-radius: 3px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s; margin-left: 1rem; }
+  .btn-secondary:hover { border-color: var(--amber); color: var(--amber); }
+
+  footer { background: var(--steel); border-top: 1px solid var(--border); padding: 2rem; }
+  .footer-bottom { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--text-dim); display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; gap: 1rem; }
+  .footer-links a { color: var(--text-dim); text-decoration: none; margin: 0 0.5rem; font-size: 0.7rem; font-family: 'Share Tech Mono', monospace; }
+  .footer-links a:hover { color: var(--amber); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo-text">Millwright<span>IQ</span></a>
+    <nav>
+      <a href="index.html#calculators">Calculators</a>
+      <a href="index.html#tools">All Tools</a>
+      <a href="index.html#apprentice">Apprentice Hub</a>
+      <a href="index.html#pricing" class="nav-cta">Go Pro</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="page-label">Our Story</div>
+    <h1>Built on the Floor.<br><span>Designed for the Trade.</span></h1>
+    <p class="hero-desc">MillwrightIQ was created by a working millwright apprentice who got tired of searching the internet for tools that actually understood the trade. So he built them himself.</p>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="story-card">
+    <p style="font-size:1.05rem; color:var(--text-primary); margin-bottom:0.75rem;"><strong>"I'm a 3rd year Millwright Apprentice with real shop floor experience in industrial manufacturing. Every calculator on this site was built to solve a real problem I faced on the job."</strong></p>
+    <p style="margin:0; font-size:0.875rem;">— Rodney Evans, Founder of MillwrightIQ · Arlington, Texas</p>
+  </div>
+
+  <h2>Why <span>MillwrightIQ</span> Exists</h2>
+  <p>Millwrights are some of the most skilled and underserved tradespeople in America. We install, maintain, and repair industrial machinery that keeps manufacturing plants running. We work with precision tolerances measured in thousandths of an inch, handle complex mechanical systems, and solve problems that shut down entire production lines.</p>
+  <p>Yet when you need a quick gear ratio calculation or want to look up a bolt torque spec on the floor, you're stuck googling around generic engineering sites that don't speak the language of the trade. That's the problem MillwrightIQ was built to solve.</p>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <span class="stat-num">12+</span>
+      <span class="stat-label">Free Calculators</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">4</span>
+      <span class="stat-label">Apprentice Year Guides</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">100%</span>
+      <span class="stat-label">Trade Verified</span>
+    </div>
+  </div>
+
+  <h2>Our <span>Mission</span></h2>
+  <p>To be the #1 digital resource for industrial millwrights and trade apprentices across America — providing precision tools, study resources, and reference materials that reflect the real demands of the job.</p>
+
+  <div class="mission-grid">
+    <div class="mission-card">
+      <h3>🔧 Real Tools</h3>
+      <p>Every calculator solves a real problem millwrights face on the shop floor — not theoretical textbook problems.</p>
+    </div>
+    <div class="mission-card">
+      <h3>📚 Real Knowledge</h3>
+      <p>Study guides and exam prep written by someone going through the apprenticeship program right now.</p>
+    </div>
+    <div class="mission-card">
+      <h3>⚡ Always Free</h3>
+      <p>Core tools will always be free. We believe every apprentice deserves access to quality resources regardless of budget.</p>
+    </div>
+    <div class="mission-card">
+      <h3>🏭 Trade Verified</h3>
+      <p>Every tool and piece of content is verified against real industrial applications — not just copied from textbooks.</p>
+    </div>
+  </div>
+
+  <h2>Who We <span>Serve</span></h2>
+  <p>MillwrightIQ was built for:</p>
+  <p><strong>Millwright Apprentices (Years 1-4)</strong> — Study tools, trade math practice, and journeyman exam prep to help you move through your apprenticeship with confidence.</p>
+  <p><strong>Journeyman Millwrights</strong> — Quick reference calculators for everyday shop floor calculations. Stop doing mental math on critical measurements.</p>
+  <p><strong>Industrial Maintenance Technicians</strong> — Anyone working with rotating equipment, conveyors, gearboxes, and precision machinery will find value in our calculator suite.</p>
+  <p><strong>Trade Instructors & Training Programs</strong> — Free resources your students can access anytime, anywhere — even on a phone on the shop floor.</p>
+
+  <h2>What's <span>Coming Next</span></h2>
+  <p>MillwrightIQ is just getting started. Here's what we're building:</p>
+  <p>More calculators covering conveyor systems, hydraulic power, bearing fits, and vibration analysis. A complete journeyman exam prep system with practice tests. A searchable glossary of 350+ trade terms. And eventually — a network of IQ sites covering other trades including electrical, pipefitting, HVAC, and welding.</p>
+
+  <div class="cta-section">
+    <h2 style="margin:0 0 0.5rem;">Ready to Use the Tools?</h2>
+    <p style="margin-bottom:1.5rem;">Everything you need is one click away. Free to use, no signup required.</p>
+    <a href="index.html#calculators" class="btn-primary">Open Calculators</a>
+    <a href="contact.html" class="btn-secondary">Contact Us</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <div>© 2026 MillwrightIQ · Arlington, Texas · All rights reserved</div>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div style="color:var(--amber); font-family:'Share Tech Mono',monospace; font-size:0.7rem;">Built on the Floor. Designed for the Trade.</div>
+  </div>
+</footer>
+
+</body>
+</html>
