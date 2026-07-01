@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Understanding Bearing Fits: Interference, Clearance, and Transition | MillwrightIQ</title>
+<meta name="description" content="A plain-language breakdown of bearing fits — interference, clearance, and transition — and why getting the fit wrong destroys bearings.">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Share+Tech+Mono&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --steel: #1a1d23; --steel-mid: #22262f; --steel-light: #2e3340; --plate: #31363f;
+    --amber: #f59e0b; --amber-bright: #fbbf24; --amber-dim: #92600a;
+    --red-alert: #ef4444; --green-go: #22c55e;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --text-dim: #475569;
+    --border: #3f4654; --glow: rgba(245,158,11,0.15);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--steel); color: var(--text-primary); font-family: 'Barlow', sans-serif; line-height: 1.7; }
+  header { background: rgba(26,29,35,0.98); border-bottom: 1px solid var(--border); padding: 0 2rem; position: sticky; top: 0; z-index: 10; }
+  .header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo-text { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.6rem; color: var(--text-primary); text-decoration: none; }
+  .logo-text span { color: var(--amber); }
+  nav { display: flex; gap: 2rem; align-items: center; }
+  nav a { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; }
+  nav a:hover { color: var(--amber); }
+  .nav-cta { background: var(--amber) !important; color: var(--steel) !important; font-weight: 700 !important; padding: 0.5rem 1rem; border-radius: 4px; }
+
+  main { max-width: 760px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+  .breadcrumb { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 2rem; }
+  .breadcrumb a { color: var(--amber-dim); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--amber); }
+
+  .eyebrow { font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
+  h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(2rem, 4vw, 2.75rem); text-transform: uppercase; line-height: 1.05; margin-bottom: 1.5rem; }
+  .lede { font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 2.5rem; }
+
+  article h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.5rem; text-transform: uppercase; color: var(--amber-bright); margin: 2.5rem 0 1rem; letter-spacing: 0.02em; }
+  article h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.15rem; text-transform: uppercase; color: var(--text-primary); margin: 1.75rem 0 0.75rem; }
+  article p { margin-bottom: 1.25rem; color: var(--text-primary); }
+  article strong { color: var(--amber-bright); }
+
+  .fit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0 2rem; }
+  .fit-card { background: var(--steel-mid); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem; }
+  .fit-card .tag { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--amber); margin-bottom: 0.5rem; }
+  .fit-card p { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0; }
+  @media (max-width: 640px) { .fit-grid { grid-template-columns: 1fr; } }
+
+  .warn-box { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.3); border-left: 3px solid var(--red-alert); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+  .warn-box .label { font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; color: var(--red-alert); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+
+  .cta-block { margin-top: 3rem; background: linear-gradient(135deg, var(--steel-mid) 0%, rgba(245,158,11,0.08) 100%); border: 1px solid var(--border); border-radius: 8px; padding: 2rem; text-align: center; }
+  .cta-block p { color: var(--text-secondary); margin-bottom: 1.25rem; }
+  .btn-amber { display: inline-block; background: var(--amber); color: var(--steel); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.9rem 2rem; border-radius: 4px; text-decoration: none; }
+
+  footer { border-top: 1px solid var(--border); padding: 2.5rem 2rem; text-align: center; color: var(--text-dim); font-size: 0.85rem; }
+  footer a { color: var(--text-dim); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/index.html" class="logo-text">Millwright<span>IQ</span></a>
+    <nav>
+      <a href="/index.html#calculators">Calculators</a>
+      <a href="/index.html#tools">All Tools</a>
+      <a href="/index.html#apprentice">Apprentice Hub</a>
+      <a href="/articles.html">Articles</a>
+      <a href="/index.html#pro" class="nav-cta">Go Pro</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="breadcrumb"><a href="/articles.html">Articles</a> / Bearing Fits</div>
+
+  <div class="eyebrow">Bearings</div>
+  <h1>Understanding Bearing Fits: Interference, Clearance, and Transition</h1>
+  <p class="lede">Bearing fits confuse a lot of people early in their career because the terminology sounds more complicated than the concept really is.</p>
+
+  <article>
+    <p>A bearing fit describes how tight or loose the bearing is on the shaft or inside the housing. The fit matters because the bearing has to stay where it belongs while the machine is running under load, heat, vibration, and speed.</p>
+
+    <h2>The Three Main Types of Bearing Fit</h2>
+    <p>There are three basic fit categories: interference fit, clearance fit, and transition fit.</p>
+
+    <div class="fit-grid">
+      <div class="fit-card"><div class="tag">Interference</div><p>Press fit. Shaft is slightly larger than the bore, or housing bore is slightly smaller than the OD. Needs pressing, heating, or cooling to install.</p></div>
+      <div class="fit-card"><div class="tag">Clearance</div><p>A small amount of looseness. Slides on by hand or light pressure. Used where the ring doesn't need to grip tightly.</p></div>
+      <div class="fit-card"><div class="tag">Transition</div><p>Between interference and clearance. May install with light pressure or feel slightly snug, depending on actual tolerances.</p></div>
+    </div>
+
+    <h3>Interference Fit</h3>
+    <p>An <strong>interference fit</strong>, also called a press fit, means the shaft is slightly larger than the bearing bore, or the housing bore is slightly smaller than the bearing outside diameter. That means the bearing does not simply slide into place by hand. It may need to be pressed on, heated, cooled, or installed with special tools.</p>
+    <p>Interference fits are commonly used when the bearing ring needs to grip tightly and prevent movement. In many applications, the ring that rotates relative to the load needs the tighter fit. For example, if the shaft rotates and the inner ring rotates with it, the inner ring often needs an interference fit on the shaft.</p>
+
+    <h3>Clearance Fit</h3>
+    <p>A <strong>clearance fit</strong> means there is a small amount of looseness between the bearing and the shaft or housing. The bearing may slide into place by hand or with light pressure.</p>
+    <p>Clearance fits are often used where the bearing ring does not need to grip as tightly, or where the bearing must be able to move slightly for thermal expansion or assembly reasons. But clearance fit does not mean sloppy fit. If the fit is too loose, the bearing ring can move, creep, or spin where it should not. That can damage the shaft or housing over time.</p>
+
+    <h3>Transition Fit</h3>
+    <p>A <strong>transition fit</strong> is between interference and clearance. Depending on the actual shaft size, housing size, and bearing tolerance, it may install with light pressure or may feel slightly snug. Transition fits are used where the application needs a controlled fit but not a heavy press fit.</p>
+
+    <h2>Why Bearing Fit Matters</h2>
+    <p>The wrong fit can destroy a bearing, shaft, or housing.</p>
+    <p>If the fit is too loose, the bearing ring may creep or spin on the shaft or inside the housing. This can cause fretting, wear, heat, vibration, and damage to the mounting surface.</p>
+
+    <div class="warn-box">
+      <div class="label">Warning Sign</div>
+      Fretting often leaves behind a fine reddish-brown or dark powder during teardown. That is a warning sign that movement has been happening where it should not.
+    </div>
+
+    <p>If the fit is too tight, the bearing can be damaged during installation. A tight fit can also reduce the bearing's internal clearance. When internal clearance gets too small, the bearing can run hot, lose lubrication film, and fail early.</p>
+
+    <h2>Rule of Thumb</h2>
+    <p>As a general rule, the bearing ring that rotates relative to the load usually needs the tighter fit. The stationary ring often uses a lighter fit, but it still has to be tight enough to prevent movement under load, vibration, and temperature changes.</p>
+    <p>This is only a rule of thumb. The correct fit depends on bearing size, shaft diameter, load direction, speed, temperature, housing material, and manufacturer recommendations. Always check the bearing manufacturer's fit chart when accuracy matters.</p>
+
+    <h2>Installation Matters</h2>
+    <p>Even the correct fit can fail if the bearing is installed the wrong way. Never hammer directly on a bearing. Do not drive force through the rolling elements. If you are pressing a bearing onto a shaft, apply force to the inner ring. If you are pressing a bearing into a housing, apply force to the outer ring.</p>
+    <p>For larger bearings, induction heating is often used to expand the bearing bore before installation. This helps the bearing slide onto the shaft without damaging the bearing, shaft, or raceway. Cleanliness also matters — dirt, burrs, rust, and raised metal can change the fit and create false readings during installation.</p>
+
+    <h2>Final Thought</h2>
+    <p>Bearing fits are not just theory. They affect heat, vibration, bearing life, shaft condition, and machine reliability. A bearing that is too loose can move. A bearing that is too tight can overheat. A bearing installed incorrectly can fail even if the fit was correct on paper.</p>
+  </article>
+
+  <div class="cta-block">
+    <p>MillwrightIQ's Bearing Fit Calculator and glossary are built to give quick field references when you need plain-language answers without digging through a manual mid-shift.</p>
+    <a href="/index.html#calculators" class="btn-amber">Open the Bearing Fit Calculator</a>
+  </div>
+</main>
+
+<footer>
+  &copy; 2026 MillwrightIQ. Built on the Floor, Designed for the Trade. &nbsp;|&nbsp; <a href="/about.html">About</a> &nbsp;|&nbsp; <a href="/contact.html">Contact</a> &nbsp;|&nbsp; <a href="/privacy.html">Privacy</a>
+</footer>
+
+</body>
+</html>

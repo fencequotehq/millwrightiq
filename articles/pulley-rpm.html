@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Calculate Pulley RPM and Belt Speed | MillwrightIQ</title>
+<meta name="description" content="Learn the pulley RPM and belt speed formulas millwrights use on the shop floor, with real examples and common mistakes to avoid.">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Share+Tech+Mono&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --steel: #1a1d23; --steel-mid: #22262f; --steel-light: #2e3340; --plate: #31363f;
+    --amber: #f59e0b; --amber-bright: #fbbf24; --amber-dim: #92600a;
+    --red-alert: #ef4444; --green-go: #22c55e;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --text-dim: #475569;
+    --border: #3f4654; --glow: rgba(245,158,11,0.15);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--steel); color: var(--text-primary); font-family: 'Barlow', sans-serif; line-height: 1.7; }
+  header { background: rgba(26,29,35,0.98); border-bottom: 1px solid var(--border); padding: 0 2rem; position: sticky; top: 0; z-index: 10; }
+  .header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo-text { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.6rem; color: var(--text-primary); text-decoration: none; }
+  .logo-text span { color: var(--amber); }
+  nav { display: flex; gap: 2rem; align-items: center; }
+  nav a { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; }
+  nav a:hover { color: var(--amber); }
+  .nav-cta { background: var(--amber) !important; color: var(--steel) !important; font-weight: 700 !important; padding: 0.5rem 1rem; border-radius: 4px; }
+
+  main { max-width: 760px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+  .breadcrumb { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 2rem; }
+  .breadcrumb a { color: var(--amber-dim); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--amber); }
+
+  .eyebrow { font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
+  h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(2rem, 4vw, 2.75rem); text-transform: uppercase; line-height: 1.05; margin-bottom: 1.5rem; }
+  .lede { font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 2.5rem; }
+
+  article h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.5rem; text-transform: uppercase; color: var(--amber-bright); margin: 2.5rem 0 1rem; letter-spacing: 0.02em; }
+  article p { margin-bottom: 1.25rem; color: var(--text-primary); }
+  article strong { color: var(--amber-bright); }
+
+  .formula-box { background: var(--steel-mid); border: 1px solid var(--border); border-left: 3px solid var(--amber); border-radius: 6px; padding: 1.5rem; margin: 1.5rem 0; font-family: 'Share Tech Mono', monospace; font-size: 1.05rem; color: var(--amber-bright); }
+
+  .example-box { background: var(--plate); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+  .example-box .label { font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+
+  ul.check-list { list-style: none; margin: 1rem 0 1.5rem; }
+  ul.check-list li { padding-left: 1.5rem; position: relative; margin-bottom: 0.5rem; color: var(--text-secondary); }
+  ul.check-list li::before { content: "→"; position: absolute; left: 0; color: var(--amber); }
+
+  .speed-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+  .speed-table td { padding: 0.6rem 1rem; border-bottom: 1px solid var(--border); }
+  .speed-table td:last-child { text-align: right; font-family: 'Share Tech Mono', monospace; color: var(--amber-bright); }
+
+  .cta-block { margin-top: 3rem; background: linear-gradient(135deg, var(--steel-mid) 0%, rgba(245,158,11,0.08) 100%); border: 1px solid var(--border); border-radius: 8px; padding: 2rem; text-align: center; }
+  .cta-block p { color: var(--text-secondary); margin-bottom: 1.25rem; }
+  .btn-amber { display: inline-block; background: var(--amber); color: var(--steel); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.9rem 2rem; border-radius: 4px; text-decoration: none; }
+
+  footer { border-top: 1px solid var(--border); padding: 2.5rem 2rem; text-align: center; color: var(--text-dim); font-size: 0.85rem; }
+  footer a { color: var(--text-dim); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/index.html" class="logo-text">Millwright<span>IQ</span></a>
+    <nav>
+      <a href="/index.html#calculators">Calculators</a>
+      <a href="/index.html#tools">All Tools</a>
+      <a href="/index.html#apprentice">Apprentice Hub</a>
+      <a href="/articles.html">Articles</a>
+      <a href="/index.html#pro" class="nav-cta">Go Pro</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="breadcrumb"><a href="/articles.html">Articles</a> / Pulley RPM &amp; Belt Speed</div>
+
+  <div class="eyebrow">Trade Math</div>
+  <h1>How to Calculate Pulley RPM and Belt Speed Without Guessing</h1>
+  <p class="lede">If you have ever stood in front of a belt-driven motor trying to figure out why a pump, fan, or gearbox is running too fast or too slow, you already know the formula matters more than the theory. Here is the pulley math millwrights actually use on the floor, broken down without the textbook language.</p>
+
+  <article>
+    <h2>The Core Pulley RPM Formula</h2>
+    <div class="formula-box">Driven RPM = Driver RPM × Driver Diameter ÷ Driven Diameter</div>
+    <p>That is the main formula. The <strong>driver pulley</strong> is the pulley connected to the power source, usually the motor. The <strong>driven pulley</strong> is the pulley being turned, such as the pulley on a pump, fan, blower, gearbox, or machine shaft.</p>
+
+    <div class="example-box">
+      <div class="label">Example</div>
+      A motor pulley is 6 inches in diameter and spins at 1750 RPM. The driven pulley is 12 inches in diameter.<br><br>
+      Driven RPM = 1750 × 6 ÷ 12<br>
+      Driven RPM = <strong>875 RPM</strong>
+    </div>
+
+    <p>So the output shaft is turning about 875 RPM. A bigger driven pulley slows the output down. A smaller driven pulley speeds the output up. That relationship does not change.</p>
+
+    <h2>Why This Trips People Up</h2>
+    <p>Most mistakes happen when people mix up the driver and driven pulley. The driver is always the pulley providing the power. The driven pulley is the one receiving the power. Get those backwards and your answer will be wrong.</p>
+    <p>Another common mistake is using the outside diameter of a worn sheave without considering belt position, wear, or the pitch diameter. For rough field math, outside diameter can get you close, but for more accurate work, use the correct pitch diameter when available.</p>
+
+    <h2>Belt Speed Formula</h2>
+    <p>Pulley RPM tells you how fast the shaft is turning. Belt speed tells you how fast the belt itself is moving.</p>
+    <div class="formula-box">Belt Speed (FPM) = Pulley Diameter × π × RPM ÷ 12</div>
+
+    <div class="example-box">
+      <div class="label">Example</div>
+      A 6-inch motor pulley turning 1750 RPM:<br><br>
+      Belt Speed = 6 × 3.1416 × 1750 ÷ 12<br>
+      Belt Speed = <strong>2,749 FPM</strong>
+    </div>
+
+    <p>So the belt is moving at about 2,749 feet per minute. This matters because excessive belt speed can cause belt wear, heat, vibration, noise, and safety issues.</p>
+
+    <h2>Checking Your Work in the Field</h2>
+    <p>If you do not trust the math, or if you are troubleshooting equipment where the pulleys have been changed over the years, use a tachometer on the driven shaft and compare the actual RPM to your calculated number.</p>
+    <p>If the real-world RPM is off by more than a few percent, check for belt slip. Common causes include worn belts, incorrect belt tension, glazed sheaves, misaligned pulleys, wrong belt size, or overloaded equipment.</p>
+    <p>The math gives you the theoretical speed. The tachometer tells you what the machine is actually doing.</p>
+
+    <h2>Common Motor Speeds to Remember</h2>
+    <p>For standard 60 Hz AC motors, these are common approximate synchronous speeds:</p>
+    <table class="speed-table">
+      <tr><td>2-pole motor</td><td>~3600 RPM</td></tr>
+      <tr><td>4-pole motor</td><td>~1800 RPM</td></tr>
+      <tr><td>6-pole motor</td><td>~1200 RPM</td></tr>
+      <tr><td>8-pole motor</td><td>~900 RPM</td></tr>
+    </table>
+    <p>Actual motor speed under load is usually slightly lower because of motor slip. For many induction motors, that slip may be around 1–3%, depending on motor design and load. So a motor listed near 1800 RPM may actually run around 1725–1760 RPM under load.</p>
+
+    <h2>Why Pulley Speed Matters</h2>
+    <p>Running equipment at the wrong RPM is not just an efficiency problem. It can become a bearing life problem, belt wear problem, vibration problem, and sometimes a safety problem.</p>
+    <p>Fans, pumps, blowers, conveyors, and rotating equipment are all designed around certain speeds. Change the pulley ratio without checking the numbers and you may create problems that show up later as heat, noise, vibration, or premature bearing failure.</p>
+    <p>Getting the pulley sizing right the first time saves time, parts, and troubleshooting headaches later.</p>
+  </article>
+
+  <div class="cta-block">
+    <p>Need to skip the mental math? The MillwrightIQ RPM &amp; Pulley Calculator lets you enter driver RPM, driver pulley diameter, and driven pulley diameter to calculate driven RPM and belt speed fast.</p>
+    <a href="/index.html#calculators" class="btn-amber">Open the Calculator</a>
+  </div>
+</main>
+
+<footer>
+  &copy; 2026 MillwrightIQ. Built on the Floor, Designed for the Trade. &nbsp;|&nbsp; <a href="/about.html">About</a> &nbsp;|&nbsp; <a href="/contact.html">Contact</a> &nbsp;|&nbsp; <a href="/privacy.html">Privacy</a>
+</footer>
+
+</body>
+</html>
