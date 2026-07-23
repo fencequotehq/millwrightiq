@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to MillwrightIQ Pro</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Share+Tech+Mono&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --steel: #1a1d23;
+    --steel-mid: #22262f;
+    --steel-light: #2e3340;
+    --amber: #f59e0b;
+    --green-go: #22c55e;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-dim: #475569;
+    --border: #3f4654;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--steel);
+    color: var(--text-primary);
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+  .card {
+    background: var(--steel-mid);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    max-width: 540px;
+    width: 100%;
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+  .logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+  }
+  .logo span { color: var(--amber); }
+  .check { font-size: 2.5rem; margin-bottom: 0.75rem; }
+  h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+  }
+  .lead { color: var(--green-go); font-weight: 500; margin-bottom: 1.5rem; }
+  p.body { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.25rem; }
+  .note {
+    border-top: 1px solid var(--border);
+    padding-top: 1.25rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  a { color: var(--amber); text-decoration: none; font-weight: 600; }
+  a:hover { text-decoration: underline; }
+  .btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+    background: var(--amber);
+    color: var(--steel);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+  }
+  .btn:hover { text-decoration: none; background: var(--amber-bright, #fbbf24); }
+  .fineprint {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    margin-top: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">Millwright<span>IQ</span></div>
+    <div class="check">✅</div>
+    <h1>Welcome to MillwrightIQ Pro</h1>
+    <div class="lead">Your subscription was received successfully.</div>
+    <p class="body">
+      Pro access is currently activated manually. Watch the email address you used
+      during checkout for access instructions within 24 hours.
+    </p>
+    <div class="note">
+      Need help? Use the <a href="contact.html">MillwrightIQ contact page</a>.
+    </div>
+    <a class="btn" href="index.html">← Back to the toolbox</a>
+    <div class="fineprint">Built on the Floor · Designed for the Trade</div>
+  </div>
+</body>
+</html>

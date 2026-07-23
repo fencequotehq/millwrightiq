@@ -1423,10 +1423,10 @@ f<!DOCTYPE html>
       <button class="calc-tab" onclick="switchTab('vbelt', this)">🔄 V-Belt Length</button>
       <button class="calc-tab" onclick="switchTab('unit', this)">📏 Unit Converter</button>
       <button class="calc-tab" onclick="switchTab('drill', this)">🪛 Drill & Tap</button>
-      <button class="calc-tab" onclick="switchTab('conveyor', this)">🏗️ Conveyor Speed</button>
-      <button class="calc-tab" onclick="switchTab('bearing', this)">⚡ Bearing Fit</button>
-      <button class="calc-tab" onclick="switchTab('keyway', this)">🔑 Keyway & Keyseat</button>
-      <button class="calc-tab" onclick="switchTab('hydraulic', this)">💧 Hydraulic Power</button>
+      <button class="calc-tab" onclick="switchTab('conveyor', this)">🏗️ Conveyor Speed <span style="font-size:0.6rem;background:var(--amber);color:var(--steel);padding:1px 5px;border-radius:2px;margin-left:4px;">PRO</span></button>
+      <button class="calc-tab" onclick="switchTab('bearing', this)">⚡ Bearing Fit <span style="font-size:0.6rem;background:var(--amber);color:var(--steel);padding:1px 5px;border-radius:2px;margin-left:4px;">PRO</span></button>
+      <button class="calc-tab" onclick="switchTab('keyway', this)">🔑 Keyway & Keyseat <span style="font-size:0.6rem;background:var(--amber);color:var(--steel);padding:1px 5px;border-radius:2px;margin-left:4px;">PRO</span></button>
+      <button class="calc-tab" onclick="switchTab('hydraulic', this)">💧 Hydraulic Power <span style="font-size:0.6rem;background:var(--amber);color:var(--steel);padding:1px 5px;border-radius:2px;margin-left:4px;">PRO</span></button>
       <button class="calc-tab" onclick="switchTab('l10', this)">⚡ L10 Bearing Life <span style="font-size:0.6rem;background:var(--amber);color:var(--steel);padding:1px 5px;border-radius:2px;margin-left:4px;">PRO</span></button>
       <button class="calc-tab" onclick="switchTab('sheave', this)">🔘 Sheave Select <span style="font-size:0.6rem;background:var(--amber);color:var(--steel);padding:1px 5px;border-radius:2px;margin-left:4px;">PRO</span></button>
       <button class="calc-tab" onclick="switchTab('pressfit', this)">💪 Press Fit Force <span style="font-size:0.6rem;background:var(--amber);color:var(--steel);padding:1px 5px;border-radius:2px;margin-left:4px;">PRO</span></button>
@@ -1843,7 +1843,13 @@ f<!DOCTYPE html>
     </div>
 
     <!-- CONVEYOR SPEED PANEL -->
-    <div class="calc-panel" id="panel-conveyor">
+    <div class="calc-panel pro-lock" id="panel-conveyor">
+      <div class="pro-lock-overlay" id="lock-conveyor">
+        <div style="font-size:2rem;margin-bottom:0.75rem;">🔒</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;text-transform:uppercase;margin-bottom:0.5rem;">Pro Tool</div>
+        <p style="color:var(--text-secondary);font-size:0.875rem;margin-bottom:1.25rem;">Conveyor Speed is included in MillwrightIQ Pro.</p>
+        <button class="btn-primary" onclick="showUpgradeModal()">Unlock Pro →</button>
+      </div>
       <div class="calc-grid">
         <div class="calc-card">
           <div class="calc-card-header">
@@ -1898,7 +1904,13 @@ f<!DOCTYPE html>
     </div>
 
     <!-- BEARING FIT PANEL -->
-    <div class="calc-panel" id="panel-bearing">
+    <div class="calc-panel pro-lock" id="panel-bearing">
+      <div class="pro-lock-overlay" id="lock-bearing">
+        <div style="font-size:2rem;margin-bottom:0.75rem;">🔒</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;text-transform:uppercase;margin-bottom:0.5rem;">Pro Tool</div>
+        <p style="color:var(--text-secondary);font-size:0.875rem;margin-bottom:1.25rem;">Bearing Fit is included in MillwrightIQ Pro.</p>
+        <button class="btn-primary" onclick="showUpgradeModal()">Unlock Pro →</button>
+      </div>
       <div class="calc-grid">
         <div class="calc-card">
           <div class="calc-card-header">
@@ -1946,7 +1958,13 @@ f<!DOCTYPE html>
     </div>
 
     <!-- KEYWAY & KEYSEAT PANEL -->
-    <div class="calc-panel" id="panel-keyway">
+    <div class="calc-panel pro-lock" id="panel-keyway">
+      <div class="pro-lock-overlay" id="lock-keyway">
+        <div style="font-size:2rem;margin-bottom:0.75rem;">🔒</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;text-transform:uppercase;margin-bottom:0.5rem;">Pro Tool</div>
+        <p style="color:var(--text-secondary);font-size:0.875rem;margin-bottom:1.25rem;">Keyway & Keyseat Reference is included in MillwrightIQ Pro.</p>
+        <button class="btn-primary" onclick="showUpgradeModal()">Unlock Pro →</button>
+      </div>
       <div class="calc-grid">
         <div class="calc-card">
           <div class="calc-card-header">
@@ -1998,7 +2016,13 @@ f<!DOCTYPE html>
     </div>
 
     <!-- HYDRAULIC POWER PANEL -->
-    <div class="calc-panel" id="panel-hydraulic">
+    <div class="calc-panel pro-lock" id="panel-hydraulic">
+      <div class="pro-lock-overlay" id="lock-hydraulic">
+        <div style="font-size:2rem;margin-bottom:0.75rem;">🔒</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;text-transform:uppercase;margin-bottom:0.5rem;">Pro Tool</div>
+        <p style="color:var(--text-secondary);font-size:0.875rem;margin-bottom:1.25rem;">Hydraulic Power is included in MillwrightIQ Pro.</p>
+        <button class="btn-primary" onclick="showUpgradeModal()">Unlock Pro →</button>
+      </div>
       <div class="calc-grid">
         <div class="calc-card">
           <div class="calc-card-header">
@@ -2430,8 +2454,8 @@ f<!DOCTYPE html>
       <button class="calc-tab" onclick="switchHub('math', this)">🧮 Trade Math Quiz</button>
       <button class="calc-tab" onclick="switchHub('exam', this)">📋 Exam Prep</button>
       <button class="calc-tab" onclick="switchHub('glossary', this)">📖 Glossary</button>
-      <button class="calc-tab" onclick="switchHub('flashcards', this)">🃏 Flashcards</button>
-      <button class="calc-tab" onclick="switchHub('progress', this)">📊 Progress</button>
+      <button class="calc-tab" onclick="switchHub('flashcards', this)">🃏 Flashcards <span style="font-size:0.6rem;background:var(--amber);color:var(--steel);padding:1px 5px;border-radius:2px;margin-left:4px;">PRO</span></button>
+      <button class="calc-tab" onclick="switchHub('progress', this)">📊 Progress <span style="font-size:0.6rem;background:var(--amber);color:var(--steel);padding:1px 5px;border-radius:2px;margin-left:4px;">PRO</span></button>
     </div>
 
     <!-- STUDY GUIDES PANEL -->
@@ -2689,9 +2713,9 @@ f<!DOCTYPE html>
 
     <!-- PRO COMING SOON -->
     <div style="background:var(--steel-mid);border:1px solid var(--border);border-radius:8px;padding:1.5rem;text-align:center;">
-      <div style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--amber);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.5rem;">Coming Later in 2026</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--amber);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.5rem;">Now Available</div>
       <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;text-transform:uppercase;margin-bottom:0.5rem;">MillwrightIQ Pro</div>
-      <p style="color:var(--text-secondary);font-size:0.875rem;max-width:500px;margin:0 auto;">Save & export results, printable cheat sheets, PDF study bundles, ad-free experience, and priority access to new tools. Use everything free now — Pro upgrades coming soon.</p>
+      <p style="color:var(--text-secondary);font-size:0.875rem;max-width:500px;margin:0 auto;">Unlock all eight advanced calculators, flashcard study mode, and progress tracking. $7.99/month or $49/year — cancel anytime.</p>
     </div>
 
   </div>
@@ -2716,7 +2740,7 @@ f<!DOCTYPE html>
   <div style="max-width:1200px;margin:0 auto;">
     <div style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--amber);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.5rem;">Upgrade</div>
     <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2rem,4vw,3rem);text-transform:uppercase;line-height:1;margin-bottom:0.75rem;">Free vs Pro</h2>
-    <p style="color:var(--text-secondary);font-size:1rem;max-width:500px;line-height:1.6;margin-bottom:2rem;font-weight:300;">Everything's free during your 14-day trial. After that, Pro keeps all the advanced tools unlocked.</p>
+    <p style="color:var(--text-secondary);font-size:1rem;max-width:500px;line-height:1.6;margin-bottom:2rem;font-weight:300;">Eight core calculators are free, always. Pro unlocks the eight advanced calculators plus flashcard study mode and progress tracking.</p>
     <div class="why-pro-grid">
       <div class="why-pro-col">
         <div class="why-pro-header" style="color:var(--text-secondary);">Free Tier</div>
@@ -2752,13 +2776,10 @@ f<!DOCTYPE html>
           <li><span style="color:var(--amber)">★</span> Bolt Pattern Sequence</li>
           <li><span style="color:var(--amber)">★</span> Flashcard Study Mode</li>
           <li><span style="color:var(--amber)">★</span> Progress Tracking</li>
-          <li><span style="color:var(--amber)">★</span> Save & Copy Results</li>
-          <li><span style="color:var(--amber)">★</span> Calculation History (last 10)</li>
-          <li><span style="color:var(--amber)">★</span> No Ads</li>
           <li><span style="color:var(--amber)">★</span> Priority Access to New Tools</li>
         </ul>
         <div style="padding:0 1.5rem 1.5rem;">
-          <button class="btn-primary" style="width:100%;font-size:1rem;" onclick="showUpgradeModal()">Start Free Trial → Go Pro</button>
+          <button class="btn-primary" style="width:100%;font-size:1rem;" onclick="showUpgradeModal()">Choose Pro Plan</button>
         </div>
       </div>
     </div>
@@ -2771,10 +2792,12 @@ f<!DOCTYPE html>
     <button class="modal-close" onclick="closeUpgradeModal()">✕</button>
     <div style="font-size:2rem;margin-bottom:0.5rem;">🔓</div>
     <div class="modal-title" style="color:var(--amber);">Unlock Pro Access</div>
-    <p style="color:var(--text-secondary);font-size:0.875rem;margin-bottom:1.5rem;line-height:1.6;">Get all 16 calculators, flashcards, progress tracking, save/export, and more.</p>
+    <p style="color:var(--text-secondary);font-size:0.875rem;margin-bottom:1.5rem;line-height:1.6;">Unlock all eight Pro calculators, plus flashcard study mode and progress tracking.</p>
     <div style="display:grid;gap:0.75rem;margin-bottom:1.5rem;">
-    <a href="https://buy.stripe.com/bJe3cvbcP7KccEX4SicfK00" target="_blank" class="btn-primary" style="text-align:center;font-size:1rem;">💳 $7.99/month</a>
-    <a href="https://buy.stripe.com/8x2bJ1a8L2pScEX84ucfK01" target="_blank" class="btn-primary" style="text-align:center;font-size:1rem;background:var(--steel-light);color:var(--amber);border:1px solid var(--amber);">📅 $49/year — Save 49%</a> 
+      <!-- STRIPE MONTHLY PAYMENT LINK: replace href="#" with the live https://buy.stripe.com/... monthly URL and delete the onclick handler. -->
+    <a href="https://buy.stripe.com/4gMaEX0vlduX5EpfdX0ZW01" class="btn-primary" style="display:block;text-align:center;text-decoration:none;padding:1rem;">Monthly — $7.99/month</a>
+      <!-- STRIPE ANNUAL PAYMENT LINK: replace href="#" with the live https://buy.stripe.com/... annual URL and delete the onclick handler. -->
+    <a href="https://buy.stripe.com/9B63cvemb0IbaYJgi10ZW00" class="btn-primary" style="display:block;text-align:center;text-decoration:none;padding:1rem;">Annual — $49/year</a>
     </div>
     <div style="border-top:1px solid var(--border);padding-top:1.25rem;">
       <div style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem;">Have an access code?</div>
@@ -2785,7 +2808,7 @@ f<!DOCTYPE html>
       <div id="code-error" style="display:none;color:var(--red-alert);font-size:0.8rem;margin-top:0.5rem;">Invalid code. Try again.</div>
       <div id="code-success" style="display:none;color:var(--green-go);font-size:0.8rem;margin-top:0.5rem;">✅ Pro access unlocked!</div>
     </div>
-    <p style="color:var(--text-dim);font-size:0.75rem;text-align:center;margin-top:1rem;">14-day free trial · Cancel anytime · Built by a working millwright</p>
+    <p style="color:var(--text-dim);font-size:0.75rem;text-align:center;margin-top:1rem;">Choose monthly or annual access · Cancel anytime · Built by a working millwright</p>
   </div>
 </div>
 
@@ -2856,8 +2879,9 @@ f<!DOCTYPE html>
 // ==================== TAB SWITCHING ====================
 function switchTab(id, btn) {
   const proTools = ['conveyor','bearing','keyway','hydraulic','l10','sheave','pressfit','boltpattern'];
-  if (proTools.includes(id) && typeof hasAccess === 'function' && !hasAccess()) {
-    showUpgradeModal(); return;
+  if (proTools.includes(id)) {
+    if (typeof hasAccess === 'function' && !hasAccess()) { showUpgradeModal(); return; }
+    maybeRevalidateOnProOpen();
   }
   document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
@@ -3011,9 +3035,9 @@ function lookupDrill() {
 
 function scrollToCalc(id) {
   const proTools = ['conveyor','bearing','keyway','hydraulic','l10','sheave','pressfit','boltpattern'];
-  if (proTools.includes(id) && typeof hasAccess === 'function' && !hasAccess()) {
-    showUpgradeModal();
-    return;
+  if (proTools.includes(id)) {
+    if (typeof hasAccess === 'function' && !hasAccess()) { showUpgradeModal(); return; }
+    maybeRevalidateOnProOpen();
   }
   document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
@@ -3261,6 +3285,10 @@ function selectYear(y, el) {
 
 // ==================== HUB TAB SWITCHING ====================
 function switchHub(id, btn) {
+  if (PRO_HUB_IDS.includes(id)) {
+    if (typeof hasAccess === 'function' && !hasAccess()) { showUpgradeModal(); return; }
+    maybeRevalidateOnProOpen();
+  }
   document.querySelectorAll('.hub-panel').forEach(p => p.style.display = 'none');
   document.querySelectorAll('#apprentice .calc-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('hub-' + id).style.display = 'block';
@@ -3485,51 +3513,97 @@ const toolOfDay = [
   if (linkEl) linkEl.setAttribute('onclick', `scrollToCalc('${t.tab}')`);
 })();
 
-// ==================== TRIAL SYSTEM ====================
-const TRIAL_DAYS = 14;
+// ==================== PRO ACCESS SYSTEM ====================
+// Access is granted via a per-customer code validated server-side by a Netlify
+// Function (netlify/functions/validate-code.js). Codes are NEVER stored in this
+// file. Mode B revalidation:
+//   under 24h  -> trusted from cache, no server call
+//   24h–72h    -> revalidate; a "valid:false" revokes immediately, but if the
+//                 server is unreachable, access is preserved (offline grace)
+//   over 72h   -> locked until a successful server validation
 const PRO_TOOL_IDS = ['conveyor','bearing','keyway','hydraulic','l10','sheave','pressfit','boltpattern'];
+const PRO_HUB_IDS = ['flashcards','progress'];
+const FRESH_MS = 24 * 60 * 60 * 1000;   // trust cache this long with no server call
+const GRACE_MS = 72 * 60 * 60 * 1000;   // keep access this long if the server is unreachable
+const VALIDATE_URL = '/.netlify/functions/validate-code';
 
-function initTrial() {
-  if (!localStorage.getItem('mwiq_trial_start')) {
-    localStorage.setItem('mwiq_trial_start', Date.now().toString());
-  }
-  updateTrialBadge();
-  updateProLocks();
+function getProCode() { return localStorage.getItem('mwiq_pro_code') || ''; }
+function getLastValidated() { return parseInt(localStorage.getItem('mwiq_pro_last_validated') || '0', 10); }
+function accessAge() { return Date.now() - getLastValidated(); }
+
+// Synchronous state for instant rendering (no network). Provisionally unlocks up
+// to the 72h grace cutoff; anything older renders locked until revalidation.
+function isProCached() {
+  if (!getProCode()) return false;
+  return accessAge() < GRACE_MS;
+}
+function isPro() { return isProCached(); }
+function hasAccess() { return isProCached(); }
+
+function clearProAccess() {
+  localStorage.removeItem('mwiq_pro_code');
+  localStorage.removeItem('mwiq_pro_last_validated');
 }
 
-function getTrialDaysLeft() {
-  const start = parseInt(localStorage.getItem('mwiq_trial_start') || Date.now());
-  const elapsed = (Date.now() - start) / (1000 * 60 * 60 * 24);
-  return Math.max(0, Math.ceil(TRIAL_DAYS - elapsed));
+function applyLocks() {
+  const unlocked = isProCached();
+  PRO_TOOL_IDS.forEach(id => {
+    const overlay = document.getElementById('lock-' + id);
+    if (overlay) overlay.classList.toggle('show', !unlocked);
+  });
+  updateProBadge(unlocked);
 }
 
-function isPro() { return localStorage.getItem('mwiq_pro') === 'true'; }
-function hasAccess() { return isPro() || getTrialDaysLeft() > 0; }
-
-function updateTrialBadge() {
+function updateProBadge(unlocked) {
   const badge = document.getElementById('trial-badge');
   if (!badge) return;
-  if (isPro()) {
+  if (unlocked) {
     badge.textContent = '⭐ PRO';
     badge.className = 'trial-badge trial-pro';
   } else {
-    const days = getTrialDaysLeft();
-    if (days > 0) {
-      badge.textContent = `🕐 ${days}d trial left`;
-      badge.className = 'trial-badge trial-active';
-    } else {
-      badge.textContent = '⚡ Trial Expired';
-      badge.className = 'trial-badge trial-expired';
-    }
+    badge.textContent = 'Go Pro';
+    badge.className = 'trial-badge trial-active';
   }
 }
 
-function updateProLocks() {
-  PRO_TOOL_IDS.forEach(id => {
-    const overlay = document.getElementById('lock-' + id);
-    if (!overlay) return;
-    overlay.classList.toggle('show', !hasAccess());
-  });
+// Revalidate the stored code against the Netlify Function.
+let _revalidating = false;
+async function revalidateAccess(opts = {}) {
+  const code = getProCode();
+  if (!code) { applyLocks(); return false; }
+  if (_revalidating) return isProCached();
+  _revalidating = true;
+  try {
+    const res = await fetch(VALIDATE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code })
+    });
+    if (!res.ok) throw new Error('status ' + res.status);
+    const data = await res.json();
+    if (data && data.valid === true) {
+      localStorage.setItem('mwiq_pro_last_validated', Date.now().toString());
+      applyLocks();
+      return true;
+    }
+    // Explicit invalid -> revoke immediately, no offline grace.
+    clearProAccess();
+    applyLocks();
+    if (opts.notify) showToast('Your Pro access has ended.');
+    return false;
+  } catch (e) {
+    // Server unreachable -> keep access only within the 72h grace window
+    // (enforced by isProCached()); never extend a confirmed-invalid code.
+    applyLocks();
+    return isProCached();
+  } finally {
+    _revalidating = false;
+  }
+}
+
+// Revalidate when a Pro surface is opened, but only if the cache is stale.
+function maybeRevalidateOnProOpen() {
+  if (getProCode() && accessAge() >= FRESH_MS) revalidateAccess({ notify: true });
 }
 
 function showUpgradeModal() {
@@ -3543,19 +3617,44 @@ function closeUpgradeModal() {
   document.getElementById('upgrade-modal').style.display = 'none';
 }
 
-function redeemCode() {
-  const code = document.getElementById('promo-code').value.toUpperCase().trim();
-  const valid = ['MILLWRIGHT2026','FLOOR2026','TRADEIQ','PROMILL'];
-  if (valid.includes(code)) {
-    localStorage.setItem('mwiq_pro', 'true');
-    document.getElementById('code-success').style.display = 'block';
-    document.getElementById('code-error').style.display = 'none';
-    updateTrialBadge();
-    updateProLocks();
-    setTimeout(closeUpgradeModal, 1500);
-  } else {
-    document.getElementById('code-error').style.display = 'block';
-    document.getElementById('code-success').style.display = 'none';
+// Redeem an access code. Access is stored ONLY on a confirmed server pass;
+// if the server is unreachable at redemption time, access is not granted.
+async function redeemCode() {
+  const input = document.getElementById('promo-code');
+  const errEl = document.getElementById('code-error');
+  const okEl = document.getElementById('code-success');
+  const code = (input.value || '').toUpperCase().trim();
+  okEl.style.display = 'none';
+  errEl.style.display = 'none';
+  if (!code) { errEl.textContent = 'Enter your access code.'; errEl.style.display = 'block'; return; }
+  try {
+    const res = await fetch(VALIDATE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code })
+    });
+    if (!res.ok) throw new Error('status ' + res.status);
+    const data = await res.json();
+    if (data && data.valid === true) {
+      localStorage.setItem('mwiq_pro_code', code);
+      localStorage.setItem('mwiq_pro_last_validated', Date.now().toString());
+      okEl.style.display = 'block';
+      applyLocks();
+      setTimeout(closeUpgradeModal, 1500);
+    } else {
+      errEl.textContent = 'Invalid code. Try again.';
+      errEl.style.display = 'block';
+    }
+  } catch (e) {
+    errEl.textContent = "Couldn't verify your code right now. Please try again shortly.";
+    errEl.style.display = 'block';
+  }
+}
+
+function initAccess() {
+  applyLocks();                                   // render from cache instantly
+  if (getProCode() && accessAge() >= FRESH_MS) {  // on-load revalidation only if stale
+    revalidateAccess({ notify: true });
   }
 }
 
@@ -3941,7 +4040,7 @@ quizQuestions.push(
 window.addEventListener('load', () => {
   updateUnitOptions();
   searchGlossary();
-  initTrial();
+  initAccess();
   loadFavorites();
   generateBoltPattern();
   updateSheaveMode();

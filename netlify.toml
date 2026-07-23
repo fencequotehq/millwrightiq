@@ -1,0 +1,7 @@
+# MillwrightIQ — static site + serverless access-code validation.
+# The site is plain HTML served from the repo root; the only backend is the
+# access-code validation function under netlify/functions.
+
+[build]
+  publish = "."
+  functions = "netlify/functions"
