@@ -1,0 +1,11 @@
+# Query: buy.stripe
+# ContextLines: 1
+
+2 results - 1 file
+
+index.html:
+  2798      <div style="display:grid;gap:0.75rem;margin-bottom:1.5rem;">
+  2799:       <!-- STRIPE MONTHLY PAYMENT LINK: replace href="#" with the live https://buy.stripe.com/... monthly URL and delete the onclick handler. -->
+  2800        <a 
+  2801:       <!-- STRIPE ANNUAL PAYMENT LINK: replace href="#" with the live https://buy.stripe.com/... annual URL and delete the onclick handler. -->
+  2802        <a href="#" data-stripe="annual-placeholder" onclick="alert('Card checkout is not live yet. If you have an access code, enter it below — or reach us via the contact page.');return false;" class="btn-primary" style="text-align:center;font-size:1rem;background:var(--steel-light);color:var(--amber);border:1px solid var(--amber);">📅 $49/year — Save 49% <span style="font-size:0.7rem;opacity:0.85;">(checkout activating soon)</span></a>
