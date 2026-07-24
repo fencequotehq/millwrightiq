@@ -1283,6 +1283,52 @@ f<!DOCTYPE html>
     .calc-result { display: block !important; }
     body { background: #fff; color: #000; }
   }
+
+  /* ===== SHOP-FLOOR HOMEPAGE — v2 navigation layer (added, does not alter calculator/Pro styles) ===== */
+  .shopfloor { max-width: 1200px; margin: 0 auto; padding: 2.5rem 1.25rem 0.5rem; }
+  .sf-search-wrap { max-width: 640px; margin: 0 auto 2.25rem; }
+  .sf-search { display: flex; align-items: center; gap: 0.6rem; background: var(--plate); border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
+  .sf-search:focus-within { border-color: var(--amber); box-shadow: 0 0 0 3px var(--glow); }
+  .sf-search-icon { font-size: 1.15rem; line-height: 1; opacity: 0.8; }
+  .sf-search input { flex: 1; min-width: 0; background: transparent; border: none; outline: none; color: var(--text-primary); font-size: 1.05rem; font-family: 'Barlow', sans-serif; }
+  .sf-search input::placeholder { color: var(--text-dim); }
+  .sf-search-note { display: block; text-align: center; color: var(--text-dim); font-family: 'Share Tech Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 0.6rem; }
+  .sf-heading { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(1.6rem, 5vw, 2.4rem); text-transform: uppercase; line-height: 1.05; text-align: center; margin-bottom: 0.35rem; color: var(--text-primary); }
+  .sf-heading .accent { color: var(--amber); }
+  .sf-sub { text-align: center; color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.75rem; }
+  .category-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  .category-card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; min-height: 104px; padding: 1rem 0.75rem; background: linear-gradient(160deg, var(--steel-light), var(--steel-mid)); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; text-align: center; color: var(--text-primary); transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease; -webkit-tap-highlight-color: transparent; }
+  .category-card:hover, .category-card:focus-visible { border-color: var(--amber); transform: translateY(-2px); background: linear-gradient(160deg, var(--plate), var(--steel-light)); outline: none; }
+  .category-card:active { transform: translateY(0); }
+  .category-icon { font-size: 1.9rem; line-height: 1; }
+  .category-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.02em; line-height: 1.1; }
+
+  .floor-section { max-width: 1200px; margin: 0 auto; padding: 2.25rem 1.25rem 0.5rem; }
+  .floor-section-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(1.3rem, 4vw, 1.8rem); text-transform: uppercase; color: var(--text-primary); margin-bottom: 0.25rem; }
+  .floor-section-desc { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.25rem; }
+  .mu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
+  .mu-tool { display: flex; align-items: center; gap: 0.7rem; width: 100%; text-align: left; background: var(--steel-light); border: 1px solid var(--border); border-radius: 10px; padding: 0.9rem 1rem; color: var(--text-primary); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; cursor: pointer; transition: border-color 0.12s ease, transform 0.12s ease; -webkit-tap-highlight-color: transparent; }
+  .mu-tool:hover, .mu-tool:focus-visible { border-color: var(--amber); transform: translateY(-1px); outline: none; }
+  .mu-tool .mu-icon { font-size: 1.4rem; line-height: 1; }
+  .mu-tool .mu-arrow { margin-left: auto; color: var(--amber); font-weight: 900; }
+
+  .learn-grid { display: grid; grid-template-columns: 1fr; gap: 0.85rem; }
+  .learn-card { display: flex; align-items: flex-start; gap: 0.9rem; background: linear-gradient(160deg, var(--steel-light), var(--steel-mid)); border: 1px solid var(--border); border-radius: 12px; padding: 1.15rem 1.25rem; text-decoration: none; color: var(--text-primary); transition: border-color 0.12s ease, transform 0.12s ease; }
+  .learn-card:hover, .learn-card:focus-visible { border-color: var(--amber); transform: translateY(-2px); outline: none; }
+  .learn-icon { font-size: 1.9rem; line-height: 1; flex-shrink: 0; }
+  .learn-body { display: flex; flex-direction: column; gap: 0.2rem; }
+  .learn-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.15rem; text-transform: uppercase; }
+  .learn-desc { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.45; }
+
+  @media (min-width: 600px) {
+    .category-grid { grid-template-columns: repeat(3, 1fr); }
+    .mu-grid { grid-template-columns: repeat(3, 1fr); }
+    .learn-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 900px) {
+    .category-grid { grid-template-columns: repeat(5, 1fr); }
+    .mu-grid { grid-template-columns: repeat(5, 1fr); }
+  }
 </style>
 </head>
 <body>
@@ -1344,12 +1390,12 @@ f<!DOCTYPE html>
       Built by a Millwright · For the Trade
     </div>
     <h1>
-      Every Tool
-      <span class="line2">You Need</span>
-      <span class="line3">On The Floor & Off The Clock</span>
+      The Digital Toolbox
+      <span class="line2">for Working</span>
+      <span class="line3">Millwrights</span>
     </h1>
  <p class="hero-desc">
-      The only tool site built by a millwright who's still on the floor. Precision calculators, apprentice study tools, and trade references — no fluff, no guessing, just results.
+      Fast, field-tested calculators and references for the real work — maintenance, breakdowns, and shutdowns. Built by a millwright who's still on the floor.
     </p>
     <div style="background:rgba(255,138,0,0.06);border:1px solid rgba(255,138,0,0.25);border-radius:8px;padding:1rem 1.25rem;max-width:520px;margin-bottom:1rem;">
   <div style="color:var(--amber);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.35rem;">Built by a Working Millwright</div>
@@ -1370,6 +1416,80 @@ f<!DOCTYPE html>
       <a href="https://reddit.com/submit?url=https://millwrightiq.com&title=Free tool site for millwrights - built by a 3rd year apprentice" target="_blank" style="background:#ff4500;color:#fff;padding:6px 14px;border-radius:4px;text-decoration:none;font-size:0.75rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:0.05em;">🔴 Reddit</a>
       <a href="sms:?body=Check out this free tool site for millwrights: https://millwrightiq.com" style="background:#22c55e;color:#fff;padding:6px 14px;border-radius:4px;text-decoration:none;font-size:0.75rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:0.05em;">💬 Text</a>
     </div>
+  </div>
+</section>
+
+<!-- ============ SHOP-FLOOR NAVIGATION — "What are you working on today?" ============ -->
+<section class="shopfloor" id="start-here">
+
+  <!-- Universal search: INTERFACE ONLY. Intentionally not wired yet (search is a later stage). -->
+  <div class="sf-search-wrap">
+    <div class="sf-search">
+      <span class="sf-search-icon" aria-hidden="true">🔍</span>
+      <input type="text" id="floor-search" autocomplete="off"
+             placeholder="What are you working on?"
+             aria-label="Search MillwrightIQ (coming soon)">
+    </div>
+    <span class="sf-search-note">Universal search — coming soon</span>
+  </div>
+
+  <h2 class="sf-heading">What are you <span class="accent">working on</span> today?</h2>
+  <p class="sf-sub">Pick the job in front of you and go straight to the right tools.</p>
+
+  <!--
+    These category cards are REAL navigation, not decoration.
+    - Cards with a matching live calculator route to it through the existing switchTab()
+      (Pro tools keep triggering the upgrade modal — that behavior is unchanged).
+    - Placeholder categories point at the tool library for now.
+    - data-category is the stable hook for future "drawer" pages. When a drawer ships,
+      only the href/onclick on that one card changes — this homepage layout stays put.
+  -->
+  <div class="category-grid">
+    <a class="category-card" data-category="bearings" href="#calculators" onclick="switchTab('bearing');return false;"><span class="category-icon" aria-hidden="true">⚙️</span><span class="category-name">Bearings</span></a>
+    <a class="category-card" data-category="motors" href="#calculators" onclick="switchTab('rpm');return false;"><span class="category-icon" aria-hidden="true">🔌</span><span class="category-name">Motors</span></a>
+    <a class="category-card" data-category="pumps-hydraulics" href="#calculators" onclick="switchTab('hydraulic');return false;"><span class="category-icon" aria-hidden="true">💧</span><span class="category-name">Pumps &amp; Hydraulics</span></a>
+    <a class="category-card" data-category="shaft-alignment" href="#calculators" onclick="switchTab('shaft');return false;"><span class="category-icon" aria-hidden="true">📐</span><span class="category-name">Shaft Alignment</span></a>
+    <a class="category-card" data-category="conveyors" href="#calculators" onclick="switchTab('conveyor');return false;"><span class="category-icon" aria-hidden="true">🏗️</span><span class="category-name">Conveyors</span></a>
+    <a class="category-card" data-category="gearboxes" href="#calculators" onclick="switchTab('gear');return false;"><span class="category-icon" aria-hidden="true">🔩</span><span class="category-name">Gearboxes</span></a>
+    <a class="category-card" data-category="belts-sheaves" href="#calculators" onclick="switchTab('vbelt');return false;"><span class="category-icon" aria-hidden="true">🔄</span><span class="category-name">Belts &amp; Sheaves</span></a>
+    <a class="category-card" data-category="chains-sprockets" href="#tools"><span class="category-icon" aria-hidden="true">⛓️</span><span class="category-name">Chains &amp; Sprockets</span></a>
+    <a class="category-card" data-category="rigging-lifting" href="#tools"><span class="category-icon" aria-hidden="true">🪝</span><span class="category-name">Rigging &amp; Lifting</span></a>
+    <a class="category-card" data-category="apprenticeship" href="#apprentice"><span class="category-icon" aria-hidden="true">🎓</span><span class="category-name">Apprenticeship</span></a>
+  </div>
+</section>
+
+<!-- ============ MOST USED TOOLS ============ -->
+<section class="floor-section" id="most-used">
+  <div class="floor-section-title">Most Used Tools</div>
+  <p class="floor-section-desc">The calculators millwrights reach for first. One tap and you're working.</p>
+  <div class="mu-grid">
+    <button type="button" class="mu-tool" onclick="switchTab('rpm')"><span class="mu-icon" aria-hidden="true">⚙️</span>RPM &amp; Pulley<span class="mu-arrow" aria-hidden="true">→</span></button>
+    <button type="button" class="mu-tool" onclick="switchTab('gear')"><span class="mu-icon" aria-hidden="true">🔩</span>Gear Ratio<span class="mu-arrow" aria-hidden="true">→</span></button>
+    <button type="button" class="mu-tool" onclick="switchTab('vbelt')"><span class="mu-icon" aria-hidden="true">🔄</span>Belt Length<span class="mu-arrow" aria-hidden="true">→</span></button>
+    <button type="button" class="mu-tool" onclick="switchTab('torque')"><span class="mu-icon" aria-hidden="true">🔧</span>Bolt Torque<span class="mu-arrow" aria-hidden="true">→</span></button>
+    <button type="button" class="mu-tool" onclick="switchTab('shaft')"><span class="mu-icon" aria-hidden="true">📐</span>Shaft Alignment<span class="mu-arrow" aria-hidden="true">→</span></button>
+  </div>
+</section>
+
+<!-- ============ LEARNING ============ -->
+<section class="floor-section" id="learning">
+  <div class="floor-section-title">Learn the Trade</div>
+  <p class="floor-section-desc">Practical, field-tested resources — not blog filler.</p>
+  <div class="learn-grid">
+    <a class="learn-card" href="#apprentice">
+      <span class="learn-icon" aria-hidden="true">🎓</span>
+      <div class="learn-body">
+        <div class="learn-title">Apprentice Hub</div>
+        <div class="learn-desc">Year 1–4 study guides, trade-math quizzes, and Red Seal exam prep — written by someone on the same path.</div>
+      </div>
+    </a>
+    <a class="learn-card" href="/articles.html">
+      <span class="learn-icon" aria-hidden="true">📖</span>
+      <div class="learn-body">
+        <div class="learn-title">Field Articles</div>
+        <div class="learn-desc">Straight-talk how-tos: bearing fits, pulley RPM, first-year survival — read it before the next breakdown.</div>
+      </div>
+    </a>
   </div>
 </section>
 
