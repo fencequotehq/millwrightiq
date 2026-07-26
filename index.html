@@ -1358,6 +1358,8 @@ f<!DOCTYPE html>
   .ws-list li::before { content: '\25B8'; color: var(--amber); position: absolute; left: 0; }
   .ws-soon { border-style: dashed; }
   .ws-soon-badge { display: inline-block; font-family: 'Share Tech Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel); background: var(--text-dim); padding: 2px 7px; border-radius: 3px; margin-left: 0.4rem; }
+  .ws-warn { display: flex; gap: 0.6rem; align-items: flex-start; background: rgba(239,68,68,0.10); border: 1px solid var(--red-alert); border-radius: 10px; padding: 0.9rem 1rem; margin-bottom: 1rem; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5; }
+  .ws-warn strong { color: var(--red-alert); }
   @media (min-width: 600px) { .ws-actions { grid-template-columns: 1fr 1fr; } }
 </style>
 </head>
@@ -1476,7 +1478,7 @@ f<!DOCTYPE html>
   -->
   <div class="category-grid">
     <a class="category-card" data-category="bearings" href="#workspace-bearings" onclick="openWorkspace('bearings');return false;"><span class="category-icon" aria-hidden="true">⚙️</span><span class="category-name">Bearings</span></a>
-    <a class="category-card" data-category="motors" href="#calculators" onclick="switchTab('rpm');return false;"><span class="category-icon" aria-hidden="true">🔌</span><span class="category-name">Motors</span></a>
+    <a class="category-card" data-category="motors" href="#workspace-motors" onclick="openWorkspace('motors');return false;"><span class="category-icon" aria-hidden="true">🔌</span><span class="category-name">Motors</span></a>
     <a class="category-card" data-category="pumps-hydraulics" href="#calculators" onclick="switchTab('hydraulic');return false;"><span class="category-icon" aria-hidden="true">💧</span><span class="category-name">Pumps &amp; Hydraulics</span></a>
     <a class="category-card" data-category="shaft-alignment" href="#calculators" onclick="switchTab('shaft');return false;"><span class="category-icon" aria-hidden="true">📐</span><span class="category-name">Shaft Alignment</span></a>
     <a class="category-card" data-category="conveyors" href="#calculators" onclick="switchTab('conveyor');return false;"><span class="category-icon" aria-hidden="true">🏗️</span><span class="category-name">Conveyors</span></a>
@@ -1577,6 +1579,88 @@ f<!DOCTYPE html>
     <div class="ws-block ws-soon">
       <div class="ws-block-label">Bearing Troubleshooting <span class="ws-soon-badge">Coming Soon</span></div>
       <p class="ws-note">A guided troubleshooting flow (noise, heat, vibration → likely cause) is planned. No AI — it'll be a straightforward reference built from field-tested checks.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ EQUIPMENT WORKSPACE: MOTORS (toggled overlay; opened by the Motors card) ============ -->
+<section class="workspace" id="workspace-motors" aria-label="Motors workspace">
+  <div class="ws-inner">
+    <div class="ws-topbar">
+      <div class="ws-title"><span class="ws-icon" aria-hidden="true">🔌</span> Motors</div>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <button type="button" class="ws-back" onclick="closeWorkspace()">← Back to the Toolbox</button>
+        <button type="button" class="ws-close" onclick="closeWorkspace()" aria-label="Close workspace">✕</button>
+      </div>
+    </div>
+
+    <!-- ELECTRICAL SAFETY DISCLAIMER -->
+    <div class="ws-warn">
+      <span aria-hidden="true" style="font-size:1.2rem;line-height:1;">⚠️</span>
+      <div><strong>Electrical hazard.</strong> Motors carry live electrical energy. Always de-energize and verify lockout/tagout before touching a motor. Electrical connections, testing, and repairs must be done by a qualified electrician per your site's procedures. This is a mechanical reference, not electrical work instructions.</div>
+    </div>
+
+    <!-- CALCULATORS — routes to existing FREE calculators via switchTab(); no calculator logic duplicated. -->
+    <div class="ws-block">
+      <div class="ws-block-label">Calculators</div>
+      <div class="ws-actions">
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); switchTab('rpm');"><span class="ws-btn-icon" aria-hidden="true">⚙️</span>RPM &amp; Pulley<span class="ws-arrow" aria-hidden="true">→</span></button>
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); switchTab('gear');"><span class="ws-btn-icon" aria-hidden="true">🔩</span>Gear Ratio<span class="ws-arrow" aria-hidden="true">→</span></button>
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); switchTab('shaft');"><span class="ws-btn-icon" aria-hidden="true">📐</span>Shaft Alignment<span class="ws-arrow" aria-hidden="true">→</span></button>
+      </div>
+    </div>
+
+    <!-- QUICK REFERENCE — synchronous motor speeds -->
+    <div class="ws-block">
+      <div class="ws-block-label">Motor Speed Reference — 60 Hz Synchronous</div>
+      <ul class="ws-list">
+        <li>2-pole — <strong style="color:var(--text-primary)">3600 RPM</strong></li>
+        <li>4-pole — <strong style="color:var(--text-primary)">1800 RPM</strong></li>
+        <li>6-pole — <strong style="color:var(--text-primary)">1200 RPM</strong></li>
+        <li>8-pole — <strong style="color:var(--text-primary)">900 RPM</strong></li>
+      </ul>
+      <p class="ws-note" style="margin-top:0.75rem;">Actual induction-motor speed runs slightly below synchronous because of slip (typically ~1–5% under load).</p>
+    </div>
+
+    <!-- INSPECTION CHECKLIST -->
+    <div class="ws-block">
+      <div class="ws-block-label">Inspection Checklist</div>
+      <ul class="ws-list">
+        <li>Verify lockout/tagout before any work.</li>
+        <li>Check mounting bolts and check for soft foot.</li>
+        <li>Inspect coupling condition.</li>
+        <li>Check shaft alignment.</li>
+        <li>Check lubrication condition.</li>
+        <li>Inspect for abnormal heat, noise, and vibration.</li>
+        <li>Confirm rotation direction before coupling or loading.</li>
+      </ul>
+    </div>
+
+    <!-- COMMON SYMPTOMS -->
+    <div class="ws-block">
+      <div class="ws-block-label">Common Symptoms</div>
+      <ul class="ws-list">
+        <li>Overheating</li>
+        <li>Excessive vibration</li>
+        <li>Bearing noise</li>
+        <li>Low speed</li>
+        <li>Tripping the overload</li>
+        <li>Coupling wear</li>
+      </ul>
+    </div>
+
+    <!-- REFERENCES & LEARNING — links to existing article + Apprentice Hub + articles. -->
+    <div class="ws-block">
+      <div class="ws-block-label">References &amp; Learning</div>
+      <p class="ws-note">Motor speed, alignment, and coupling topics are covered in the Apprentice Hub quizzes and exam prep, plus the field articles.</p>
+      <div style="margin-top:0.85rem;">
+        <a class="ws-btn" href="/articles/pulley-rpm.html"><span class="ws-btn-icon" aria-hidden="true">📖</span>Read: Pulley RPM &amp; Belt Speed<span class="ws-arrow" aria-hidden="true">→</span></a>
+      </div>
+      <div class="ws-actions" style="margin-top:0.6rem;">
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); document.getElementById('apprentice').scrollIntoView({behavior:'smooth'});"><span class="ws-btn-icon" aria-hidden="true">🎓</span>Apprentice Hub<span class="ws-arrow" aria-hidden="true">→</span></button>
+        <a class="ws-btn" href="/articles.html"><span class="ws-btn-icon" aria-hidden="true">🗂️</span>All Articles<span class="ws-arrow" aria-hidden="true">→</span></a>
+      </div>
     </div>
 
   </div>
