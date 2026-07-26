@@ -1479,7 +1479,7 @@ f<!DOCTYPE html>
   <div class="category-grid">
     <a class="category-card" data-category="bearings" href="#workspace-bearings" onclick="openWorkspace('bearings');return false;"><span class="category-icon" aria-hidden="true">⚙️</span><span class="category-name">Bearings</span></a>
     <a class="category-card" data-category="motors" href="#workspace-motors" onclick="openWorkspace('motors');return false;"><span class="category-icon" aria-hidden="true">🔌</span><span class="category-name">Motors</span></a>
-    <a class="category-card" data-category="pumps-hydraulics" href="#calculators" onclick="switchTab('hydraulic');return false;"><span class="category-icon" aria-hidden="true">💧</span><span class="category-name">Pumps &amp; Hydraulics</span></a>
+    <a class="category-card" data-category="pumps-hydraulics" href="#workspace-pumps" onclick="openWorkspace('pumps');return false;"><span class="category-icon" aria-hidden="true">💧</span><span class="category-name">Pumps &amp; Hydraulics</span></a>
     <a class="category-card" data-category="shaft-alignment" href="#calculators" onclick="switchTab('shaft');return false;"><span class="category-icon" aria-hidden="true">📐</span><span class="category-name">Shaft Alignment</span></a>
     <a class="category-card" data-category="conveyors" href="#calculators" onclick="switchTab('conveyor');return false;"><span class="category-icon" aria-hidden="true">🏗️</span><span class="category-name">Conveyors</span></a>
     <a class="category-card" data-category="gearboxes" href="#calculators" onclick="switchTab('gear');return false;"><span class="category-icon" aria-hidden="true">🔩</span><span class="category-name">Gearboxes</span></a>
@@ -1658,6 +1658,81 @@ f<!DOCTYPE html>
         <a class="ws-btn" href="/articles/pulley-rpm.html"><span class="ws-btn-icon" aria-hidden="true">📖</span>Read: Pulley RPM &amp; Belt Speed<span class="ws-arrow" aria-hidden="true">→</span></a>
       </div>
       <div class="ws-actions" style="margin-top:0.6rem;">
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); document.getElementById('apprentice').scrollIntoView({behavior:'smooth'});"><span class="ws-btn-icon" aria-hidden="true">🎓</span>Apprentice Hub<span class="ws-arrow" aria-hidden="true">→</span></button>
+        <a class="ws-btn" href="/articles.html"><span class="ws-btn-icon" aria-hidden="true">🗂️</span>All Articles<span class="ws-arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ EQUIPMENT WORKSPACE: PUMPS & HYDRAULICS (toggled overlay; opened by the Pumps card) ============ -->
+<section class="workspace" id="workspace-pumps" aria-label="Pumps and hydraulics workspace">
+  <div class="ws-inner">
+    <div class="ws-topbar">
+      <div class="ws-title"><span class="ws-icon" aria-hidden="true">💧</span> Pumps &amp; Hydraulics</div>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <button type="button" class="ws-back" onclick="closeWorkspace()">← Back to the Toolbox</button>
+        <button type="button" class="ws-close" onclick="closeWorkspace()" aria-label="Close workspace">✕</button>
+      </div>
+    </div>
+
+    <!-- CALCULATORS — routes to existing calculators via switchTab(); Hydraulic Power stays Pro (gating preserved). -->
+    <div class="ws-block">
+      <div class="ws-block-label">Calculators</div>
+      <div class="ws-actions">
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); switchTab('hydraulic');"><span class="ws-btn-icon" aria-hidden="true">💧</span>Hydraulic Power <span class="ws-pro">PRO</span><span class="ws-arrow" aria-hidden="true">→</span></button>
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); switchTab('rpm');"><span class="ws-btn-icon" aria-hidden="true">⚙️</span>RPM &amp; Pulley<span class="ws-arrow" aria-hidden="true">→</span></button>
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); switchTab('unit');"><span class="ws-btn-icon" aria-hidden="true">📏</span>Unit Converter<span class="ws-arrow" aria-hidden="true">→</span></button>
+      </div>
+    </div>
+
+    <!-- PUMP INSPECTION CHECKLIST -->
+    <div class="ws-block">
+      <div class="ws-block-label">Pump Inspection Checklist</div>
+      <ul class="ws-list">
+        <li>Verify lockout/tagout before any work.</li>
+        <li>Check baseplate and mounting bolts.</li>
+        <li>Inspect coupling and alignment.</li>
+        <li>Confirm suction and discharge valves are in the correct position.</li>
+        <li>Check lubrication level and condition.</li>
+        <li>Inspect seals, packing, and leakage.</li>
+        <li>Check for abnormal vibration, heat, or noise.</li>
+        <li>Confirm correct rotation before full operation.</li>
+      </ul>
+    </div>
+
+    <!-- COMMON SYMPTOMS -->
+    <div class="ws-block">
+      <div class="ws-block-label">Common Pump Symptoms</div>
+      <ul class="ws-list">
+        <li>No flow</li>
+        <li>Low flow</li>
+        <li>Low pressure</li>
+        <li>Cavitation</li>
+        <li>Excessive vibration</li>
+        <li>Overheating</li>
+        <li>Seal leakage</li>
+        <li>Motor overload</li>
+      </ul>
+    </div>
+
+    <!-- QUICK REFERENCE -->
+    <div class="ws-block">
+      <div class="ws-block-label">Quick Reference</div>
+      <ul class="ws-list">
+        <li><strong style="color:var(--text-primary)">Cavitation signs:</strong> gravel/rattling noise, vibration, and erratic or falling discharge pressure — often from a starved suction.</li>
+        <li><strong style="color:var(--text-primary)">Suction-side restriction:</strong> check for a clogged strainer, a closed or partly-closed suction valve, a collapsed hose, an air leak, or a low supply level.</li>
+        <li><strong style="color:var(--text-primary)">Priming:</strong> fill the pump and suction line with liquid before starting; never run a centrifugal pump dry; vent trapped air.</li>
+        <li><strong style="color:var(--text-primary)">Alignment &amp; soft foot:</strong> check coupling alignment and soft foot before final bolt-down, then recheck once the unit reaches operating temperature.</li>
+      </ul>
+    </div>
+
+    <!-- REFERENCES & LEARNING -->
+    <div class="ws-block">
+      <div class="ws-block-label">References &amp; Learning</div>
+      <p class="ws-note">Pump alignment, coupling, and hydraulic-power topics are covered in the Apprentice Hub quizzes and exam prep, plus the field articles.</p>
+      <div class="ws-actions" style="margin-top:0.85rem;">
         <button type="button" class="ws-btn" onclick="closeWorkspace(); document.getElementById('apprentice').scrollIntoView({behavior:'smooth'});"><span class="ws-btn-icon" aria-hidden="true">🎓</span>Apprentice Hub<span class="ws-arrow" aria-hidden="true">→</span></button>
         <a class="ws-btn" href="/articles.html"><span class="ws-btn-icon" aria-hidden="true">🗂️</span>All Articles<span class="ws-arrow" aria-hidden="true">→</span></a>
       </div>
