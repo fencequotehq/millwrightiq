@@ -1482,7 +1482,7 @@ f<!DOCTYPE html>
     <a class="category-card" data-category="pumps-hydraulics" href="#workspace-pumps" onclick="openWorkspace('pumps');return false;"><span class="category-icon" aria-hidden="true">💧</span><span class="category-name">Pumps &amp; Hydraulics</span></a>
     <a class="category-card" data-category="shaft-alignment" href="#calculators" onclick="switchTab('shaft');return false;"><span class="category-icon" aria-hidden="true">📐</span><span class="category-name">Shaft Alignment</span></a>
     <a class="category-card" data-category="conveyors" href="#calculators" onclick="switchTab('conveyor');return false;"><span class="category-icon" aria-hidden="true">🏗️</span><span class="category-name">Conveyors</span></a>
-    <a class="category-card" data-category="gearboxes" href="#calculators" onclick="switchTab('gear');return false;"><span class="category-icon" aria-hidden="true">🔩</span><span class="category-name">Gearboxes</span></a>
+    <a class="category-card" data-category="gearboxes" href="#workspace-gearboxes" onclick="openWorkspace('gearboxes');return false;"><span class="category-icon" aria-hidden="true">🔩</span><span class="category-name">Gearboxes</span></a>
     <a class="category-card" data-category="belts-sheaves" href="#calculators" onclick="switchTab('vbelt');return false;"><span class="category-icon" aria-hidden="true">🔄</span><span class="category-name">Belts &amp; Sheaves</span></a>
     <a class="category-card" data-category="chains-sprockets" href="#tools"><span class="category-icon" aria-hidden="true">⛓️</span><span class="category-name">Chains &amp; Sprockets</span></a>
     <a class="category-card" data-category="rigging-lifting" href="#tools"><span class="category-icon" aria-hidden="true">🪝</span><span class="category-name">Rigging &amp; Lifting</span></a>
@@ -1732,6 +1732,100 @@ f<!DOCTYPE html>
     <div class="ws-block">
       <div class="ws-block-label">References &amp; Learning</div>
       <p class="ws-note">Pump alignment, coupling, and hydraulic-power topics are covered in the Apprentice Hub quizzes and exam prep, plus the field articles.</p>
+      <div class="ws-actions" style="margin-top:0.85rem;">
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); document.getElementById('apprentice').scrollIntoView({behavior:'smooth'});"><span class="ws-btn-icon" aria-hidden="true">🎓</span>Apprentice Hub<span class="ws-arrow" aria-hidden="true">→</span></button>
+        <a class="ws-btn" href="/articles.html"><span class="ws-btn-icon" aria-hidden="true">🗂️</span>All Articles<span class="ws-arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ EQUIPMENT WORKSPACE: GEARBOXES (toggled overlay; opened by the Gearboxes card) ============ -->
+<section class="workspace" id="workspace-gearboxes" aria-label="Gearboxes workspace">
+  <div class="ws-inner">
+    <div class="ws-topbar">
+      <div class="ws-title"><span class="ws-icon" aria-hidden="true">🔩</span> Gearboxes</div>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <button type="button" class="ws-back" onclick="closeWorkspace()">← Back to the Toolbox</button>
+        <button type="button" class="ws-close" onclick="closeWorkspace()" aria-label="Close workspace">✕</button>
+      </div>
+    </div>
+
+    <!-- CALCULATORS — routes to existing FREE calculators via switchTab(); no calculator logic duplicated. -->
+    <div class="ws-block">
+      <div class="ws-block-label">Calculators</div>
+      <div class="ws-actions">
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); switchTab('gear');"><span class="ws-btn-icon" aria-hidden="true">🔩</span>Gear Ratio<span class="ws-arrow" aria-hidden="true">→</span></button>
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); switchTab('rpm');"><span class="ws-btn-icon" aria-hidden="true">⚙️</span>RPM &amp; Pulley<span class="ws-arrow" aria-hidden="true">→</span></button>
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); switchTab('shaft');"><span class="ws-btn-icon" aria-hidden="true">📐</span>Shaft Alignment<span class="ws-arrow" aria-hidden="true">→</span></button>
+      </div>
+    </div>
+
+    <!-- GEARBOX INSPECTION CHECKLIST -->
+    <div class="ws-block">
+      <div class="ws-block-label">Gearbox Inspection Checklist</div>
+      <ul class="ws-list">
+        <li>Verify lockout/tagout.</li>
+        <li>Check mounting bolts, base, and soft foot.</li>
+        <li>Inspect coupling condition and alignment.</li>
+        <li>Check oil level before startup.</li>
+        <li>Confirm the correct lubricant type and viscosity.</li>
+        <li>Inspect breathers, seals, gaskets, and drain plugs.</li>
+        <li>Check for leaks and oil contamination.</li>
+        <li>Inspect for abnormal heat, noise, and vibration.</li>
+        <li>Confirm input and output shaft rotation.</li>
+        <li>Check guards before returning equipment to service.</li>
+      </ul>
+    </div>
+
+    <!-- COMMON SYMPTOMS -->
+    <div class="ws-block">
+      <div class="ws-block-label">Common Gearbox Symptoms</div>
+      <ul class="ws-list">
+        <li>Excessive heat</li>
+        <li>Abnormal whining or grinding</li>
+        <li>Excessive vibration</li>
+        <li>Oil leakage</li>
+        <li>Foaming oil</li>
+        <li>Metal particles in the lubricant</li>
+        <li>Backlash or excessive shaft movement</li>
+        <li>Incorrect output speed</li>
+        <li>Repeated bearing or seal failure</li>
+      </ul>
+    </div>
+
+    <!-- QUICK REFERENCE -->
+    <div class="ws-block">
+      <div class="ws-block-label">Quick Reference</div>
+      <div class="formula-box">Output RPM = Input RPM ÷ Gear Ratio</div>
+      <ul class="ws-list" style="margin-top:0.85rem;">
+        <li>Higher numerical ratio → generally lower output speed and higher available torque.</li>
+        <li>Lower numerical ratio → generally higher output speed and less torque multiplication.</li>
+        <li>Do not mix incompatible lubricant types.</li>
+        <li>Overfilling can cause heat, foaming, leakage, and churning losses.</li>
+        <li>Underfilling can starve gears and bearings.</li>
+        <li>A blocked breather can raise internal pressure and force oil past the seals.</li>
+        <li>Alignment and soft-foot problems can cause repeated coupling, bearing, and seal failures.</li>
+      </ul>
+      <p class="ws-note" style="border-left:3px solid var(--amber); padding-left:0.75rem; margin-top:0.85rem;"><strong style="color:var(--text-primary)">Always follow the manufacturer's data.</strong> Actual torque capacity, service factor, lubricant selection, and allowable loading must follow the gearbox manufacturer's specifications — this guidance is general and does not replace the nameplate or manual.</p>
+    </div>
+
+    <!-- TROUBLESHOOTING FLOW -->
+    <div class="ws-block">
+      <div class="ws-block-label">Troubleshooting Flow</div>
+      <ul class="ws-list">
+        <li><strong style="color:var(--text-primary)">Running hot:</strong> verify load, oil level, lubricant grade, ventilation, alignment, and bearing condition.</li>
+        <li><strong style="color:var(--text-primary)">Noisy:</strong> inspect oil condition, gear wear, bearings, backlash, mounting, and alignment.</li>
+        <li><strong style="color:var(--text-primary)">Leaking:</strong> check oil level, breather, seals, shaft condition, housing joints, and internal pressure.</li>
+        <li><strong style="color:var(--text-primary)">Wrong output speed:</strong> verify motor RPM, gear ratio, pulley ratio, rotation, and internal damage.</li>
+      </ul>
+    </div>
+
+    <!-- REFERENCES & LEARNING -->
+    <div class="ws-block">
+      <div class="ws-block-label">References &amp; Learning</div>
+      <p class="ws-note">Gear ratio, alignment, and lubrication topics are covered in the Apprentice Hub quizzes and exam prep, plus the field articles.</p>
       <div class="ws-actions" style="margin-top:0.85rem;">
         <button type="button" class="ws-btn" onclick="closeWorkspace(); document.getElementById('apprentice').scrollIntoView({behavior:'smooth'});"><span class="ws-btn-icon" aria-hidden="true">🎓</span>Apprentice Hub<span class="ws-arrow" aria-hidden="true">→</span></button>
         <a class="ws-btn" href="/articles.html"><span class="ws-btn-icon" aria-hidden="true">🗂️</span>All Articles<span class="ws-arrow" aria-hidden="true">→</span></a>
