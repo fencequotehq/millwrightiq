@@ -1483,7 +1483,7 @@ f<!DOCTYPE html>
     <a class="category-card" data-category="shaft-alignment" href="#calculators" onclick="switchTab('shaft');return false;"><span class="category-icon" aria-hidden="true">📐</span><span class="category-name">Shaft Alignment</span></a>
     <a class="category-card" data-category="conveyors" href="#calculators" onclick="switchTab('conveyor');return false;"><span class="category-icon" aria-hidden="true">🏗️</span><span class="category-name">Conveyors</span></a>
     <a class="category-card" data-category="gearboxes" href="#workspace-gearboxes" onclick="openWorkspace('gearboxes');return false;"><span class="category-icon" aria-hidden="true">🔩</span><span class="category-name">Gearboxes</span></a>
-    <a class="category-card" data-category="belts-sheaves" href="#calculators" onclick="switchTab('vbelt');return false;"><span class="category-icon" aria-hidden="true">🔄</span><span class="category-name">Belts &amp; Sheaves</span></a>
+    <a class="category-card" data-category="belts-sheaves" href="#workspace-belts" onclick="openWorkspace('belts');return false;"><span class="category-icon" aria-hidden="true">🔄</span><span class="category-name">Belts &amp; Sheaves</span></a>
     <a class="category-card" data-category="chains-sprockets" href="#tools"><span class="category-icon" aria-hidden="true">⛓️</span><span class="category-name">Chains &amp; Sprockets</span></a>
     <a class="category-card" data-category="rigging-lifting" href="#tools"><span class="category-icon" aria-hidden="true">🪝</span><span class="category-name">Rigging &amp; Lifting</span></a>
     <a class="category-card" data-category="apprenticeship" href="#apprentice"><span class="category-icon" aria-hidden="true">🎓</span><span class="category-name">Apprenticeship</span></a>
@@ -1827,6 +1827,108 @@ f<!DOCTYPE html>
       <div class="ws-block-label">References &amp; Learning</div>
       <p class="ws-note">Gear ratio, alignment, and lubrication topics are covered in the Apprentice Hub quizzes and exam prep, plus the field articles.</p>
       <div class="ws-actions" style="margin-top:0.85rem;">
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); document.getElementById('apprentice').scrollIntoView({behavior:'smooth'});"><span class="ws-btn-icon" aria-hidden="true">🎓</span>Apprentice Hub<span class="ws-arrow" aria-hidden="true">→</span></button>
+        <a class="ws-btn" href="/articles.html"><span class="ws-btn-icon" aria-hidden="true">🗂️</span>All Articles<span class="ws-arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ EQUIPMENT WORKSPACE: BELTS & SHEAVES (toggled overlay; opened by the Belts & Sheaves card) ============ -->
+<section class="workspace" id="workspace-belts" aria-label="Belts and sheaves workspace">
+  <div class="ws-inner">
+    <div class="ws-topbar">
+      <div class="ws-title"><span class="ws-icon" aria-hidden="true">🔄</span> Belts &amp; Sheaves</div>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <button type="button" class="ws-back" onclick="closeWorkspace()">← Back to the Toolbox</button>
+        <button type="button" class="ws-close" onclick="closeWorkspace()" aria-label="Close workspace">✕</button>
+      </div>
+    </div>
+
+    <!-- CALCULATORS — routes to existing calculators via switchTab(); Sheave Selection stays Pro (gating preserved). -->
+    <div class="ws-block">
+      <div class="ws-block-label">Calculators</div>
+      <div class="ws-actions">
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); switchTab('vbelt');"><span class="ws-btn-icon" aria-hidden="true">🔄</span>V-Belt Length<span class="ws-arrow" aria-hidden="true">→</span></button>
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); switchTab('rpm');"><span class="ws-btn-icon" aria-hidden="true">⚙️</span>RPM &amp; Pulley<span class="ws-arrow" aria-hidden="true">→</span></button>
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); switchTab('sheave');"><span class="ws-btn-icon" aria-hidden="true">🔘</span>Sheave Selection <span class="ws-pro">PRO</span><span class="ws-arrow" aria-hidden="true">→</span></button>
+      </div>
+    </div>
+
+    <!-- INSPECTION CHECKLIST -->
+    <div class="ws-block">
+      <div class="ws-block-label">Inspection Checklist</div>
+      <ul class="ws-list">
+        <li>Verify lockout/tagout.</li>
+        <li>Inspect guards before removal and before return to service.</li>
+        <li>Check sheaves for cracks, chips, worn grooves, rust, and damage.</li>
+        <li>Check belt condition for glazing, cracking, fraying, separation, and contamination.</li>
+        <li>Confirm the correct belt cross-section and matched belt set.</li>
+        <li>Inspect sheave alignment.</li>
+        <li>Check shaft and bearing condition.</li>
+        <li>Check sheave and bushing security.</li>
+        <li>Verify belt tension.</li>
+        <li>Rotate the system by hand before startup.</li>
+        <li>Recheck tension after the recommended run-in period.</li>
+      </ul>
+    </div>
+
+    <!-- COMMON SYMPTOMS -->
+    <div class="ws-block">
+      <div class="ws-block-label">Common Symptoms</div>
+      <ul class="ws-list">
+        <li>Belt squeal</li>
+        <li>Belt slipping</li>
+        <li>Excessive belt dust</li>
+        <li>Uneven belt wear</li>
+        <li>Belt rollover</li>
+        <li>Cracked or glazed belts</li>
+        <li>Hot bearings</li>
+        <li>Excessive vibration</li>
+        <li>Repeated belt failure</li>
+        <li>Incorrect driven speed</li>
+      </ul>
+    </div>
+
+    <!-- QUICK REFERENCE -->
+    <div class="ws-block">
+      <div class="ws-block-label">Quick Reference</div>
+      <div class="formula-box">Driven RPM = Driver Diameter × Driver RPM ÷ Driven Diameter</div>
+      <ul class="ws-list" style="margin-top:0.85rem;">
+        <li>Larger driven sheave → generally lower output speed.</li>
+        <li>Smaller driven sheave → generally higher output speed.</li>
+        <li>Use sheave pitch diameter, not outside diameter, when the manufacturer requires it.</li>
+        <li>Replace belts in a multi-belt drive as a matched set.</li>
+        <li>Do not mix new and used belts in the same drive.</li>
+        <li>Excessive tension can overload bearings and shafts.</li>
+        <li>Insufficient tension can cause slip, heat, glazing, and poor power transmission.</li>
+        <li>Misalignment can cause edge wear, vibration, belt rollover, and shortened belt life.</li>
+        <li>Oil and grease contamination can damage belts and cause slippage.</li>
+      </ul>
+      <p class="ws-note" style="border-left:3px solid var(--amber); padding-left:0.75rem; margin-top:0.85rem;"><strong style="color:var(--text-primary)">Follow the manufacturer's data.</strong> Final belt selection, tension, horsepower capacity, service factor, and minimum sheave diameter must follow the belt and equipment manufacturer's specifications.</p>
+    </div>
+
+    <!-- TROUBLESHOOTING FLOW -->
+    <div class="ws-block">
+      <div class="ws-block-label">Troubleshooting Flow</div>
+      <ul class="ws-list">
+        <li><strong style="color:var(--text-primary)">Belt squeal or slip:</strong> check load, tension, contamination, groove wear, belt condition, and sheave size.</li>
+        <li><strong style="color:var(--text-primary)">Uneven wear:</strong> check alignment, groove wear, shaft position, matched belts, and bearing movement.</li>
+        <li><strong style="color:var(--text-primary)">Repeated belt failure:</strong> check sheave diameter, overload, tension, alignment, contamination, and vibration.</li>
+        <li><strong style="color:var(--text-primary)">Hot bearings:</strong> check excessive belt tension, alignment, lubrication, bearing condition, and shaft load.</li>
+        <li><strong style="color:var(--text-primary)">Wrong output speed:</strong> verify motor RPM, driver sheave, driven sheave, belt slip, and tachometer reading.</li>
+      </ul>
+    </div>
+
+    <!-- REFERENCES & LEARNING -->
+    <div class="ws-block">
+      <div class="ws-block-label">References &amp; Learning</div>
+      <p class="ws-note">Pulley/sheave speed, alignment, and belt topics are covered in the Apprentice Hub quizzes and exam prep, plus the field articles.</p>
+      <div style="margin-top:0.85rem;">
+        <a class="ws-btn" href="/articles/pulley-rpm.html"><span class="ws-btn-icon" aria-hidden="true">📖</span>Read: Pulley RPM &amp; Belt Speed<span class="ws-arrow" aria-hidden="true">→</span></a>
+      </div>
+      <div class="ws-actions" style="margin-top:0.6rem;">
         <button type="button" class="ws-btn" onclick="closeWorkspace(); document.getElementById('apprentice').scrollIntoView({behavior:'smooth'});"><span class="ws-btn-icon" aria-hidden="true">🎓</span>Apprentice Hub<span class="ws-arrow" aria-hidden="true">→</span></button>
         <a class="ws-btn" href="/articles.html"><span class="ws-btn-icon" aria-hidden="true">🗂️</span>All Articles<span class="ws-arrow" aria-hidden="true">→</span></a>
       </div>
