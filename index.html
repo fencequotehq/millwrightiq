@@ -1480,7 +1480,7 @@ f<!DOCTYPE html>
     <a class="category-card" data-category="bearings" href="#workspace-bearings" onclick="openWorkspace('bearings');return false;"><span class="category-icon" aria-hidden="true">⚙️</span><span class="category-name">Bearings</span></a>
     <a class="category-card" data-category="motors" href="#workspace-motors" onclick="openWorkspace('motors');return false;"><span class="category-icon" aria-hidden="true">🔌</span><span class="category-name">Motors</span></a>
     <a class="category-card" data-category="pumps-hydraulics" href="#workspace-pumps" onclick="openWorkspace('pumps');return false;"><span class="category-icon" aria-hidden="true">💧</span><span class="category-name">Pumps &amp; Hydraulics</span></a>
-    <a class="category-card" data-category="shaft-alignment" href="#calculators" onclick="switchTab('shaft');return false;"><span class="category-icon" aria-hidden="true">📐</span><span class="category-name">Shaft Alignment</span></a>
+    <a class="category-card" data-category="shaft-alignment" href="#workspace-shafts" onclick="openWorkspace('shafts');return false;" title="Shaft alignment, couplings, runout, soft foot, and shaft &amp; hub inspection"><span class="category-icon" aria-hidden="true">📐</span><span class="category-name">Shafts &amp; Couplings</span></a>
     <a class="category-card" data-category="conveyors" href="#calculators" onclick="switchTab('conveyor');return false;"><span class="category-icon" aria-hidden="true">🏗️</span><span class="category-name">Conveyors</span></a>
     <a class="category-card" data-category="gearboxes" href="#workspace-gearboxes" onclick="openWorkspace('gearboxes');return false;"><span class="category-icon" aria-hidden="true">🔩</span><span class="category-name">Gearboxes</span></a>
     <a class="category-card" data-category="belts-sheaves" href="#workspace-belts" onclick="openWorkspace('belts');return false;"><span class="category-icon" aria-hidden="true">🔄</span><span class="category-name">Belts &amp; Sheaves</span></a>
@@ -1929,6 +1929,110 @@ f<!DOCTYPE html>
         <a class="ws-btn" href="/articles/pulley-rpm.html"><span class="ws-btn-icon" aria-hidden="true">📖</span>Read: Pulley RPM &amp; Belt Speed<span class="ws-arrow" aria-hidden="true">→</span></a>
       </div>
       <div class="ws-actions" style="margin-top:0.6rem;">
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); document.getElementById('apprentice').scrollIntoView({behavior:'smooth'});"><span class="ws-btn-icon" aria-hidden="true">🎓</span>Apprentice Hub<span class="ws-arrow" aria-hidden="true">→</span></button>
+        <a class="ws-btn" href="/articles.html"><span class="ws-btn-icon" aria-hidden="true">🗂️</span>All Articles<span class="ws-arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ EQUIPMENT WORKSPACE: SHAFTS & COUPLINGS (toggled overlay; opened by the relabeled Shaft Alignment card) ============ -->
+<section class="workspace" id="workspace-shafts" aria-label="Shafts and couplings workspace">
+  <div class="ws-inner">
+    <div class="ws-topbar">
+      <div class="ws-title"><span class="ws-icon" aria-hidden="true">📐</span> Shafts &amp; Couplings</div>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <button type="button" class="ws-back" onclick="closeWorkspace()">← Back to the Toolbox</button>
+        <button type="button" class="ws-close" onclick="closeWorkspace()" aria-label="Close workspace">✕</button>
+      </div>
+    </div>
+
+    <!-- CALCULATORS — routes to existing calculators via switchTab(); Press Fit & Bearing Fit stay Pro (gating preserved). -->
+    <div class="ws-block">
+      <div class="ws-block-label">Calculators</div>
+      <div class="ws-actions">
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); switchTab('shaft');"><span class="ws-btn-icon" aria-hidden="true">📐</span>Shaft Alignment<span class="ws-arrow" aria-hidden="true">→</span></button>
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); switchTab('thermal');"><span class="ws-btn-icon" aria-hidden="true">🌡️</span>Thermal Expansion<span class="ws-arrow" aria-hidden="true">→</span></button>
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); switchTab('pressfit');"><span class="ws-btn-icon" aria-hidden="true">💪</span>Press Fit Force <span class="ws-pro">PRO</span><span class="ws-arrow" aria-hidden="true">→</span></button>
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); switchTab('bearing');"><span class="ws-btn-icon" aria-hidden="true">⚡</span>Bearing Fit <span class="ws-pro">PRO</span><span class="ws-arrow" aria-hidden="true">→</span></button>
+      </div>
+    </div>
+
+    <!-- INSPECTION CHECKLIST -->
+    <div class="ws-block">
+      <div class="ws-block-label">Inspection Checklist</div>
+      <ul class="ws-list">
+        <li>Verify lockout/tagout.</li>
+        <li>Inspect shaft condition for scoring, corrosion, burrs, and impact damage.</li>
+        <li>Check shaft straightness and runout.</li>
+        <li>Inspect coupling hubs, keys, keyways, inserts, grids, discs, and fasteners.</li>
+        <li>Confirm the correct coupling type and rating.</li>
+        <li>Check hub fit and shaft fit.</li>
+        <li>Check key fit and keyway condition.</li>
+        <li>Inspect base, mounting bolts, grout, and shims.</li>
+        <li>Check for soft foot before final alignment.</li>
+        <li>Confirm rough alignment before precision alignment.</li>
+        <li>Check pipe strain or connected-equipment strain.</li>
+        <li>Tighten fasteners using the correct sequence.</li>
+        <li>Recheck alignment after tightening.</li>
+        <li>Install guards before returning equipment to service.</li>
+      </ul>
+    </div>
+
+    <!-- COMMON SYMPTOMS -->
+    <div class="ws-block">
+      <div class="ws-block-label">Common Symptoms</div>
+      <ul class="ws-list">
+        <li>Repeated coupling insert failure</li>
+        <li>Excessive vibration</li>
+        <li>Hot bearings</li>
+        <li>Seal leakage</li>
+        <li>Broken coupling bolts</li>
+        <li>Fretting around hubs</li>
+        <li>Loose keys</li>
+        <li>Worn keyways</li>
+        <li>Shaft scoring</li>
+        <li>Excessive runout</li>
+        <li>Alignment readings that change after tightening</li>
+      </ul>
+    </div>
+
+    <!-- QUICK REFERENCE -->
+    <div class="ws-block">
+      <div class="ws-block-label">Quick Reference</div>
+      <ul class="ws-list">
+        <li>Angular misalignment: shaft centerlines intersect at an angle.</li>
+        <li>Offset (parallel) misalignment: shaft centerlines are parallel but displaced.</li>
+        <li>Most real conditions contain both angular and offset misalignment.</li>
+        <li>Correct soft foot before final alignment.</li>
+        <li>Pipe strain can move equipment after alignment.</li>
+        <li>Thermal growth can change running alignment.</li>
+        <li>Coupling flexibility does not remove the need for accurate alignment.</li>
+        <li>Excessive interference fit can damage hubs, shafts, and bearings.</li>
+        <li>Loose fits can cause fretting, key damage, and hub movement.</li>
+        <li>Check shaft runout before blaming the alignment instrument.</li>
+      </ul>
+      <p class="ws-note" style="border-left:3px solid var(--amber); padding-left:0.75rem; margin-top:0.85rem;"><strong style="color:var(--text-primary)">Follow the manufacturer's data.</strong> Final alignment tolerances, coupling limits, fits, torque values, and thermal-growth targets must follow the equipment and coupling manufacturers' specifications.</p>
+    </div>
+
+    <!-- TROUBLESHOOTING FLOW -->
+    <div class="ws-block">
+      <div class="ws-block-label">Troubleshooting Flow</div>
+      <ul class="ws-list">
+        <li><strong style="color:var(--text-primary)">Readings change after tightening:</strong> check soft foot, base distortion, shim condition, bolt sequence, and pipe strain.</li>
+        <li><strong style="color:var(--text-primary)">Coupling repeatedly fails:</strong> check alignment, overload, shaft movement, coupling selection, lubrication, and installation.</li>
+        <li><strong style="color:var(--text-primary)">Hot bearings after alignment:</strong> check residual misalignment, excessive belt or pipe load, lubrication, fit, and bearing condition.</li>
+        <li><strong style="color:var(--text-primary)">Hub moves on shaft:</strong> check fit, key condition, retaining method, shaft damage, and installation procedure.</li>
+        <li><strong style="color:var(--text-primary)">High vibration remains:</strong> check runout, looseness, balance, bent shaft, coupling damage, resonance, and bearing condition.</li>
+      </ul>
+    </div>
+
+    <!-- REFERENCES & LEARNING -->
+    <div class="ws-block">
+      <div class="ws-block-label">References &amp; Learning</div>
+      <p class="ws-note">Alignment, coupling, keyway, and fit topics are covered in the Apprentice Hub quizzes and exam prep, plus the field articles.</p>
+      <div class="ws-actions" style="margin-top:0.85rem;">
         <button type="button" class="ws-btn" onclick="closeWorkspace(); document.getElementById('apprentice').scrollIntoView({behavior:'smooth'});"><span class="ws-btn-icon" aria-hidden="true">🎓</span>Apprentice Hub<span class="ws-arrow" aria-hidden="true">→</span></button>
         <a class="ws-btn" href="/articles.html"><span class="ws-btn-icon" aria-hidden="true">🗂️</span>All Articles<span class="ws-arrow" aria-hidden="true">→</span></a>
       </div>
