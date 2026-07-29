@@ -2770,7 +2770,7 @@ f<!DOCTYPE html>
               <label class="input-label">Bearing Type</label>
               <select class="calc-select" id="l10-type" style="width:100%">
                 <option value="3">Ball Bearing (exponent = 3)</option>
-                <option value="3.333">Roller Bearing (exponent = 10/3)</option>
+                <option value="10/3">Roller Bearing (exponent = 10/3)</option>
               </select>
             </div>
             <div class="input-group">
@@ -2778,9 +2778,10 @@ f<!DOCTYPE html>
               <input class="calc-input" type="number" id="l10-c" placeholder="e.g. 5000">
             </div>
             <div class="input-group">
-              <label class="input-label">Applied Load P (lbs)</label>
+              <label class="input-label">Equivalent Dynamic Bearing Load P (lbs)</label>
               <input class="calc-input" type="number" id="l10-p" placeholder="e.g. 2500">
             </div>
+            <div style="font-size:0.8rem;color:var(--text-dim);margin-top:-0.5rem;margin-bottom:0.75rem;">For combined radial and axial loading, P must already include the bearing-specific X/Y/e equivalent-load factors from manufacturer data.</div>
             <div class="input-group">
               <label class="input-label">Shaft Speed (RPM)</label>
               <input class="calc-input" type="number" id="l10-rpm" placeholder="e.g. 1750">
@@ -2799,15 +2800,18 @@ f<!DOCTYPE html>
         </div>
         <div class="info-panel">
           <h3>L10 Life Formula</h3>
-          <div class="formula-box">L10h = (C/P)^p × 10⁶ ÷ (60 × n)<br><span style="color:var(--text-dim);font-size:0.7rem">p=3 ball, 3.33 roller · n=RPM</span></div>
-          <p style="font-size:0.8rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem;">L10 means 90% of identical bearings will reach or exceed this life under these conditions.</p>
+          <div class="formula-box">L10 = (C / P)^p million revolutions<br>L10h = 10⁶ × (C / P)^p ÷ (60 × n)<br><span style="color:var(--text-dim);font-size:0.7rem">p = 3 for ball bearings, p = 10/3 for roller bearings · n = RPM</span></div>
+          <p style="font-size:0.8rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem;">This calculator computes basic L10 life at 90% reliability. It does not guarantee service life.</p>
           <ul class="info-list">
-            <li>Light duty <span>&gt; 50,000 hrs</span></li>
+            <li>Use the same units for C and P <span>(lbs)</span></li>
+            <li>P must include the bearing equivalent dynamic load factors X, Y, and e for combined loading</li>
+            <li>Results assume uniform loading, proper lubrication, and normal operating temperature</li>
+            <li>Excludes contamination, misalignment, internal clearance effects, shock loading, variable load, and modified-life factors</li>
             <li>Standard machinery <span>20,000–50,000 hrs</span></li>
             <li>8-hr/day service <span>~10,000–25,000 hrs</span></li>
             <li>Continuous 24/7 <span>&gt; 40,000 hrs</span></li>
           </ul>
-          <div class="alert-box">⚡ C rating is on the bearing datasheet. If you double the load, life drops to 1/8th for ball bearings.</div>
+          <div class="alert-box">⚡ C rating is on the bearing datasheet. If you double the load, life drops to 1/8th for ball bearings. This L10 result is a basic 90% reliability estimate, not a guarantee of service life.</div>
         </div>
       </div>
     </div>
@@ -4534,19 +4538,42 @@ function calcL10() {
   const C = parseFloat(document.getElementById('l10-c').value);
   const P = parseFloat(document.getElementById('l10-p').value);
   const n = parseFloat(document.getElementById('l10-rpm').value);
-  const p = parseFloat(document.getElementById('l10-type').value);
-  if (!C || !P || !n) { alert('Please fill in all fields.'); return; }
-  if (P <= 0) { alert('Load must be greater than 0.'); return; }
+  const pValue = document.getElementById('l10-type').value;
+  const p = pValue === '10/3' ? 10 / 3 : parseFloat(pValue);
+  // Validation: show non-blocking messages in the result panel and clear any stale result
+  const resultEl = document.getElementById('l10-result');
+  const notesEl = document.getElementById('l10-notes');
+  const panelEl = document.getElementById('result-l10');
+  function showValidation(message) {
+    resultEl.textContent = '—';
+    notesEl.innerHTML = `<span style="color:var(--red-alert)">${message}</span>`;
+    panelEl.classList.add('show');
+  }
+  if (isNaN(C) || isNaN(P) || isNaN(n) || isNaN(p)) {
+    showValidation('Please fill in all fields with valid numbers.');
+    return;
+  }
+  if (C <= 0) { showValidation('Dynamic load rating C must be greater than 0.'); return; }
+  if (P <= 0) { showValidation('Equivalent dynamic load P must be greater than 0.'); return; }
+  if (n <= 0) { showValidation('RPM must be greater than 0.'); return; }
   const L10m = Math.pow(C / P, p);
   const L10h = (L10m * 1e6) / (60 * n);
   const years = (L10h / 8760).toFixed(1);
-  document.getElementById('l10-result').textContent = Math.round(L10h).toLocaleString();
+  const L10hFormatted = L10h.toFixed(1);
+  const statusMessage = P >= C
+    ? '<span style="color:var(--red-alert)">⚠️ P ≥ C — very low life estimate. Check your equivalent dynamic load.</span>'
+    : L10h < 10000
+      ? '<span style="color:var(--red-alert)">⚠️ Calculated L10 life is relatively short. Review bearing selection, equivalent dynamic load (P), operating conditions, and manufacturer recommendations.</span>'
+      : L10h > 50000
+        ? '<span style="color:var(--green-go)">✓ Excellent bearing life for this application.</span>'
+        : '✓ Acceptable life for standard service.';
+  document.getElementById('l10-result').textContent = Number(L10hFormatted).toLocaleString();
   document.getElementById('l10-notes').innerHTML =
     `<strong>C/P Ratio:</strong> ${(C/P).toFixed(2)} &nbsp; <strong>L10m:</strong> ${L10m.toFixed(1)} million revs<br>
-     <strong>At ${n} RPM:</strong> ${Math.round(L10h).toLocaleString()} hours ≈ <strong>${years} years</strong> (continuous)<br>
-     ${L10h < 10000 ? '<span style="color:var(--red-alert)">⚠️ Short life — consider a larger bearing or reduce load.</span>' : L10h > 50000 ? '<span style="color:var(--green-go)">✓ Excellent bearing life for this application.</span>' : '✓ Acceptable life for standard service.'}`;
+     <strong>At ${n} RPM:</strong> ${L10hFormatted} hours ≈ <strong>${years} years</strong> (continuous)<br>
+     ${statusMessage}`;
   document.getElementById('result-l10').classList.add('show');
-  pushHistory('L10 Bearing Life', `C=${C} lbs, P=${P} lbs, ${n} RPM`, `${Math.round(L10h).toLocaleString()} hrs`);
+  pushHistory('L10 Bearing Life', `C=${C} lbs, P=${P} lbs, ${n} RPM`, `${L10hFormatted} hrs`);
 }
 
 // ==================== SHEAVE SELECTION ====================
