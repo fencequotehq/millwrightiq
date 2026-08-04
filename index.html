@@ -548,6 +548,96 @@ f<!DOCTYPE html>
 
   .calc-result.show { display: block; }
 
+  .advanced-results {
+    margin-top: 1rem;
+  }
+
+  .advanced-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.9rem 1rem;
+    cursor: pointer;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .advanced-toggle:hover,
+  .advanced-toggle:focus {
+    border-color: var(--amber);
+    color: var(--amber);
+    outline: none;
+  }
+
+  .advanced-toggle-icon {
+    transition: transform 0.2s ease;
+  }
+
+  .advanced-panel {
+    margin-top: 0.75rem;
+    background: var(--steel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1rem;
+  }
+
+  .advanced-panel[hidden] {
+    display: none;
+  }
+
+  .advanced-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .advanced-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .advanced-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .advanced-value {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.2rem;
+    color: var(--amber);
+    word-break: break-word;
+  }
+
+  .advanced-unit {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .advanced-note {
+    margin-top: 0.85rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 640px) {
+    .advanced-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .result-label {
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.65rem;
@@ -1852,7 +1942,7 @@ f<!DOCTYPE html>
       <div class="ws-actions">
         <button type="button" class="ws-btn" onclick="closeWorkspace(); switchTab('vbelt');"><span class="ws-btn-icon" aria-hidden="true">🔄</span>V-Belt Length<span class="ws-arrow" aria-hidden="true">→</span></button>
         <button type="button" class="ws-btn" onclick="closeWorkspace(); switchTab('rpm');"><span class="ws-btn-icon" aria-hidden="true">⚙️</span>RPM &amp; Pulley<span class="ws-arrow" aria-hidden="true">→</span></button>
-        <button type="button" class="ws-btn" onclick="closeWorkspace(); switchTab('sheave');"><span class="ws-btn-icon" aria-hidden="true">🔘</span>Sheave Selection <span class="ws-pro">PRO</span><span class="ws-arrow" aria-hidden="true">→</span></button>
+        <button type="button" class="ws-btn" onclick="closeWorkspace(); switchTab('sheave');"><span class="ws-btn-icon" aria-hidden="true">🔘</span>Sheave Speed / Diameter<span class="ws-pro">PRO</span><span class="ws-arrow" aria-hidden="true">→</span></button>
       </div>
     </div>
 
@@ -2096,7 +2186,7 @@ f<!DOCTYPE html>
       <button class="calc-tab" onclick="switchTab('keyway', this)">🔑 Keyway & Keyseat <span style="font-size:0.6rem;background:var(--amber);color:var(--steel);padding:1px 5px;border-radius:2px;margin-left:4px;">PRO</span></button>
       <button class="calc-tab" onclick="switchTab('hydraulic', this)">💧 Hydraulic Power <span style="font-size:0.6rem;background:var(--amber);color:var(--steel);padding:1px 5px;border-radius:2px;margin-left:4px;">PRO</span></button>
       <button class="calc-tab" onclick="switchTab('l10', this)">⚡ L10 Bearing Life <span style="font-size:0.6rem;background:var(--amber);color:var(--steel);padding:1px 5px;border-radius:2px;margin-left:4px;">PRO</span></button>
-      <button class="calc-tab" onclick="switchTab('sheave', this)">🔘 Sheave Select <span style="font-size:0.6rem;background:var(--amber);color:var(--steel);padding:1px 5px;border-radius:2px;margin-left:4px;">PRO</span></button>
+      <button class="calc-tab" onclick="switchTab('sheave', this)">🔘 Sheave Speed / Diameter <span style="font-size:0.6rem;background:var(--amber);color:var(--steel);padding:1px 5px;border-radius:2px;margin-left:4px;">PRO</span></button>
       <button class="calc-tab" onclick="switchTab('pressfit', this)">💪 Press Fit Force <span style="font-size:0.6rem;background:var(--amber);color:var(--steel);padding:1px 5px;border-radius:2px;margin-left:4px;">PRO</span></button>
       <button class="calc-tab" onclick="switchTab('boltpattern', this)">🔩 Bolt Pattern <span style="font-size:0.6rem;background:var(--amber);color:var(--steel);padding:1px 5px;border-radius:2px;margin-left:4px;">PRO</span></button>
     </div>
@@ -2830,23 +2920,23 @@ f<!DOCTYPE html>
       <div class="pro-lock-overlay" id="lock-sheave">
         <div style="font-size:2rem;margin-bottom:0.75rem;">🔒</div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;text-transform:uppercase;margin-bottom:0.5rem;">Pro Tool</div>
-        <p style="color:var(--text-secondary);font-size:0.875rem;margin-bottom:1.25rem;">Sheave Selection is included in MillwrightIQ Pro.</p>
+        <p style="color:var(--text-secondary);font-size:0.875rem;margin-bottom:1.25rem;">Sheave Speed / Diameter is included in MillwrightIQ Pro.</p>
         <button class="btn-primary" onclick="showUpgradeModal()">Unlock Pro →</button>
       </div>
       <div class="calc-grid">
         <div class="calc-card">
-          <div class="calc-card-header"><div class="calc-icon">🔘</div><div><div class="calc-title">Sheave Selection Calculator</div></div></div>
+          <div class="calc-card-header"><div class="calc-icon">🔘</div><div><div class="calc-title">Sheave Speed / Diameter Calculator</div></div></div>
           <div class="calc-body">
             <div class="input-group">
               <label class="input-label">Solve For</label>
               <select class="calc-select" id="sheave-mode" style="width:100%" onchange="updateSheaveMode()">
-                <option value="driven-dia">Driven Sheave Diameter</option>
+                <option value="driven-dia">Driven Sheave Pitch Diameter</option>
                 <option value="driven-rpm">Driven Shaft RPM</option>
-                <option value="driver-dia">Driver Sheave Diameter</option>
+                <option value="driver-dia">Driver Sheave Pitch Diameter</option>
               </select>
             </div>
             <div class="input-group" id="sheave-driver-dia-group">
-              <label class="input-label">Driver Sheave Diameter (inches)</label>
+              <label class="input-label">Driver Sheave Pitch Diameter (inches)</label>
               <input class="calc-input" type="number" id="sheave-d1" placeholder="e.g. 6" step="0.1">
             </div>
             <div class="input-group" id="sheave-driver-rpm-group">
@@ -2854,7 +2944,7 @@ f<!DOCTYPE html>
               <input class="calc-input" type="number" id="sheave-n1" placeholder="e.g. 1750">
             </div>
             <div class="input-group" id="sheave-driven-dia-group">
-              <label class="input-label">Driven Sheave Diameter (inches)</label>
+              <label class="input-label">Driven Sheave Pitch Diameter (inches)</label>
               <input class="calc-input" type="number" id="sheave-d2" placeholder="e.g. 12" step="0.1">
             </div>
             <div class="input-group" id="sheave-driven-rpm-group">
@@ -2866,11 +2956,45 @@ f<!DOCTYPE html>
               <div class="result-label" id="sheave-result-label">Result</div>
               <div><span class="result-value" id="sheave-result">—</span><span class="result-unit" id="sheave-result-unit"></span></div>
               <div class="result-notes" id="sheave-notes"></div>
+              <div class="advanced-results">
+                <button type="button" class="advanced-toggle" id="sheave-advanced-toggle" aria-expanded="false" aria-controls="sheave-advanced-panel" onclick="toggleSheaveAdvancedResults()">
+                  <span class="advanced-toggle-label">Advanced Results</span>
+                  <span class="advanced-toggle-icon" aria-hidden="true">▶</span>
+                </button>
+                <div class="advanced-panel" id="sheave-advanced-panel" hidden>
+                  <div class="advanced-grid">
+                    <div class="advanced-item">
+                      <span class="advanced-label">Belt Speed</span>
+                      <span class="advanced-value" id="sheave-advanced-belt-speed">—</span>
+                      <span class="advanced-unit">FPM</span>
+                    </div>
+                    <div class="advanced-item">
+                      <span class="advanced-label">Speed Ratio</span>
+                      <span class="advanced-value" id="sheave-advanced-speed-ratio">—</span>
+                    </div>
+                    <div class="advanced-item">
+                      <span class="advanced-label">Diameter Ratio</span>
+                      <span class="advanced-value" id="sheave-advanced-diameter-ratio">—</span>
+                    </div>
+                  </div>
+                  <div class="advanced-note">Informational only. Acceptable operating speed depends on the selected belt type and manufacturer recommendations.</div>
+                </div>
+              </div>
               <div class="save-row">
                 <button class="btn-save" onclick="copyCalcResult('sheave')">📋 Copy Result</button>
                 <button class="btn-save" onclick="saveCalcToHistory('sheave')">💾 Save to History</button>
               </div>
             </div>
+            <div class="calc-note" style="margin-top:1rem;font-size:0.95rem;line-height:1.5;">
+              <strong>Basis:</strong> N1 × D1 = N2 × D2;<br>
+              N2 / N1 = D1 / D2;<br>
+              D2 / D1 = N1 / N2;<br>
+              <strong>Speed ratio:</strong> N1 : N2<br>
+              <strong>Diameter ratio:</strong> D2 : D1<br>
+              <strong>Assumptions:</strong> pitch diameters are used, belt slip is zero, operating speed is steady, and belts are matched and properly tensioned.<br>
+              <strong>Limitations:</strong> This tool does not select belt section, groove count, horsepower capacity, center distance, wrap angle, belt length, or minimum allowable sheave diameter. Verify the result using the belt and sheave manufacturer’s catalog.
+            </div>
+            <div class="alert-box" style="margin-top:0.75rem;">Choose an available manufacturer pitch diameter, then recalculate the resulting driven RPM.</div>
           </div>
         </div>
         <div class="info-panel">
@@ -2878,11 +3002,11 @@ f<!DOCTYPE html>
           <div class="formula-box">N1 × D1 = N2 × D2</div>
           <ul class="info-list">
             <li>N1 = Driver RPM <span>known</span></li>
-            <li>D1 = Driver dia <span>known</span></li>
+            <li>D1 = Driver pitch diameter <span>known</span></li>
             <li>N2 = Driven RPM <span>solve or input</span></li>
-            <li>D2 = Driven dia <span>solve or input</span></li>
+            <li>D2 = Driven pitch diameter <span>solve or input</span></li>
           </ul>
-          <div class="alert-box">📐 Round your answer to the nearest standard sheave size. Sheaves come in 0.5" increments — verify with your supplier before ordering.</div>
+          <div class="alert-box">📐 Choose an available manufacturer pitch diameter, then recalculate the resulting driven RPM.</div>
         </div>
       </div>
     </div>
@@ -3118,8 +3242,8 @@ f<!DOCTYPE html>
         <button class="fav-btn" onclick="event.stopPropagation();toggleFavorite('sheave',this)" title="Favorite">☆</button>
         <div class="tool-badge badge-pro">Pro</div>
         <div class="tool-card-icon">🔘</div>
-        <div class="tool-card-name">Sheave Selection</div>
-        <div class="tool-card-desc">Find sheave dia or RPM</div>
+        <div class="tool-card-name">Sheave Speed / Diameter</div>
+        <div class="tool-card-desc">Find sheave pitch dia or RPM</div>
       </div>
       <div class="tool-card" onclick="scrollToCalc('pressfit')" style="cursor:pointer">
         <button class="fav-btn" onclick="event.stopPropagation();toggleFavorite('pressfit',this)" title="Favorite">☆</button>
@@ -3482,7 +3606,7 @@ f<!DOCTYPE html>
           <li><span style="color:var(--amber)">★</span> Keyway & Keyseat Reference</li>
           <li><span style="color:var(--amber)">★</span> Hydraulic Power Calculator</li>
           <li><span style="color:var(--amber)">★</span> L10 Bearing Life Calculator</li>
-          <li><span style="color:var(--amber)">★</span> Sheave Selection Calculator</li>
+          <li><span style="color:var(--amber)">★</span> Sheave Speed / Diameter Calculator</li>
           <li><span style="color:var(--amber)">★</span> Press Fit Force Calculator</li>
           <li><span style="color:var(--amber)">★</span> Bolt Pattern Sequence</li>
           <li><span style="color:var(--amber)">★</span> Flashcard Study Mode</li>
@@ -4586,11 +4710,32 @@ function calcL10() {
 }
 
 // ==================== SHEAVE SELECTION ====================
+function toggleSheaveAdvancedResults() {
+  const button = document.getElementById('sheave-advanced-toggle');
+  const panel = document.getElementById('sheave-advanced-panel');
+  const expanded = button.getAttribute('aria-expanded') === 'true';
+  button.setAttribute('aria-expanded', String(!expanded));
+  button.querySelector('.advanced-toggle-icon').textContent = expanded ? '▶' : '▼';
+  panel.hidden = expanded;
+}
+
+function clearSheaveAdvancedResults() {
+  const button = document.getElementById('sheave-advanced-toggle');
+  const panel = document.getElementById('sheave-advanced-panel');
+  document.getElementById('sheave-advanced-belt-speed').textContent = '—';
+  document.getElementById('sheave-advanced-speed-ratio').textContent = '—';
+  document.getElementById('sheave-advanced-diameter-ratio').textContent = '—';
+  button.setAttribute('aria-expanded', 'false');
+  button.querySelector('.advanced-toggle-icon').textContent = '▶';
+  panel.hidden = true;
+}
+
 function updateSheaveMode() {
   const mode = document.getElementById('sheave-mode').value;
   document.getElementById('sheave-driven-dia-group').style.display = mode === 'driven-dia' ? 'none' : 'block';
   document.getElementById('sheave-driven-rpm-group').style.display = mode === 'driven-rpm' ? 'none' : 'block';
   document.getElementById('sheave-driver-dia-group').style.display = mode === 'driver-dia' ? 'none' : 'block';
+  clearSheaveAdvancedResults();
 }
 
 function calcSheave() {
@@ -4599,32 +4744,68 @@ function calcSheave() {
   const n1 = parseFloat(document.getElementById('sheave-n1').value);
   const d2 = parseFloat(document.getElementById('sheave-d2').value);
   const n2 = parseFloat(document.getElementById('sheave-n2').value);
-  let result, label, unit, notes;
-  if (mode === 'driven-dia') {
-    if (!d1 || !n1 || !n2) { alert('Please fill in driver dia, driver RPM, and target RPM.'); return; }
-    result = (n1 * d1) / n2;
-    label = 'Required Driven Sheave Diameter'; unit = 'inches';
-    notes = `<strong>Driver:</strong> ${d1}" @ ${n1} RPM → <strong>Driven:</strong> ${result.toFixed(3)}" to achieve ${n2} RPM<br>
-             <em>Round to nearest standard: ${(Math.round(result * 2) / 2).toFixed(1)}" sheave</em>`;
-  } else if (mode === 'driven-rpm') {
-    if (!d1 || !n1 || !d2) { alert('Please fill in all sheave diameters and driver RPM.'); return; }
-    result = (n1 * d1) / d2;
-    label = 'Driven Shaft Speed'; unit = 'RPM';
-    notes = `<strong>Driver:</strong> ${d1}" @ ${n1} RPM → <strong>Driven:</strong> ${d2}" = ${result.toFixed(1)} RPM<br>
-             <strong>Ratio:</strong> ${(d2/d1).toFixed(3)}:1`;
-  } else {
-    if (!n1 || !d2 || !n2) { alert('Please fill in driver RPM, driven dia, and target RPM.'); return; }
-    result = (n2 * d2) / n1;
-    label = 'Required Driver Sheave Diameter'; unit = 'inches';
-    notes = `<strong>Target:</strong> ${n2} RPM on ${d2}" driven → need <strong>${result.toFixed(3)}"</strong> driver sheave<br>
-             <em>Round to: ${(Math.round(result * 2) / 2).toFixed(1)}"</em>`;
+  const resultEl = document.getElementById('sheave-result');
+  const unitEl = document.getElementById('sheave-result-unit');
+  const notesEl = document.getElementById('sheave-notes');
+  const beltSpeedValueEl = document.getElementById('sheave-advanced-belt-speed');
+  const speedRatioEl = document.getElementById('sheave-advanced-speed-ratio');
+  const diameterRatioEl = document.getElementById('sheave-advanced-diameter-ratio');
+  const panelEl = document.getElementById('result-sheave');
+  function showValidation(message) {
+    resultEl.textContent = '—';
+    unitEl.textContent = '';
+    notesEl.innerHTML = `<span style="color:var(--red-alert)">${message}</span>`;
+    clearSheaveAdvancedResults();
+    panelEl.classList.add('show');
   }
-  document.getElementById('sheave-result-label').textContent = label;
-  document.getElementById('sheave-result').textContent = result.toFixed(3);
-  document.getElementById('sheave-result-unit').textContent = unit;
-  document.getElementById('sheave-notes').innerHTML = notes;
-  document.getElementById('result-sheave').classList.add('show');
-  pushHistory('Sheave Selection', notes.replace(/<[^>]+>/g,'').substring(0,100), `${result.toFixed(3)} ${unit}`);
+  if (isNaN(n1) || n1 <= 0) { showValidation('Driver speed must be a positive number.'); return; }
+  if (mode !== 'driver-dia') {
+    if (isNaN(d1) || d1 <= 0) { showValidation('Driver sheave pitch diameter must be a positive number.'); return; }
+  }
+  if (mode === 'driven-dia') {
+    if (isNaN(n2) || n2 <= 0) { showValidation('Target driven speed must be a positive number.'); return; }
+  } else if (mode === 'driven-rpm') {
+    if (isNaN(d2) || d2 <= 0) { showValidation('Driven sheave pitch diameter must be a positive number.'); return; }
+  } else {
+    if (isNaN(d2) || d2 <= 0) { showValidation('Driven sheave pitch diameter must be a positive number.'); return; }
+    if (isNaN(n2) || n2 <= 0) { showValidation('Target driven speed must be a positive number.'); return; }
+  }
+  let result, unit, notes, speedRatio, diameterRatio, effectiveDriverDia;
+  if (mode === 'driven-dia') {
+    result = (n1 * d1) / n2;
+    unit = 'inches';
+    notes = `<strong>Driver:</strong> ${d1}" @ ${n1} RPM → <strong>Driven:</strong> ${result.toFixed(3)}" to achieve ${n2} RPM<br>
+             <em>Choose an available manufacturer pitch diameter, then recalculate the resulting driven RPM.</em>`;
+    speedRatio = `${n1.toFixed(0)} : ${n2.toFixed(0)}`;
+    diameterRatio = `${result.toFixed(3)} : ${d1.toFixed(3)}`;
+    effectiveDriverDia = d1;
+  } else if (mode === 'driven-rpm') {
+    result = (n1 * d1) / d2;
+    unit = 'RPM';
+    notes = `<strong>Driver:</strong> ${d1}" @ ${n1} RPM → <strong>Driven:</strong> ${d2}" = ${result.toFixed(1)} RPM`;
+    speedRatio = `${n1.toFixed(0)} : ${result.toFixed(1)}`;
+    diameterRatio = `${d2.toFixed(3)} : ${d1.toFixed(3)}`;
+    effectiveDriverDia = d1;
+  } else {
+    result = (n2 * d2) / n1;
+    unit = 'inches';
+    notes = `<strong>Target:</strong> ${n2} RPM on ${d2}" driven → need <strong>${result.toFixed(3)}"</strong> driver sheave<br>
+             <em>Choose an available manufacturer pitch diameter, then recalculate the resulting driven RPM.</em>`;
+    speedRatio = `${n1.toFixed(0)} : ${n2.toFixed(0)}`;
+    diameterRatio = `${d2.toFixed(3)} : ${result.toFixed(3)}`;
+    effectiveDriverDia = result;
+  }
+  resultEl.textContent = result.toFixed(3);
+  unitEl.textContent = unit;
+  notesEl.innerHTML = notes;
+  if (!isNaN(effectiveDriverDia) && effectiveDriverDia > 0 && !isNaN(n1) && n1 > 0) {
+    const beltSpeed = Math.PI * effectiveDriverDia * n1 / 12;
+    beltSpeedValueEl.textContent = `${beltSpeed.toFixed(0)}`;
+  }
+  speedRatioEl.textContent = speedRatio;
+  diameterRatioEl.textContent = diameterRatio;
+  panelEl.classList.add('show');
+  pushHistory('Sheave Speed / Diameter', notes.replace(/<[^>]+>/g,'').substring(0,100), `${result.toFixed(3)} ${unit}`);
 }
 
 function updateShaftGeometry() {
