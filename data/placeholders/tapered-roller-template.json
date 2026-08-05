@@ -1,0 +1,223 @@
+{
+  "schemaVersion": "1.0.0",
+  "datasetType": "manufacturer_specific",
+  "datasetVersion": "1.0.0",
+  "generatedAt": "2026-08-04T00:00:00Z",
+  "manifest": {
+    "manifestVersion": "1.0.0",
+    "lastUpdated": "2026-08-04T00:00:00Z",
+    "manufacturers": [
+      {
+        "manufacturerId": "PLACEHOLDER_CO",
+        "manufacturerName": "Placeholder Co.",
+        "versions": [
+          {
+            "version": "1.0.0",
+            "updatedAt": "2026-08-04T00:00:00Z",
+            "path": "data/placeholders/tapered-roller-template.json"
+          }
+        ]
+      }
+    ],
+    "isoVersions": [
+      {
+        "version": "1.0.0",
+        "updatedAt": "2026-08-04T00:00:00Z",
+        "path": "data/placeholders/tapered-roller-template.json"
+      }
+    ]
+  },
+  "manufacturers": [
+    {
+      "manufacturerId": "PLACEHOLDER_CO",
+      "manufacturerName": "Placeholder Co.",
+      "version": "1.0.0",
+      "seriesId": "TRB-3000",
+      "family": "tapered_roller",
+      "bearingType": "tapered_roller",
+      "coverage": {
+        "boreMinMM": 20,
+        "boreMaxMM": 90,
+        "nominalBoreValuesMM": [25, 45, 65, 85]
+      },
+      "bearingCharacteristics": {
+        "typicalInternalClearanceClasses": [
+          { "code": "C4", "min_um": 8, "max_um": 18 }
+        ],
+        "coefficientThermalExpansion": { "material": "placeholder_steel", "alpha_perC": 12 }
+      },
+      "toleranceTable": [
+        {
+          "id": "trb-row-1",
+          "boreMinMM": 25,
+          "boreMaxMM": 45,
+          "ringRotation": "inner-rotating",
+          "applicationClass": "normal",
+          "bearingArrangement": "locating",
+          "recommendedFits": [
+            {
+              "target": "shaft_inner",
+              "sourceType": "manufacturer_guidance",
+              "primaryReference": "Placeholder Co. fit guidance",
+              "supportingReferences": ["Placeholder engineering guidance"],
+              "applicationScope": "General placeholder application guidance for tapered roller bearings.",
+              "limitations": "Template placeholder data only; not for production use.",
+              "sourceTraceability": {
+                "primaryReferenceDocument": {
+                  "title": "Placeholder Fit Guidance",
+                  "publisher": "Placeholder Co.",
+                  "year": 2026,
+                  "url": "https://example.com/placeholder-fit-guidance",
+                  "license": "CC-BY-4.0"
+                },
+                "supportingReferenceDocuments": []
+              },
+              "recommendedToleranceClass": "m6",
+              "recommendedInterference_um": { "min": 8, "max": 18 },
+              "installationMethod": "heat",
+              "confidence": 30,
+              "references": [
+                {
+                  "title": "Placeholder Fit Guidance",
+                  "publisher": "Placeholder Co.",
+                  "year": 2026,
+                  "url": "https://example.com/placeholder-fit-guidance",
+                  "license": "CC-BY-4.0"
+                }
+              ],
+              "note": "Illustrative placeholder interference only. NOT FOR PRODUCTION USE."
+            }
+          ],
+          "references": [
+            {
+              "title": "Placeholder Fit Table",
+              "publisher": "Placeholder Co.",
+              "year": 2026,
+              "url": "https://example.com/placeholder-fit-table",
+              "license": "CC-BY-4.0"
+            }
+          ],
+          "notes": "NOT FOR PRODUCTION USE. This template demonstrates structure only."
+        },
+        {
+          "id": "trb-row-2",
+          "boreMinMM": 50,
+          "boreMaxMM": 85,
+          "ringRotation": "outer-rotating",
+          "applicationClass": "heavy_shock",
+          "bearingArrangement": "non_locating",
+          "recommendedFits": [
+            {
+              "target": "housing_outer",
+              "sourceType": "manufacturer_guidance",
+              "primaryReference": "Placeholder Co. fit guidance",
+              "supportingReferences": ["Placeholder engineering guidance"],
+              "applicationScope": "General placeholder application guidance for tapered roller bearings.",
+              "limitations": "Template placeholder data only; not for production use.",
+              "sourceTraceability": {
+                "primaryReferenceDocument": {
+                  "title": "Placeholder Fit Guidance",
+                  "publisher": "Placeholder Co.",
+                  "year": 2026,
+                  "url": "https://example.com/placeholder-fit-guidance",
+                  "license": "CC-BY-4.0"
+                },
+                "supportingReferenceDocuments": []
+              },
+              "recommendedToleranceClass": "H7",
+              "recommendedInterference_um": { "min": -12, "max": 3 },
+              "installationMethod": "fit_check",
+              "confidence": 25,
+              "references": [
+                {
+                  "title": "Placeholder Fit Guidance",
+                  "publisher": "Placeholder Co.",
+                  "year": 2026,
+                  "url": "https://example.com/placeholder-fit-guidance",
+                  "license": "CC-BY-4.0"
+                }
+              ],
+              "note": "Illustrative placeholder clearance only. NOT FOR PRODUCTION USE."
+            }
+          ],
+          "references": [
+            {
+              "title": "Placeholder Fit Table",
+              "publisher": "Placeholder Co.",
+              "year": 2026,
+              "url": "https://example.com/placeholder-fit-table",
+              "license": "CC-BY-4.0"
+            }
+          ],
+          "notes": "NOT FOR PRODUCTION USE. Contains representative structure only."
+        }
+      ],
+      "installationGuidance": {
+        "maxHeatC": 150,
+        "notes": "Template installation guidance only. NOT FOR PRODUCTION USE."
+      },
+      "metadata": {
+        "createdAt": "2026-08-04T00:00:00Z",
+        "updatedAt": "2026-08-04T00:00:00Z",
+        "sourceDocuments": [
+          {
+            "title": "Placeholder Data Source",
+            "publisher": "Placeholder Co.",
+            "year": 2026,
+            "url": "https://example.com/placeholder-source",
+            "license": "CC-BY-4.0"
+          }
+        ],
+        "license": "CC-BY-4.0"
+      }
+    }
+  ],
+  "isoFallback": {
+    "isoVersion": "1.0.0",
+    "sourceUrl": "https://example.com/placeholder-iso",
+    "toleranceClasses": [
+      {
+        "classCode": "H7",
+        "nominalMinMM": 20,
+        "nominalMaxMM": 90,
+        "deviationMin_um": 0,
+        "deviationMax_um": 30
+      }
+    ],
+    "genericFitPresets": [
+      {
+        "bearingType": "tapered_roller",
+        "ringRotation": "outer-rotating",
+        "applicationClass": "heavy_shock",
+        "bearingArrangement": "non_locating",
+        "shaftClass": "m6",
+        "housingClass": "H7",
+        "recommendedInterference_um": { "min": -10, "max": 10 },
+        "confidence": 30,
+        "references": [
+          {
+            "title": "Placeholder ISO Guidance",
+            "publisher": "Placeholder Co.",
+            "year": 2026,
+            "url": "https://example.com/placeholder-iso-guidance",
+            "license": "CC-BY-4.0"
+          }
+        ],
+        "notes": "Illustrative placeholder ISO-based fit preset. NOT FOR PRODUCTION USE."
+      }
+    ],
+    "metadata": {
+      "createdAt": "2026-08-04T00:00:00Z",
+      "updatedAt": "2026-08-04T00:00:00Z",
+      "sourceDocuments": [
+        {
+          "title": "Placeholder ISO Source",
+          "publisher": "Placeholder Co.",
+          "year": 2026,
+          "url": "https://example.com/placeholder-iso-source",
+          "license": "CC-BY-4.0"
+        }
+      ]
+    }
+  }
+}

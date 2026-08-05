@@ -1,0 +1,223 @@
+{
+  "schemaVersion": "1.0.0",
+  "datasetType": "manufacturer_specific",
+  "datasetVersion": "1.0.0",
+  "generatedAt": "2026-08-04T00:00:00Z",
+  "manifest": {
+    "manifestVersion": "1.0.0",
+    "lastUpdated": "2026-08-04T00:00:00Z",
+    "manufacturers": [
+      {
+        "manufacturerId": "PLACEHOLDER_CO",
+        "manufacturerName": "Placeholder Co.",
+        "versions": [
+          {
+            "version": "1.0.0",
+            "updatedAt": "2026-08-04T00:00:00Z",
+            "path": "data/placeholders/deep-groove-ball-template.json"
+          }
+        ]
+      }
+    ],
+    "isoVersions": [
+      {
+        "version": "1.0.0",
+        "updatedAt": "2026-08-04T00:00:00Z",
+        "path": "data/placeholders/deep-groove-ball-template.json"
+      }
+    ]
+  },
+  "manufacturers": [
+    {
+      "manufacturerId": "PLACEHOLDER_CO",
+      "manufacturerName": "Placeholder Co.",
+      "version": "1.0.0",
+      "seriesId": "PGB-1000",
+      "family": "deep-groove-ball",
+      "bearingType": "deep_groove_ball",
+      "coverage": {
+        "boreMinMM": 10,
+        "boreMaxMM": 100,
+        "nominalBoreValuesMM": [20, 40, 60, 80]
+      },
+      "bearingCharacteristics": {
+        "typicalInternalClearanceClasses": [
+          { "code": "C3", "min_um": 5, "max_um": 15 }
+        ],
+        "coefficientThermalExpansion": { "material": "placeholder_steel", "alpha_perC": 12 }
+      },
+      "toleranceTable": [
+        {
+          "id": "pbg-row-1",
+          "boreMinMM": 20,
+          "boreMaxMM": 40,
+          "ringRotation": "inner-rotating",
+          "applicationClass": "normal",
+          "bearingArrangement": "locating",
+          "recommendedFits": [
+            {
+              "target": "shaft_inner",
+              "sourceType": "manufacturer_guidance",
+              "primaryReference": "Placeholder Co. fit guidance",
+              "supportingReferences": ["Placeholder engineering guidance"],
+              "applicationScope": "General placeholder application guidance for standard metric deep groove ball bearings.",
+              "limitations": "Template placeholder data only; not for production use.",
+              "sourceTraceability": {
+                "primaryReferenceDocument": {
+                  "title": "Placeholder Fit Guidance",
+                  "publisher": "Placeholder Co.",
+                  "year": 2026,
+                  "url": "https://example.com/placeholder-fit-guidance",
+                  "license": "CC-BY-4.0"
+                },
+                "supportingReferenceDocuments": []
+              },
+              "recommendedToleranceClass": "j6",
+              "recommendedInterference_um": { "min": 5, "max": 15 },
+              "installationMethod": "press",
+              "confidence": 35,
+              "references": [
+                {
+                  "title": "Placeholder Fit Guidance",
+                  "publisher": "Placeholder Co.",
+                  "year": 2026,
+                  "url": "https://example.com/placeholder-fit-guidance",
+                  "license": "CC-BY-4.0"
+                }
+              ],
+              "note": "Illustrative placeholder fit range only. NOT FOR PRODUCTION USE."
+            }
+          ],
+          "references": [
+            {
+              "title": "Placeholder Fit Table",
+              "publisher": "Placeholder Co.",
+              "year": 2026,
+              "url": "https://example.com/placeholder-fit-table",
+              "license": "CC-BY-4.0"
+            }
+          ],
+          "notes": "NOT FOR PRODUCTION USE. This is a template dataset for schema validation only."
+        },
+        {
+          "id": "pbg-row-2",
+          "boreMinMM": 50,
+          "boreMaxMM": 80,
+          "ringRotation": "outer-rotating",
+          "applicationClass": "heavy_shock",
+          "bearingArrangement": "non_locating",
+          "recommendedFits": [
+            {
+              "target": "housing_outer",
+              "sourceType": "manufacturer_guidance",
+              "primaryReference": "Placeholder Co. fit guidance",
+              "supportingReferences": ["Placeholder engineering guidance"],
+              "applicationScope": "General placeholder application guidance for standard metric deep groove ball bearings.",
+              "limitations": "Template placeholder data only; not for production use.",
+              "sourceTraceability": {
+                "primaryReferenceDocument": {
+                  "title": "Placeholder Fit Guidance",
+                  "publisher": "Placeholder Co.",
+                  "year": 2026,
+                  "url": "https://example.com/placeholder-fit-guidance",
+                  "license": "CC-BY-4.0"
+                },
+                "supportingReferenceDocuments": []
+              },
+              "recommendedToleranceClass": "H7",
+              "recommendedInterference_um": { "min": -10, "max": 0 },
+              "installationMethod": "fit_check",
+              "confidence": 25,
+              "references": [
+                {
+                  "title": "Placeholder Fit Guidance",
+                  "publisher": "Placeholder Co.",
+                  "year": 2026,
+                  "url": "https://example.com/placeholder-fit-guidance",
+                  "license": "CC-BY-4.0"
+                }
+              ],
+              "note": "Illustrative placeholder clearance only. NOT FOR PRODUCTION USE."
+            }
+          ],
+          "references": [
+            {
+              "title": "Placeholder Fit Table",
+              "publisher": "Placeholder Co.",
+              "year": 2026,
+              "url": "https://example.com/placeholder-fit-table",
+              "license": "CC-BY-4.0"
+            }
+          ],
+          "notes": "NOT FOR PRODUCTION USE. Contains representative structure only."
+        }
+      ],
+      "installationGuidance": {
+        "maxHeatC": 120,
+        "notes": "Template installation guidance only. NOT FOR PRODUCTION USE."
+      },
+      "metadata": {
+        "createdAt": "2026-08-04T00:00:00Z",
+        "updatedAt": "2026-08-04T00:00:00Z",
+        "sourceDocuments": [
+          {
+            "title": "Placeholder Data Source",
+            "publisher": "Placeholder Co.",
+            "year": 2026,
+            "url": "https://example.com/placeholder-source",
+            "license": "CC-BY-4.0"
+          }
+        ],
+        "license": "CC-BY-4.0"
+      }
+    }
+  ],
+  "isoFallback": {
+    "isoVersion": "1.0.0",
+    "sourceUrl": "https://example.com/placeholder-iso",
+    "toleranceClasses": [
+      {
+        "classCode": "H7",
+        "nominalMinMM": 10,
+        "nominalMaxMM": 100,
+        "deviationMin_um": 0,
+        "deviationMax_um": 25
+      }
+    ],
+    "genericFitPresets": [
+      {
+        "bearingType": "deep_groove_ball",
+        "ringRotation": "inner-rotating",
+        "applicationClass": "normal",
+        "bearingArrangement": "locating",
+        "shaftClass": "j6",
+        "housingClass": "H7",
+        "recommendedInterference_um": { "min": 5, "max": 15 },
+        "confidence": 40,
+        "references": [
+          {
+            "title": "Placeholder ISO Guidance",
+            "publisher": "Placeholder Co.",
+            "year": 2026,
+            "url": "https://example.com/placeholder-iso-guidance",
+            "license": "CC-BY-4.0"
+          }
+        ],
+        "notes": "Illustrative placeholder ISO-based fit preset. NOT FOR PRODUCTION USE."
+      }
+    ],
+    "metadata": {
+      "createdAt": "2026-08-04T00:00:00Z",
+      "updatedAt": "2026-08-04T00:00:00Z",
+      "sourceDocuments": [
+        {
+          "title": "Placeholder ISO Source",
+          "publisher": "Placeholder Co.",
+          "year": 2026,
+          "url": "https://example.com/placeholder-iso-source",
+          "license": "CC-BY-4.0"
+        }
+      ]
+    }
+  }
+}

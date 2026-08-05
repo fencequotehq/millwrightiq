@@ -1,0 +1,776 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://millwrightiq.com/schemas/bearing-fit-schema.v1.json",
+  "title": "MillwrightIQ Bearing Fit Dataset Schema (Frozen)",
+  "description": "Schema for versioned manufacturer and ISO bearing fit lookup data used by the MillwrightIQ Bearing Fit calculator. Schema v1.0.0 is frozen; future incompatible changes must use Schema v2.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "datasetType",
+    "datasetVersion",
+    "generatedAt",
+    "manifest",
+    "manufacturers",
+    "isoFallback"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "description": "Schema version for compatibility checks.",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "datasetType": {
+      "type": "string",
+      "description": "Type of dataset included in this file.",
+      "enum": ["manufacturer_specific", "generic_engineering_recommendation"]
+    },
+    "datasetVersion": {
+      "type": "string",
+      "description": "Dataset version identifier.",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the dataset was generated."
+    },
+    "manifest": {
+      "$ref": "#/$defs/Manifest"
+    },
+    "manufacturers": {
+      "type": "array",
+      "description": "List of manufacturer-specific or generic engineering recommendation bearing series datasets.",
+      "items": {
+        "$ref": "#/$defs/ManufacturerTable"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "isoFallback": {
+      "$ref": "#/$defs/ISOFallback"
+    }
+  },
+  "$defs": {
+    "Manifest": {
+      "type": "object",
+      "description": "Registry of available series and dataset metadata.",
+      "required": [
+        "manifestVersion",
+        "lastUpdated",
+        "manufacturers",
+        "isoVersions"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "manifestVersion": {
+          "type": "string",
+          "description": "Manifest version identifier.",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the manifest was last updated."
+        },
+        "manufacturers": {
+          "type": "array",
+          "description": "Metadata for each manufacturer in this dataset.",
+          "items": {
+            "$ref": "#/$defs/ManifestEntry"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "isoVersions": {
+          "type": "array",
+          "description": "Registered ISO fallback dataset versions.",
+          "items": {
+            "type": "object",
+            "required": ["version", "updatedAt", "path"],
+            "additionalProperties": false,
+            "properties": {
+              "version": {
+                "type": "string",
+                "description": "ISO dataset version identifier.",
+                "pattern": "^\\d+\\.\\d+\\.\\d+$"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Last updated timestamp for this ISO fallback dataset."
+              },
+              "path": {
+                "type": "string",
+                "description": "Relative path to the ISO fallback dataset file."
+              }
+            }
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "ManifestEntry": {
+      "type": "object",
+      "description": "Entry describing a manufacturer dataset and its versions.",
+      "required": ["manufacturerId", "manufacturerName", "versions"],
+      "additionalProperties": false,
+      "properties": {
+        "manufacturerId": {
+          "type": "string",
+          "description": "Canonical manufacturer identifier, e.g. SKF, Timken, NSK."
+        },
+        "manufacturerName": {
+          "type": "string",
+          "description": "Manufacturer display name."
+        },
+        "versions": {
+          "type": "array",
+          "description": "Available dataset versions for the manufacturer.",
+          "items": {
+            "type": "object",
+            "required": ["version", "updatedAt", "path"],
+            "additionalProperties": false,
+            "properties": {
+              "version": {
+                "type": "string",
+                "description": "Version identifier for this manufacturer dataset.",
+                "pattern": "^\\d+\\.\\d+\\.\\d+$"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Timestamp when this manufacturer dataset was updated."
+              },
+              "path": {
+                "type": "string",
+                "description": "Relative path to the manufacturer dataset file."
+              }
+            }
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "ManufacturerTable": {
+      "type": "object",
+      "description": "Manufacturer-specific bearing series lookup dataset.",
+      "required": [
+        "manufacturerId",
+        "manufacturerName",
+        "version",
+        "seriesId",
+        "family",
+        "bearingType",
+        "coverage",
+        "toleranceTable",
+        "metadata"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "manufacturerId": {
+          "type": "string",
+          "description": "Canonical manufacturer identifier."
+        },
+        "manufacturerName": {
+          "type": "string",
+          "description": "Display name of the manufacturer."
+        },
+        "version": {
+          "type": "string",
+          "description": "Dataset version for this manufacturer table.",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "seriesId": {
+          "type": "string",
+          "description": "Series identifier or model family name, e.g. 6205, NU204."
+        },
+        "family": {
+          "type": "string",
+          "description": "Bearing family description, e.g. deep-groove-ball."
+        },
+        "bearingType": {
+          "type": "string",
+          "description": "Type of bearing within the dataset.",
+          "enum": [
+            "deep_groove_ball",
+            "angular_contact",
+            "cylindrical_roller",
+            "spherical_roller",
+            "tapered_roller",
+            "needle",
+            "thrust"
+          ]
+        },
+        "coverage": {
+          "type": "object",
+          "description": "Bore diameter coverage for this series dataset.",
+          "required": ["boreMinMM", "boreMaxMM"],
+          "additionalProperties": false,
+          "properties": {
+            "boreMinMM": {
+              "type": "number",
+              "description": "Minimum nominal bore diameter covered by this series, in millimeters.",
+              "exclusiveMinimum": 0
+            },
+            "boreMaxMM": {
+              "type": "number",
+              "description": "Maximum nominal bore diameter covered by this series, in millimeters.",
+              "exclusiveMinimum": 0
+            },
+            "nominalBoreValuesMM": {
+              "type": "array",
+              "description": "Optional list of nominal bore diameters covered by this series dataset.",
+              "items": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "uniqueItems": true
+            }
+          }
+        },
+        "bearingCharacteristics": {
+          "type": "object",
+          "description": "Descriptive characteristics for the bearing series.",
+          "additionalProperties": false,
+          "required": ["typicalInternalClearanceClasses", "coefficientThermalExpansion"],
+          "properties": {
+            "typicalInternalClearanceClasses": {
+              "type": "array",
+              "description": "Common internal clearance classes for this bearing series.",
+              "items": {
+                "type": "object",
+                "required": ["code", "min_um", "max_um"],
+                "additionalProperties": false,
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "Clearance class code, e.g. C2, C3."
+                  },
+                  "min_um": {
+                    "type": "number",
+                    "description": "Minimum radial clearance in micrometers.",
+                    "minimum": 0
+                  },
+                  "max_um": {
+                    "type": "number",
+                    "description": "Maximum radial clearance in micrometers.",
+                    "minimum": 0
+                  }
+                }
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "coefficientThermalExpansion": {
+              "type": "object",
+              "description": "Default thermal expansion coefficient for the bearing steel.",
+              "additionalProperties": false,
+              "required": ["material", "alpha_perC"],
+              "properties": {
+                "material": {
+                  "type": "string",
+                  "description": "Material type used for thermal coefficient, typically steel."
+                },
+                "alpha_perC": {
+                  "type": "number",
+                  "description": "Coefficient of thermal expansion in 1/°C.",
+                  "exclusiveMinimum": 0
+                }
+              }
+            }
+          }
+        },
+        "toleranceTable": {
+          "type": "array",
+          "description": "List of tolerance rows for this bearing series.",
+          "items": {
+            "$ref": "#/$defs/ToleranceRow"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "installationGuidance": {
+          "$ref": "#/$defs/InstallationGuidance"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Provenance metadata for this dataset file.",
+          "required": ["createdAt", "updatedAt", "sourceDocuments"],
+          "additionalProperties": false,
+          "properties": {
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Creation timestamp for this data file."
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Last updated timestamp for this data file."
+            },
+            "sourceDocuments": {
+              "type": "array",
+              "description": "References to manufacturer or standards documents used to build this dataset.",
+              "items": {
+                "$ref": "#/$defs/Reference"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "license": {
+              "type": "string",
+              "description": "License under which this dataset is published."
+            }
+          }
+        }
+      }
+    },
+    "ToleranceRow": {
+      "type": "object",
+      "description": "A row of fit guidance for a specific bore range and application.",
+      "required": [
+        "id",
+        "boreMinMM",
+        "boreMaxMM",
+        "ringRotation",
+        "applicationClass",
+        "bearingArrangement",
+        "recommendedFits",
+        "references"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this tolerance row."
+        },
+        "boreMinMM": {
+          "type": "number",
+          "description": "Minimum nominal bore for this row, in millimeters.",
+          "exclusiveMinimum": 0
+        },
+        "boreMaxMM": {
+          "type": "number",
+          "description": "Maximum nominal bore for this row, in millimeters.",
+          "exclusiveMinimum": 0
+        },
+        "ringRotation": {
+          "type": "string",
+          "description": "Which ring rotates relative to the load.",
+          "enum": ["inner-rotating", "outer-rotating", "stationary"]
+        },
+        "applicationClass": {
+          "type": "string",
+          "description": "Application severity or loading class.",
+          "enum": ["normal", "high_speed", "heavy_shock", "light"]
+        },
+        "bearingArrangement": {
+          "type": "string",
+          "description": "Whether the bearing is locating or non-locating.",
+          "enum": ["locating", "non_locating"]
+        },
+        "recommendedFits": {
+          "type": "array",
+          "description": "One or more recommended fit options for this condition.",
+          "items": {
+            "$ref": "#/$defs/FitRecommendation"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "installation": {
+          "$ref": "#/$defs/InstallationGuidance"
+        },
+        "manufacturerOverrideFlag": {
+          "type": "object",
+          "description": "Optional notice that this row may later need a manufacturer-specific override.",
+          "additionalProperties": false,
+          "properties": {
+            "reason": {
+              "type": "string",
+              "description": "Why this generic recommendation may need a manufacturer-specific override."
+            },
+            "affectedManufacturers": {
+              "type": "array",
+              "description": "Manufacturer identifiers that differ in this condition.",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            },
+            "suggestedAction": {
+              "type": "string",
+              "description": "Suggested action for future override handling."
+            }
+          }
+        },
+        "references": {
+          "type": "array",
+          "description": "Document-level references for this tolerance row.",
+          "items": {
+            "$ref": "#/$defs/Reference"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional explanatory notes describing the recommendation."
+        }
+      }
+    },
+    "FitRecommendation": {
+      "type": "object",
+      "description": "A recommended fit for a specific target component.",
+      "required": [
+        "target",
+        "sourceType",
+        "primaryReference",
+        "supportingReferences",
+        "applicationScope",
+        "limitations",
+        "sourceTraceability",
+        "confidence",
+        "references"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "target": {
+          "type": "string",
+          "description": "Which mating component the recommendation applies to.",
+          "enum": ["shaft_inner", "housing_outer"]
+        },
+        "sourceType": {
+          "type": "string",
+          "description": "Category of source used for this recommendation.",
+          "enum": ["manufacturer_guidance", "standards_reference", "engineering_principle", "combined"]
+        },
+        "primaryReference": {
+          "type": "string",
+          "description": "Primary authoritative source for this recommendation."
+        },
+        "supportingReferences": {
+          "type": "array",
+          "description": "Additional sources that support this recommendation.",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "applicationScope": {
+          "type": "string",
+          "description": "Scope of applications covered by this recommendation."
+        },
+        "limitations": {
+          "type": "string",
+          "description": "Known limitations or excluded conditions for this recommendation."
+        },
+        "sourceTraceability": {
+          "type": "object",
+          "description": "Traceability detail for the primary and supporting source documents.",
+          "additionalProperties": false,
+          "properties": {
+            "primaryReferenceDocument": {
+              "$ref": "#/$defs/Reference"
+            },
+            "supportingReferenceDocuments": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Reference"
+              },
+              "minItems": 0,
+              "uniqueItems": true
+            }
+          }
+        },
+        "recommendedToleranceClass": {
+          "type": ["string", "null"],
+          "description": "Optional ISO tolerance class recommendation, e.g. j6 or H7."
+        },
+        "recommendedInterference_um": {
+          "description": "Recommended interference or clearance range in micrometers.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["min", "max"],
+          "properties": {
+            "min": {
+              "type": "number",
+              "description": "Minimum interference in micrometers; negative values indicate clearance."
+            },
+            "max": {
+              "type": "number",
+              "description": "Maximum interference in micrometers; negative values indicate clearance."
+            }
+          }
+        },
+        "interferenceAtAssembly_um": {
+          "description": "Optional interference range accounting for assembly temperature relative to running temperature.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["min", "max"],
+          "properties": {
+            "min": { "type": "number" },
+            "max": { "type": "number" }
+          }
+        },
+        "installationMethod": {
+          "type": "string",
+          "description": "Recommended installation method for the fit.",
+          "enum": ["press", "heat", "shrink", "fit_check", "none"]
+        },
+        "installationParams": {
+          "type": "object",
+          "description": "Optional installation parameters such as temperature.",
+          "additionalProperties": false,
+          "properties": {
+            "heatTempC": {
+              "type": "number",
+              "description": "Recommended maximum heating temperature in degrees Celsius.",
+              "exclusiveMinimum": 0
+            },
+            "pressLimitN": {
+              "type": "number",
+              "description": "Optional recommended maximum press load in newtons.",
+              "exclusiveMinimum": 0
+            },
+            "note": {
+              "type": "string",
+              "description": "Optional note about the installation method."
+            }
+          }
+        },
+        "confidence": {
+          "type": "integer",
+          "description": "Confidence level for the recommendation, 0 to 100.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "references": {
+          "type": "array",
+          "description": "Document references supporting this recommendation.",
+          "items": {
+            "$ref": "#/$defs/Reference"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "note": {
+          "type": "string",
+          "description": "Optional explanatory note for the fit recommendation."
+        }
+      }
+    },
+    "InstallationGuidance": {
+      "type": "object",
+      "description": "Installation and handling guidance for the bearing series.",
+      "additionalProperties": false,
+      "properties": {
+        "maxHeatC": {
+          "type": "number",
+          "description": "Recommended maximum heating temperature in Celsius.",
+          "exclusiveMinimum": 0
+        },
+        "notes": {
+          "type": "string",
+          "description": "General installation guidance notes."
+        },
+        "hardnessRequirements": {
+          "type": "string",
+          "description": "Optional shaft or housing hardness guidance for the fit range."
+        },
+        "pressLimitN": {
+          "type": "number",
+          "description": "Optional press force advisory in newtons.",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "Reference": {
+      "type": "object",
+      "description": "Reference to an engineering document or standard source.",
+      "required": ["title", "publisher", "year", "url", "license"],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Document title or source name."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "Publisher or issuing organization."
+        },
+        "year": {
+          "type": "integer",
+          "description": "Publication year of the referenced source.",
+          "minimum": 1900,
+          "maximum": 2100
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the referenced source document."
+        },
+        "page": {
+          "type": ["string", "integer"],
+          "description": "Page number or section identifier where the referenced data is found."
+        },
+        "clause": {
+          "type": "string",
+          "description": "ISO clause or document clause identifier, if applicable."
+        },
+        "license": {
+          "type": "string",
+          "description": "License or usage terms for the referenced source."
+        }
+      }
+    },
+    "ISOFallback": {
+      "type": "object",
+      "description": "ISO-based fallback dataset for generic bearing fit recommendations.",
+      "required": ["isoVersion", "sourceUrl", "toleranceClasses", "genericFitPresets", "metadata"],
+      "additionalProperties": false,
+      "properties": {
+        "isoVersion": {
+          "type": "string",
+          "description": "ISO standard version for the fallback dataset."
+        },
+        "sourceUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the ISO reference document."
+        },
+        "toleranceClasses": {
+          "type": "array",
+          "description": "ISO tolerance classes and deviations used for generic recommendations.",
+          "items": {
+            "type": "object",
+            "required": ["classCode", "nominalMinMM", "nominalMaxMM", "deviationMin_um", "deviationMax_um"],
+            "additionalProperties": false,
+            "properties": {
+              "classCode": {
+                "type": "string",
+                "description": "ISO tolerance class code, e.g. h6, H7."
+              },
+              "nominalMinMM": {
+                "type": "number",
+                "description": "Minimum nominal diameter for this tolerance class in millimeters.",
+                "exclusiveMinimum": 0
+              },
+              "nominalMaxMM": {
+                "type": "number",
+                "description": "Maximum nominal diameter for this tolerance class in millimeters.",
+                "exclusiveMinimum": 0
+              },
+              "deviationMin_um": {
+                "type": "number",
+                "description": "Minimum deviation relative to nominal diameter in micrometers."
+              },
+              "deviationMax_um": {
+                "type": "number",
+                "description": "Maximum deviation relative to nominal diameter in micrometers."
+              }
+            }
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "genericFitPresets": {
+          "type": "array",
+          "description": "Generic ISO-derived fit presets for bearing families and applications.",
+          "items": {
+            "type": "object",
+            "required": ["bearingType", "ringRotation", "applicationClass", "bearingArrangement", "shaftClass", "housingClass", "recommendedInterference_um", "confidence", "references"],
+            "additionalProperties": false,
+            "properties": {
+              "bearingType": {
+                "type": "string",
+                "enum": ["deep_groove_ball", "angular_contact", "cylindrical_roller", "spherical_roller", "tapered_roller", "needle", "thrust"],
+                "description": "Bearing type for the generic preset."
+              },
+              "ringRotation": {
+                "type": "string",
+                "enum": ["inner-rotating", "outer-rotating", "stationary"],
+                "description": "Rotation case for the generic preset."
+              },
+              "applicationClass": {
+                "type": "string",
+                "enum": ["normal", "high_speed", "heavy_shock", "light"],
+                "description": "Application severity class for the generic preset."
+              },
+              "bearingArrangement": {
+                "type": "string",
+                "enum": ["locating", "non_locating"],
+                "description": "Located or non-locating bearing arrangement for the generic preset."
+              },
+              "shaftClass": {
+                "type": "string",
+                "description": "Recommended shaft tolerance class for generic guidance."
+              },
+              "housingClass": {
+                "type": "string",
+                "description": "Recommended housing tolerance class for generic guidance."
+              },
+              "recommendedInterference_um": {
+                "type": "object",
+                "description": "Recommended interference or clearance range in micrometers for the generic preset.",
+                "additionalProperties": false,
+                "required": ["min", "max"],
+                "properties": {
+                  "min": { "type": "number" },
+                  "max": { "type": "number" }
+                }
+              },
+              "confidence": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100,
+                "description": "Confidence level for the generic preset."
+              },
+              "references": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/Reference"
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              },
+              "notes": {
+                "type": "string",
+                "description": "Optional explanatory note for the generic preset."
+              }
+            }
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Provenance metadata for the ISO fallback dataset.",
+          "required": ["createdAt", "updatedAt", "sourceDocuments"],
+          "additionalProperties": false,
+          "properties": {
+            "createdAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "sourceDocuments": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Reference"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

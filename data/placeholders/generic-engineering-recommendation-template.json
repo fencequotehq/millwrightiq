@@ -1,0 +1,191 @@
+{
+  "schemaVersion": "1.0.0",
+  "datasetType": "generic_engineering_recommendation",
+  "datasetVersion": "1.0.0",
+  "generatedAt": "2026-08-04T00:00:00Z",
+  "manifest": {
+    "manifestVersion": "1.0.0",
+    "lastUpdated": "2026-08-04T00:00:00Z",
+    "manufacturers": [
+      {
+        "manufacturerId": "GENERIC_RECOMMENDATION",
+        "manufacturerName": "Generic Engineering Recommendation",
+        "versions": [
+          {
+            "version": "1.0.0",
+            "updatedAt": "2026-08-04T00:00:00Z",
+            "path": "data/placeholders/generic-engineering-recommendation-template.json"
+          }
+        ]
+      }
+    ],
+    "isoVersions": [
+      {
+        "version": "1.0.0",
+        "updatedAt": "2026-08-04T00:00:00Z",
+        "path": "data/placeholders/generic-engineering-recommendation-template.json"
+      }
+    ]
+  },
+  "manufacturers": [
+    {
+      "manufacturerId": "GENERIC_RECOMMENDATION",
+      "manufacturerName": "Generic Engineering Recommendation",
+      "version": "1.0.0",
+      "seriesId": "GENERIC-1",
+      "family": "generic",
+      "bearingType": "deep_groove_ball",
+      "coverage": {
+        "boreMinMM": 20,
+        "boreMaxMM": 80,
+        "nominalBoreValuesMM": [25, 30, 35, 40, 45, 50, 60, 70]
+      },
+      "bearingCharacteristics": {
+        "typicalInternalClearanceClasses": [
+          { "code": "C3", "min_um": 5, "max_um": 15 }
+        ],
+        "coefficientThermalExpansion": { "material": "steel", "alpha_perC": 11.7 }
+      },
+      "toleranceTable": [
+        {
+          "id": "gen-1",
+          "boreMinMM": 20,
+          "boreMaxMM": 45,
+          "ringRotation": "inner-rotating",
+          "applicationClass": "normal",
+          "bearingArrangement": "locating",
+          "recommendedFits": [
+            {
+              "target": "shaft_inner",
+              "sourceType": "manufacturer_guidance",
+              "primaryReference": "SKF",
+              "supportingReferences": ["NSK", "Schaeffler"],
+              "applicationScope": "Standard metric radial bearing applications with moderate speed and load.",
+              "limitations": "Not for very high speed, thin-wall housings, or hollow shafts without additional verification.",
+              "sourceTraceability": {
+                "primaryReferenceDocument": {
+                  "title": "Tolerances and resultant fits",
+                  "publisher": "SKF",
+                  "year": 2024,
+                  "url": "https://www.skf.com/group/products/rolling-bearings/principles-of-rolling-bearing-selection/bearing-selection-process/bearing-interfaces/tolerances-and-resultant-fits",
+                  "license": "SKF terms of use"
+                },
+                "supportingReferenceDocuments": [
+                  {
+                    "title": "Fits and Internal Clearance",
+                    "publisher": "NSK",
+                    "year": 2025,
+                    "url": "https://www.nsk.com/tools-resources/abc-bearings/fits-and-internal-clearance/",
+                    "license": "NSK terms of use"
+                  },
+                  {
+                    "title": "Rolling bearing tolerances",
+                    "publisher": "Schaeffler",
+                    "year": 2025,
+                    "url": "https://www.schaeffler.com/remotemedien/media/_shared_media/08_media_library/01_publications/schaeffler_2/tpi/downloads_8/tpi138_de_en.pdf",
+                    "license": "Schaeffler terms of use"
+                  }
+                ]
+              },
+              "recommendedToleranceClass": "j6",
+              "recommendedInterference_um": { "min": 10, "max": 25 },
+              "installationMethod": "press",
+              "confidence": 95,
+              "references": [
+                {
+                  "title": "Tolerances and resultant fits",
+                  "publisher": "SKF",
+                  "year": 2024,
+                  "url": "https://www.skf.com/group/products/rolling-bearings/principles-of-rolling-bearing-selection/bearing-selection-process/bearing-interfaces/tolerances-and-resultant-fits",
+                  "license": "SKF terms of use"
+                }
+              ],
+              "note": "Conservative generic recommendation based on manufacturer guidance consensus."
+            }
+          ],
+          "references": [
+            {
+              "title": "Tolerances and resultant fits",
+              "publisher": "SKF",
+              "year": 2024,
+              "url": "https://www.skf.com/group/products/rolling-bearings/principles-of-rolling-bearing-selection/bearing-selection-process/bearing-interfaces/tolerances-and-resultant-fits",
+              "license": "SKF terms of use"
+            }
+          ],
+          "notes": "Generic engineering recommendation row with traceable references and manufacturer alignment.",
+          "manufacturerOverrideFlag": {
+            "reason": "High-speed or heavy-shock conditions may need manufacturer-specific exception handling.",
+            "affectedManufacturers": ["SKF", "NSK", "Schaeffler"],
+            "suggestedAction": "Evaluate when published manufacturer-specific fit tables differ in high-speed, heavy-shock, or hollow-shaft applications."
+          }
+        }
+      ],
+      "installationGuidance": {
+        "maxHeatC": 120,
+        "notes": "Standard press fit guidance for generic recommendations. Use manufacturer documentation for special case heating or sleeve mounting."
+      },
+      "metadata": {
+        "createdAt": "2026-08-04T00:00:00Z",
+        "updatedAt": "2026-08-04T00:00:00Z",
+        "sourceDocuments": [
+          {
+            "title": "Tolerances and resultant fits",
+            "publisher": "SKF",
+            "year": 2024,
+            "url": "https://www.skf.com/group/products/rolling-bearings/principles-of-rolling-bearing-selection/bearing-selection-process/bearing-interfaces/tolerances-and-resultant-fits",
+            "license": "SKF terms of use"
+          }
+        ],
+        "license": "Proprietary internal use"
+      }
+    }
+  ],
+  "isoFallback": {
+    "isoVersion": "ISO 286-2 (referenced)",
+    "sourceUrl": "https://www.iso.org/standard/72444.html",
+    "toleranceClasses": [
+      {
+        "classCode": "H7",
+        "nominalMinMM": 20,
+        "nominalMaxMM": 80,
+        "deviationMin_um": 0,
+        "deviationMax_um": 25
+      }
+    ],
+    "genericFitPresets": [
+      {
+        "bearingType": "deep_groove_ball",
+        "ringRotation": "inner-rotating",
+        "applicationClass": "normal",
+        "bearingArrangement": "locating",
+        "shaftClass": "j6",
+        "housingClass": "H7",
+        "recommendedInterference_um": { "min": 10, "max": 25 },
+        "confidence": 90,
+        "references": [
+          {
+            "title": "Tolerances and resultant fits",
+            "publisher": "SKF",
+            "year": 2024,
+            "url": "https://www.skf.com/group/products/rolling-bearings/principles-of-rolling-bearing-selection/bearing-selection-process/bearing-interfaces/tolerances-and-resultant-fits",
+            "license": "SKF terms of use"
+          }
+        ],
+        "notes": "Generic fallback recommendation based on SKF guidance and standard ISO tolerance practice."
+      }
+    ],
+    "metadata": {
+      "createdAt": "2026-08-04T00:00:00Z",
+      "updatedAt": "2026-08-04T00:00:00Z",
+      "sourceDocuments": [
+        {
+          "title": "ISO 286-2:2020",
+          "publisher": "ISO",
+          "year": 2020,
+          "url": "https://www.iso.org/standard/72444.html",
+          "license": "ISO purchase required"
+        }
+      ]
+    }
+  }
+}

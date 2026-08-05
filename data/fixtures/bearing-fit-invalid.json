@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "1",
+  "datasetType": "manufacturer_specific",
+  "datasetVersion": "1.0",
+  "generatedAt": "invalid-date",
+  "manifest": {
+    "manifestVersion": "1.0.0",
+    "lastUpdated": "invalid-date",
+    "manufacturers": [
+      {
+        "manufacturerId": "SKF",
+        "manufacturerName": "SKF",
+        "versions": [
+          {
+            "version": "1.0.0",
+            "updatedAt": "2026-08-04T00:00:00Z",
+            "path": "manufacturer/skf.v1.json",
+            "extra": true
+          }
+        ]
+      }
+    ]
+  },
+  "manufacturers": [
+    {
+      "manufacturerId": "SKF",
+      "manufacturerName": "SKF",
+      "version": "1.0.0",
+      "seriesId": "6205",
+      "family": "deep-groove-ball",
+      "bearingType": "unknown_type",
+      "coverage": {
+        "boreMinMM": 30,
+        "boreMaxMM": 20,
+        "nominalBoreValuesMM": [15, 110]
+      },
+      "bearingCharacteristics": {
+        "typicalInternalClearanceClasses": [
+          {
+            "code": "C3",
+            "min_um": 5,
+            "max_um": 15
+          }
+        ],
+        "coefficientThermalExpansion": {
+          "material": "steel",
+          "alpha_perC": 12
+        }
+      },
+      "toleranceTable": [
+        {
+          "id": "row-1",
+          "boreMinMM": 20,
+          "boreMaxMM": 30,
+          "ringRotation": "inner-rotating",
+          "applicationClass": "normal",
+          "bearingArrangement": "locating",
+          "recommendedFits": [
+            {
+              "target": "shaft_center",
+              "recommendedToleranceClass": "j6",
+              "recommendedInterference_um": { "min": 20, "max": 10 },
+              "installationMethod": "unknown_method",
+              "confidence": 150,
+              "references": [
+                {
+                  "title": "SKF Fit Recommendations",
+                  "publisher": "SKF",
+                  "year": 2025,
+                  "url": "not-a-url",
+                  "license": "CC-BY-4.0"
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "title": "SKF Fit Table",
+              "publisher": "SKF",
+              "year": 2025,
+              "url": "https://example.com/skf-fit-table",
+              "license": "CC-BY-4.0"
+            }
+          ]
+        }
+      ],
+      "installationGuidance": {
+        "maxHeatC": -10,
+        "notes": "Heat the inner ring evenly."
+      },
+      "metadata": {
+        "createdAt": "2026-08-04T00:00:00Z",
+        "updatedAt": "2026-08-04T00:00:00Z",
+        "sourceDocuments": [
+          {
+            "title": "SKF Bearing Handbook",
+            "publisher": "SKF",
+            "year": 2025,
+            "url": "https://example.com/skf-handbook",
+            "license": "CC-BY-4.0"
+          }
+        ],
+        "license": "CC-BY-4.0"
+      }
+    }
+  ],
+  "isoFallback": {
+    "isoVersion": "1.0.0",
+    "sourceUrl": "invalid-url",
+    "toleranceClasses": [
+      {
+        "classCode": "H7",
+        "nominalMinMM": 10,
+        "nominalMaxMM": 50,
+        "deviationMin_um": 0,
+        "deviationMax_um": 25
+      }
+    ],
+    "genericFitPresets": [
+      {
+        "bearingType": "deep_groove_ball",
+        "ringRotation": "inner-rotating",
+        "applicationClass": "normal",
+        "bearingArrangement": "locating",
+        "shaftClass": "j6",
+        "housingClass": "H7",
+        "recommendedInterference_um": { "min": 5, "max": 15 },
+        "confidence": 80,
+        "references": [
+          {
+            "title": "ISO Mounting",
+            "publisher": "ISO",
+            "year": 2023,
+            "url": "https://example.com/iso-mounting",
+            "license": "CC-BY-4.0"
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "createdAt": "2026-08-04T00:00:00Z",
+      "updatedAt": "2026-08-04T00:00:00Z",
+      "sourceDocuments": [
+        {
+          "title": "ISO 286",
+          "publisher": "ISO",
+          "year": 2023,
+          "url": "https://example.com/iso-286",
+          "license": "CC-BY-4.0"
+        }
+      ]
+    }
+  }
+}
