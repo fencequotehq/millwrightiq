@@ -2820,13 +2820,30 @@ f<!DOCTYPE html>
                 <label class="input-label">Horsepower (HP)</label>
                 <input class="calc-input" type="number" id="hyd-hp-input" placeholder="e.g. 5">
               </div>
+              <div class="input-group" id="hyd-eff-group">
+                <label class="input-label">Pump / System Efficiency (%)</label>
+                <input class="calc-input" type="number" id="hyd-eff" min="50" max="100" step="1" value="85" placeholder="85">
+                <div style="font-size:0.8rem;color:var(--text-secondary);margin-top:0.25rem;">Default 85%. Range 50–100%.</div>
+              </div>
             </div>
             <button class="calc-btn" onclick="calcHydraulic()">Calculate</button>
             <div class="calc-result" id="result-hydraulic">
-              <div class="result-label" id="hyd-result-label">Hydraulic Horsepower</div>
-              <div><span class="result-value" id="hyd-result">—</span><span class="result-unit" id="hyd-result-unit">HP</span></div>
+              <div class="result-label" id="hyd-theoretical-label">Theoretical Hydraulic Power</div>
+              <div><span class="result-value" id="hyd-theoretical-result">—</span><span class="result-unit" id="hyd-theoretical-unit">HP</span></div>
+              <div id="hyd-estimated-row" style="display:none;margin-top:1rem;">
+                <div class="result-label">Estimated Motor HP Required</div>
+                <div><span class="result-value" id="hyd-estimated-result">—</span><span class="result-unit">HP</span></div>
+              </div>
               <div class="result-notes" id="hyd-notes"></div>
+              <div id="hyd-validation" style="color:#dc2626;font-size:0.95rem;min-height:1.2rem;margin-top:0.5rem;"></div>
               <div class="save-row"><button class="btn-save" onclick="copyCalcResult('hydraulic')">📋 Copy</button><button class="btn-save" onclick="saveCalcToHistory('hydraulic')">💾 Save</button></div>
+              <button class="calc-btn" type="button" id="hyd-advanced-btn" aria-expanded="false" aria-controls="hyd-advanced" onclick="toggleHydAdvanced()" style="margin-top:0.75rem;">Show Advanced Results</button>
+              <div id="hyd-advanced" style="display:none; margin-top:0.75rem; padding:0.75rem; border:1px solid rgba(148,163,184,0.5); border-radius:10px; background:rgba(15,23,42,0.08); color:var(--text-primary);">
+                <div style="margin-bottom:0.5rem;"><strong>Hydraulic constant:</strong> 1714</div>
+                <div style="margin-bottom:0.5rem;"><strong>Selected efficiency:</strong> <span id="hyd-eff-used">85%</span></div>
+                <div style="margin-bottom:0.5rem;"><strong>Formula used:</strong> HP = (PSI × GPM) ÷ 1714</div>
+                <div><strong>Assumptions:</strong> The result is theoretical hydraulic power. Estimated motor HP assumes pump/system efficiency only; actual motor selection should also consider starting torque, duty cycle, pressure spikes, and manufacturer recommendations.</div>
+              </div>
             </div>
           </div>
         </div>
@@ -3973,37 +3990,137 @@ function updateHydMode() {
   document.getElementById('hyd-gpm-group').style.display = mode === 'gpm' ? 'none' : 'block';
   document.getElementById('hyd-hp-group').style.display = (mode === 'gpm' || mode === 'psi') ? 'block' : 'none';
 }
+function setHydValidation(message) {
+  document.getElementById('hyd-validation').textContent = message;
+  document.getElementById('hyd-notes').innerHTML = '';
+  document.getElementById('hyd-advanced').style.display = 'none';
+  document.getElementById('hyd-advanced-btn').textContent = 'Show Advanced Results';
+  document.getElementById('hyd-advanced-btn').setAttribute('aria-expanded', 'false');
+  document.getElementById('hyd-theoretical-result').textContent = '—';
+  document.getElementById('hyd-estimated-result').textContent = '—';
+  document.getElementById('hyd-estimated-row').style.display = 'none';
+  document.getElementById('hyd-eff-used').textContent = '—';
+  document.getElementById('result-hydraulic').classList.add('show');
+}
+
+function clearHydValidation() {
+  document.getElementById('hyd-validation').textContent = '';
+}
+
+function collapseHydAdvanced() {
+  const panel = document.getElementById('hyd-advanced');
+  const button = document.getElementById('hyd-advanced-btn');
+  if (panel) { panel.style.display = 'none'; }
+  if (button) {
+    button.textContent = 'Show Advanced Results';
+    button.setAttribute('aria-expanded', 'false');
+  }
+}
+
 function calcHydraulic() {
   const mode = document.getElementById('hyd-mode').value;
   const psi = parseFloat(document.getElementById('hyd-psi').value);
   const gpm = parseFloat(document.getElementById('hyd-gpm').value);
   const hpIn = parseFloat(document.getElementById('hyd-hp-input').value);
-  let result, label, unit, notes;
+  const efficiency = parseFloat(document.getElementById('hyd-eff').value);
+  clearHydValidation();
+
+  if (!Number.isFinite(efficiency)) {
+    setHydValidation('Enter pump/system efficiency between 50 and 100%.');
+    return;
+  }
+  if (efficiency < 50) {
+    setHydValidation('Efficiency must be at least 50%.');
+    return;
+  }
+  if (efficiency > 100) {
+    setHydValidation('Efficiency cannot exceed 100%.');
+    return;
+  }
+
+  let result, notes;
+  const estimatedRow = document.getElementById('hyd-estimated-row');
+
   if (mode === 'hp') {
-    if (!psi || !gpm) { alert('Please enter PSI and GPM.'); return; }
-    result = (psi * gpm) / 1714;
-    label = 'Hydraulic Horsepower'; unit = 'HP';
+    if (!Number.isFinite(psi) || !Number.isFinite(gpm)) {
+      setHydValidation('Enter PSI and GPM.');
+      return;
+    }
+    if (psi <= 0) {
+      setHydValidation('Pressure must be greater than zero.');
+      return;
+    }
+    if (gpm <= 0) {
+      setHydValidation('Flow rate must be greater than zero.');
+      return;
+    }
+
+    const hydraulicHP = (psi * gpm) / 1714;
+    const motorHP = hydraulicHP / (efficiency / 100);
+    result = hydraulicHP;
     notes = `<strong>PSI:</strong> ${psi} &nbsp; <strong>GPM:</strong> ${gpm}<br>
-             <strong>HP = (${psi} × ${gpm}) ÷ 1714 = ${result.toFixed(2)} HP</strong><br>
-             <em>With 85% efficiency: ${(result/0.85).toFixed(2)} HP motor needed</em>`;
+             <strong>HP = (${psi} × ${gpm}) ÷ 1714 = ${hydraulicHP.toFixed(2)} HP</strong><br>
+             <em>Estimated motor HP required at ${efficiency.toFixed(0)}% efficiency: ${motorHP.toFixed(2)} HP</em>`;
+    document.getElementById('hyd-estimated-result').textContent = motorHP.toFixed(2);
+    estimatedRow.style.display = 'block';
   } else if (mode === 'gpm') {
-    if (!hpIn || !psi) { alert('Please enter HP and PSI.'); return; }
+    if (!Number.isFinite(hpIn) || !Number.isFinite(psi)) {
+      setHydValidation('Enter HP and PSI.');
+      return;
+    }
+    if (hpIn <= 0) {
+      setHydValidation('Horsepower must be greater than zero.');
+      return;
+    }
+    if (psi <= 0) {
+      setHydValidation('Pressure must be greater than zero.');
+      return;
+    }
+
     result = (hpIn * 1714) / psi;
-    label = 'Required Flow Rate'; unit = 'GPM';
     notes = `<strong>HP:</strong> ${hpIn} &nbsp; <strong>PSI:</strong> ${psi}<br>
              <strong>GPM = (${hpIn} × 1714) ÷ ${psi} = ${result.toFixed(2)} GPM</strong>`;
+    estimatedRow.style.display = 'none';
   } else {
-    if (!hpIn || !gpm) { alert('Please enter HP and GPM.'); return; }
+    if (!Number.isFinite(hpIn) || !Number.isFinite(gpm)) {
+      setHydValidation('Enter HP and GPM.');
+      return;
+    }
+    if (hpIn <= 0) {
+      setHydValidation('Horsepower must be greater than zero.');
+      return;
+    }
+    if (gpm <= 0) {
+      setHydValidation('Flow rate must be greater than zero.');
+      return;
+    }
+
     result = (hpIn * 1714) / gpm;
-    label = 'System Pressure'; unit = 'PSI';
     notes = `<strong>HP:</strong> ${hpIn} &nbsp; <strong>GPM:</strong> ${gpm}<br>
              <strong>PSI = (${hpIn} × 1714) ÷ ${gpm} = ${result.toFixed(0)} PSI</strong>`;
+    estimatedRow.style.display = 'none';
   }
-  document.getElementById('hyd-result-label').textContent = label;
-  document.getElementById('hyd-result').textContent = result.toFixed(2);
-  document.getElementById('hyd-result-unit').textContent = unit;
+
+  document.getElementById('hyd-theoretical-result').textContent = result.toFixed(2);
   document.getElementById('hyd-notes').innerHTML = notes;
+  document.getElementById('hyd-eff-used').textContent = `${efficiency.toFixed(0)}%`;
   document.getElementById('result-hydraulic').classList.add('show');
+  collapseHydAdvanced();
+}
+
+function toggleHydAdvanced() {
+  const panel = document.getElementById('hyd-advanced');
+  const button = document.getElementById('hyd-advanced-btn');
+  if (!panel || !button) { return; }
+  if (panel.style.display === 'block') {
+    panel.style.display = 'none';
+    button.textContent = 'Show Advanced Results';
+    button.setAttribute('aria-expanded', 'false');
+  } else {
+    panel.style.display = 'block';
+    button.textContent = 'Hide Advanced Results';
+    button.setAttribute('aria-expanded', 'true');
+  }
 }
 
 // ==================== RPM CALCULATOR ====================
